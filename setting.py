@@ -1,0 +1,4 @@
+DEBUG: bool = True
+DEFAULT_FILE_PATH_WITHOUT_SUBSTANCE: str = "data/empty.csv"
+DEFAULT_FILE_PATH_WITH_SUBSTANCE: str = "data/DMSO.csv"
+DEFAULT_FILE_PATH_NEURAL_NETWORK: str = "data/5_new.joblib"

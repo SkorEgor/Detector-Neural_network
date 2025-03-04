@@ -1,0 +1,22 @@
+<RCC>
+  <qresource prefix="general_black_ui">
+    <file>resource/general_black_ui/cycle1_24dp_white.svg</file>
+    <file>resource/general_black_ui/cycle2_24dp_white.svg</file>
+    <file>resource/general_black_ui/data_24dp_white.svg</file>
+    <file>resource/general_black_ui/download_24dp_white.svg</file>
+    <file>resource/general_black_ui/launch_24dp_white.svg</file>
+    <file>resource/general_black_ui/network_24dp_white.svg</file>
+    <file>resource/general_black_ui/save_24dp_white.svg</file>
+    <file>resource/general_black_ui/table_24dp_white.svg</file>
+  </qresource>
+  <qresource prefix="multi_check_box">
+    <file>resource/multi_check_box_svg/all_24dp.svg</file>
+    <file>resource/multi_check_box_svg/no_24dp.svg</file>
+    <file>resource/multi_check_box_svg/undefined_24dp.svg</file>
+    <file>resource/multi_check_box_svg/yes_blue_24dp.svg</file>
+    <file>resource/multi_check_box_svg/yes_green_24dp.svg</file>
+  </qresource>
+  <qresource prefix="application_picture">
+    <file>resource/application_picture/app_icon-round.png</file>
+  </qresource>
+</RCC>
