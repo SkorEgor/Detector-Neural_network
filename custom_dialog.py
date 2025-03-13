@@ -1,6 +1,5 @@
 import os
-from PyQt5 import QtWidgets
-from PyQt5.QtCore import Qt
+from pyqtgraph.Qt.QtCore import Qt
 from gui import Ui_Dialog
 from color_theme import ColorTheme
 from app_exception import AppException
@@ -15,14 +14,14 @@ class CustomDialog(Ui_Dialog):
         # 1. Создание окна
         # - Инициализация UI из дизайна
         super().__init__(*args, **kwargs)
-        QtWidgets.QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
         os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
         # - Инициализация окна
         Ui_Dialog.__init__(self)
         dialog.setWindowFlags(  # Передаем флаги создания окна
-            Qt.WindowCloseButtonHint |      # Кнопка закрытия
-            Qt.WindowMaximizeButtonHint |   # Кнопка развернуть
-            Qt.WindowMinimizeButtonHint     # Кнопка свернуть
+            Qt.WindowType.CustomizeWindowHint |        # must be set to allow the other flags to be changed
+            Qt.WindowType.WindowCloseButtonHint |      # Кнопка закрытия
+            Qt.WindowType.WindowMaximizeButtonHint |   # Кнопка развернуть
+            Qt.WindowType.WindowMinimizeButtonHint     # Кнопка свернуть
         )
         # - Устанавливаем пользовательский интерфейс
         self.setupUi(dialog)
@@ -56,26 +55,26 @@ class CustomDialog(Ui_Dialog):
         # Проверка наличия "нейронной сети" (выставляем соответсвующий статус и имя файла)
         if self.data.get_neural_network():
             self.label_text_neural_network.setText(self.file_name_neural_network)
-            self.checkBox_download_neural_network.setCheckState(Qt.Checked)
+            self.checkBox_download_neural_network.setCheckState(Qt.CheckState.Checked)
         else:
             self.label_text_neural_network.setText("Нет файла")
-            self.checkBox_download_neural_network.setCheckState(Qt.Unchecked)
+            self.checkBox_download_neural_network.setCheckState(Qt.CheckState.Unchecked)
 
         spectra = self.data.get_spectra()
         # Проверяем наличие "Спектра без вещества" (выставляем соответсвующий статус и имя файла)
         if not (spectra["without_gas"].empty or spectra["without_gas"].isna().all()):
             self.label_text_file_name_no_gas.setText(os.path.basename(self.file_name_without_substance))
-            self.checkBox_download_no_gas.setCheckState(Qt.Checked)
+            self.checkBox_download_no_gas.setCheckState(Qt.CheckState.Checked)
         else:
             self.label_text_file_name_no_gas.setText("Нет файла")
-            self.checkBox_download_no_gas.setCheckState(Qt.Unchecked)
+            self.checkBox_download_no_gas.setCheckState(Qt.CheckState.Unchecked)
         # Проверяем наличие "Спектра с веществом"
         if not (spectra["with_gas"].empty or spectra["with_gas"].isna().all()):
             self.label_text_file_name_with_gas.setText(os.path.basename(self.file_name_with_substance))
-            self.checkBox_download_with_gas.setCheckState(Qt.Checked)
+            self.checkBox_download_with_gas.setCheckState(Qt.CheckState.Checked)
         else:
             self.label_text_file_name_with_gas.setText("Нет файла")
-            self.checkBox_download_with_gas.setCheckState(Qt.Unchecked)
+            self.checkBox_download_with_gas.setCheckState(Qt.CheckState.Unchecked)
 
     # ---------------------------------------------------------------------------
     #   Getters - получение данных из интерфейса

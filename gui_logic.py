@@ -2,7 +2,7 @@ import os
 import setting
 from joblib import load
 from functools import partial
-from PyQt5.QtWidgets import QFileDialog, QTableWidgetItem
+from pyqtgraph.Qt.QtWidgets import QFileDialog, QTableWidgetItem
 from app_exception import AppException
 from custom_dialog import CustomDialog
 from multi_check_box import GreenRedYellowCheckBox, BlueRedYellowCheckBox

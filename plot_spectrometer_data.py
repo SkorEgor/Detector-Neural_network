@@ -3,9 +3,9 @@ import sys
 import numpy as np
 import pandas as pd
 from pandas import DataFrame
-from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtGui import QPixmap, QColor
-from PyQt5.QtWidgets import QApplication, QWidget, QHBoxLayout, QLabel, QVBoxLayout
+from pyqtgraph.Qt.QtCore import Qt, pyqtSignal
+from pyqtgraph.Qt.QtGui import QPixmap, QColor
+from pyqtgraph.Qt.QtWidgets import QApplication, QWidget, QHBoxLayout, QLabel, QVBoxLayout
 from pyqtgraph import PlotWidget, mkPen, setConfigOptions, ScatterPlotItem
 from data_and_processing import DataAndProcessing
 

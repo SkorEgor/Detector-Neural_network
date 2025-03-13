@@ -2,9 +2,8 @@ import sys
 import ctypes
 import traceback
 from functools import partial
-from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtWidgets import QMessageBox, QApplication
-from PyQt5.QtCore import Qt
+from pyqtgraph.Qt.QtWidgets import QMessageBox, QApplication, QDialog
+from pyqtgraph.Qt.QtCore import QCoreApplication, Qt
 from gui_logic import GuiProgram
 from app_exception import AppException
 
@@ -26,14 +25,14 @@ if __name__ == '__main__':
     # Решает проблему не правильного масштабирования интерфейса и осей графика PyQtGraph на разных мониторах
     # https://github.com/pyqtgraph/pyqtgraph/issues/756#issuecomment-1023182391
     QApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
-    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
+    QCoreApplication.setAttribute(Qt.ApplicationAttribute.AA_EnableHighDpiScaling, True)
     # Установка значка приложения на панели задач
     # https://stackoverflow.com/a/1552105
     my_app_id = 'company.my-product.subproject.version'
     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(my_app_id)
     # Инициализации и запуск приложения
-    app = QtWidgets.QApplication(sys.argv)
-    dialog = QtWidgets.QDialog()
+    app = QApplication(sys.argv)
+    dialog = QDialog(None)
     program = GuiProgram(dialog)
     dialog.show()
     # Устанавливаем глобальный обработчик исключений, c передачей app для подгрузки иконки приложения
