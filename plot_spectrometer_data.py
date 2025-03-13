@@ -5,7 +5,13 @@ import pandas as pd
 from pandas import DataFrame
 from pyqtgraph.Qt.QtCore import Qt, pyqtSignal
 from pyqtgraph.Qt.QtGui import QPixmap, QColor
-from pyqtgraph.Qt.QtWidgets import QApplication, QWidget, QHBoxLayout, QLabel, QVBoxLayout
+from pyqtgraph.Qt.QtWidgets import (
+    QApplication,
+    QWidget,
+    QHBoxLayout,
+    QLabel,
+    QVBoxLayout,
+)
 from pyqtgraph import PlotWidget, mkPen, setConfigOptions, ScatterPlotItem
 from data_and_processing import DataAndProcessing
 
@@ -35,20 +41,26 @@ class SpectrometerPlotWidget(PlotWidget):
     color_status = {
         True: "#36F62D",  # Зеленый
         False: "#FF0000",  # Красный
-        None: "#FFA500"  # Оранжевый
+        None: "#FFA500",  # Оранжевый
     }
     # Объявляем сигнал обновления легенды (для кастомной легенды)
     dataUpdated = pyqtSignal(list)
 
-    def __init__(self, absorption_click_callback=None, with_gas_click_callback=None, *args, **kwargs):
+    def __init__(
+        self,
+        absorption_click_callback=None,
+        with_gas_click_callback=None,
+        *args,
+        **kwargs,
+    ):
         setConfigOptions(
             background="w",  # Белый фон
-            foreground="k"  # Черный цвет текста
+            foreground="k",  # Черный цвет текста
         )
         super().__init__(*args, **kwargs)
         self.showGrid(x=True, y=True)
-        self.setLabel('left', self.vertical_axis_name_data)
-        self.setLabel('bottom', self.horizontal_axis_name_data)
+        self.setLabel("left", self.vertical_axis_name_data)
+        self.setLabel("bottom", self.horizontal_axis_name_data)
         self.setTitle(self.title_data)
         self.absorption_click_callback = absorption_click_callback
         self.with_gas_click_callback = with_gas_click_callback
@@ -69,41 +81,41 @@ class SpectrometerPlotWidget(PlotWidget):
 
         # Проверка на наличие данных "без вещества" и их отрисовка
         if (
-                isinstance(spectrometer_data, DataFrame)
-                and not spectrometer_data.empty
-                and "without_gas" in spectrometer_data.columns
-                and not spectrometer_data["without_gas"].dropna().empty
+            isinstance(spectrometer_data, DataFrame)
+            and not spectrometer_data.empty
+            and "without_gas" in spectrometer_data.columns
+            and not spectrometer_data["without_gas"].dropna().empty
         ):
             self.plot(
                 spectrometer_data["frequency"],
                 spectrometer_data["without_gas"],
                 pen=mkPen(color=self.color_without_gas, width=2),
-                symbol='o',
+                symbol="o",
                 symbolSize=4,
                 symbolBrush=self.color_without_gas,
-                name=self.name_without_gas
+                name=self.name_without_gas,
             )
             legend_data.append((self.color_without_gas, self.name_without_gas))
 
         # Проверка на наличие данных "с веществом" и их отрисовка
         if (
-                isinstance(spectrometer_data, DataFrame)
-                and not spectrometer_data.empty
-                and "with_gas" in spectrometer_data.columns
-                and not spectrometer_data["with_gas"].dropna().empty
+            isinstance(spectrometer_data, DataFrame)
+            and not spectrometer_data.empty
+            and "with_gas" in spectrometer_data.columns
+            and not spectrometer_data["with_gas"].dropna().empty
         ):
             # Рисуем линию
             self.plot(
                 spectrometer_data["frequency"],
                 spectrometer_data["with_gas"],
                 pen=mkPen(color=self.color_with_gas, width=2),
-                name=self.name_with_gas
+                name=self.name_with_gas,
             )
             # Добавляем точки поверх линии с обработкой нажатий
             with_gas_scatter = ScatterPlotItem(
                 x=spectrometer_data["frequency"],
                 y=spectrometer_data["with_gas"],
-                symbol='o',
+                symbol="o",
                 pen=mkPen("k"),
                 size=5,
                 brush=self.color_with_gas,
@@ -119,34 +131,38 @@ class SpectrometerPlotWidget(PlotWidget):
             # Цвета для раскраски точек
             conditions = [
                 # status=False
-                (absorption_points['status'] == False),
+                (not absorption_points["status"]),
                 # status=None
-                (absorption_points['status'].isna()),
+                (absorption_points["status"].isna()),
                 # status=True и source_neural_network=True
-                (absorption_points['status'] == True) & (absorption_points['source_neural_network'] == True),
+                (absorption_points["status"])
+                & (absorption_points["source_neural_network"]),
                 # status=True и source_neural_network=False
-                (absorption_points['status'] == True) & (absorption_points['source_neural_network'] == False)
+                (absorption_points["status"])
+                & (not absorption_points["source_neural_network"]),
             ]
             choices = [
                 "#FF0000",  # Красный
                 "#FFA500",  # Оранжевый
                 "#36F62D",  # Зеленый
-                "#2854C5"  # Синий
+                "#2854C5",  # Синий
             ]
             self.absorption_scatter = ScatterPlotItem(
                 x=absorption_points["frequency"],
                 y=absorption_points["gamma"],
                 pen=mkPen("k"),
-                symbol='o',
+                symbol="o",
                 brush=np.select(conditions, choices, default="#FFA500"),
                 symbolBrush="b",
-                size=8
+                size=8,
             )
             self.addItem(self.absorption_scatter)
             # Подключаем callback если он задан
             if self.absorption_click_callback:
                 self.absorption_scatter.sigClicked.connect(
-                    lambda plot, points: self.absorption_click_callback(self, plot, points)
+                    lambda plot, points: self.absorption_click_callback(
+                        self, plot, points
+                    )
                 )
             legend_data.append((self.color_absorbing, self.list_absorbing))
 
@@ -209,7 +225,8 @@ class SpectrometerPlotAndLegendWidget(QWidget):
         layout = QVBoxLayout()
         self.plot_widget = SpectrometerPlotWidget(
             absorption_click_callback=absorption_click_callback,
-            with_gas_click_callback=with_gas_click_callback)
+            with_gas_click_callback=with_gas_click_callback,
+        )
         layout.addWidget(self.plot_widget)
 
         # Создаем и добавляем легенду под графиком
@@ -223,20 +240,20 @@ class SpectrometerPlotAndLegendWidget(QWidget):
 
 
 # Пример использования
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = QApplication(sys.argv)
 
     data_processing = DataAndProcessing()
-    data_processing._DataAndProcessing__spectra = pd.DataFrame({
-        "frequency": [1, 2, 3, 4, 5],
-        "without_gas": [10, 15, 13, 18, 20],
-        "with_gas": [8, 14, 12, 17, 19]
-    })
-    data_processing._DataAndProcessing__point_absorption = pd.DataFrame({
-        "frequency": [2, 4],
-        "gamma": [14, 17],
-        "status": ["absorption", "absorption"]
-    })
+    data_processing._DataAndProcessing__spectra = pd.DataFrame(
+        {
+            "frequency": [1, 2, 3, 4, 5],
+            "without_gas": [10, 15, 13, 18, 20],
+            "with_gas": [8, 14, 12, 17, 19],
+        }
+    )
+    data_processing._DataAndProcessing__point_absorption = pd.DataFrame(
+        {"frequency": [2, 4], "gamma": [14, 17], "status": ["absorption", "absorption"]}
+    )
 
     main_window = SpectrometerPlotAndLegendWidget()
     main_window.plot_widget.plot_spectrometer_data(data_processing)

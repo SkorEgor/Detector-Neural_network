@@ -40,7 +40,10 @@ def split_into_windows(input_list: list, window_width: int) -> np.ndarray:
     # Проверяем, чтобы длина input_list была больше или равна window_width
     if len(input_list) < window_width:
         return np.array([])  # Возврат пустого массива, если список слишком мал
-    windows = [input_list[i:i + window_width] for i in range(len(input_list) - window_width + 1)]
+    windows = [
+        input_list[i : i + window_width]
+        for i in range(len(input_list) - window_width + 1)
+    ]
     return np.array(windows)
 
 
@@ -72,25 +75,33 @@ def interpolate_values(frequency, values, step=0.06):
 
 def spectra_will_be_changed(method):
     """Декоратор для вызова __spectra_interceptor после выполнения метода"""
+
     @wraps(method)
     def wrapper(self, *args, **kwargs):
         result = method(self, *args, **kwargs)
-        interceptor_attr = '_DataAndProcessing__spectra_interceptor'
-        if hasattr(self, interceptor_attr) and callable(getattr(self, interceptor_attr)):
+        interceptor_attr = "_DataAndProcessing__spectra_interceptor"
+        if hasattr(self, interceptor_attr) and callable(
+            getattr(self, interceptor_attr)
+        ):
             getattr(self, interceptor_attr)(method.__name__, *args, **kwargs)
         return result
+
     return wrapper
 
 
 def absorption_will_be_changed(method):
     """Декоратор для вызова __absorption_interceptor после выполнения метода"""
+
     @wraps(method)
     def wrapper(self, *args, **kwargs):
         result = method(self, *args, **kwargs)
-        interceptor_attr = '_DataAndProcessing__absorption_interceptor'
-        if hasattr(self, interceptor_attr) and callable(getattr(self, interceptor_attr)):
+        interceptor_attr = "_DataAndProcessing__absorption_interceptor"
+        if hasattr(self, interceptor_attr) and callable(
+            getattr(self, interceptor_attr)
+        ):
             getattr(self, interceptor_attr)(method.__name__, *args, **kwargs)
         return result
+
     return wrapper
 
 
@@ -99,17 +110,27 @@ class DataAndProcessing:
     # переопределив __slots__, удаляется __dict__, и объект может иметь только строго заданные атрибуты.
     # Защита от изменений полей вне методов класса (изменять значение полей можно только через методы данного класса)
     __slots__ = (
-        '__spectra_interceptor', '__spectra', '__point_absorption', '__neural_network', '__smoothed_noise',
-        '__absorption_interceptor'
+        "__spectra_interceptor",
+        "__spectra",
+        "__point_absorption",
+        "__neural_network",
+        "__smoothed_noise",
+        "__absorption_interceptor",
     )
     # Константы для инициализации пустых DataFrame
-    DEFAULT_SPECTROMETER_DATA = DataFrame(columns=["frequency", "without_gas", "with_gas"])
-    DEFAULT_POINT_ABSORPTION = DataFrame(columns=["frequency", "gamma", "status", "source_neural_network"])
+    DEFAULT_SPECTROMETER_DATA = DataFrame(
+        columns=["frequency", "without_gas", "with_gas"]
+    )
+    DEFAULT_POINT_ABSORPTION = DataFrame(
+        columns=["frequency", "gamma", "status", "source_neural_network"]
+    )
 
     def __init__(self):
         # Функция-перехватчик, вызываемая после выполнения метода
         self.__spectra_interceptor: Callable = lambda method_name, *args, **kwargs: None
-        self.__absorption_interceptor: Callable = lambda method_name, *args, **kwargs: None
+        self.__absorption_interceptor: Callable = (
+            lambda method_name, *args, **kwargs: None
+        )
         # Данные со спектрометра
         self.__spectra = self.DEFAULT_SPECTROMETER_DATA.copy()
         # Точки, соответствующие линиям поглощения
@@ -152,7 +173,9 @@ class DataAndProcessing:
     #   Setters - запись данных
     # ---------------------------------------------------------------------------
     @spectra_will_be_changed
-    def set_spectrum_with_substance(self, frequency: list | Series, gamma: list | Series):
+    def set_spectrum_with_substance(
+        self, frequency: list | Series, gamma: list | Series
+    ):
         """Добавляет данные в колонку 'with_gas' таблицы спектрометра."""
         if len(frequency) != len(gamma):
             raise ValueError("Количество частот не совпадает с количеством гамм")
@@ -169,7 +192,9 @@ class DataAndProcessing:
 
         gamma = savgol_filter(gamma, window_length=10, polyorder=2)
         # Интерполяция значений без газа
-        interpolated_frequencies, interpolated_gamma = interpolate_values(frequency, gamma)
+        interpolated_frequencies, interpolated_gamma = interpolate_values(
+            frequency, gamma
+        )
         # Частота пуста - данных не было - задаем
         if self.__spectra["frequency"].empty:
             self.__spectra["frequency"] = interpolated_frequencies
@@ -181,7 +206,9 @@ class DataAndProcessing:
             self.__spectra["with_gas"] = interpolated_gamma
 
     @spectra_will_be_changed
-    def set_spectrum_without_substance(self, frequency: list | Series, gamma: list | Series):
+    def set_spectrum_without_substance(
+        self, frequency: list | Series, gamma: list | Series
+    ):
         """Добавляет данные в колонку 'without_gas' таблицы спектрометра."""
         if len(frequency) != len(gamma):
             raise ValueError("Количество частот не совпадает с количеством гамм")
@@ -189,7 +216,9 @@ class DataAndProcessing:
         gamma = savgol_filter(gamma, window_length=10, polyorder=2)
         frequency, gamma = interpolate_values(frequency, gamma)
         # Интерполяция значений без газа
-        interpolated_frequencies, interpolated_gamma = interpolate_values(frequency, gamma)
+        interpolated_frequencies, interpolated_gamma = interpolate_values(
+            frequency, gamma
+        )
         # Частота пуста - данных не было - задаем
         if self.__spectra["frequency"].empty:
             self.__spectra["frequency"] = interpolated_frequencies
@@ -263,7 +292,11 @@ class DataAndProcessing:
         result = self.__neural_network.predict(windows)
 
         # Добавление нулей на края для выравнивания длины
-        result = np.pad(result, (len(self.__spectra["with_gas"]) - len(result)) // 2, mode="constant")
+        result = np.pad(
+            result,
+            (len(self.__spectra["with_gas"]) - len(result)) // 2,
+            mode="constant",
+        )
 
         # Устранение "дыр" в результатах, если требуется
         if filling_blanks:
@@ -280,32 +313,44 @@ class DataAndProcessing:
             # Находим индексы текущей группы
             group_indices = np.where(labeled_array == group_label)[0]
             # Выбираем индекс элемента с максимальным значением 'with_gas'
-            max_index = group_indices[np.argmax(self.__spectra.loc[group_indices, "with_gas"].values)]
+            max_index = group_indices[
+                np.argmax(self.__spectra.loc[group_indices, "with_gas"].values)
+            ]
             indices.append(max_index)
 
         # Проверка разницы между with_gas и without_gas
         # хай пас фильтр на 5 точек, с очень большой частотой отсечки
-        if not self.__spectra["without_gas"].empty and not self.__spectra["without_gas"].isna().all():
+        if (
+            not self.__spectra["without_gas"].empty
+            and not self.__spectra["without_gas"].isna().all()
+        ):
             # Фильтрация точек, где разница положительна и превышает отклонение
             indices = [
-                idx for idx in indices
-                if self.__spectra.loc[idx, "with_gas"] - self.__spectra.loc[idx, "without_gas"] > self.__smoothed_noise
+                idx
+                for idx in indices
+                if self.__spectra.loc[idx, "with_gas"]
+                - self.__spectra.loc[idx, "without_gas"]
+                > self.__smoothed_noise
             ]
 
         # Формирование результата
-        self.__point_absorption = DataFrame({
-            "frequency": self.__spectra.loc[indices, "frequency"].values,
-            "gamma": self.__spectra.loc[indices, "with_gas"].values,
-            "status": None,
-            "source_neural_network": True
-        })
+        self.__point_absorption = DataFrame(
+            {
+                "frequency": self.__spectra.loc[indices, "frequency"].values,
+                "gamma": self.__spectra.loc[indices, "with_gas"].values,
+                "status": None,
+                "source_neural_network": True,
+            }
+        )
 
     # ---------------------------------------------------------------------------
     #   Методы для работы с графиком
     # ---------------------------------------------------------------------------
     def get_status_point_absorption(self, frequency: float, gamma: float):
         """Возвращает индекс, статус и источник точки поглощения с заданными координатами."""
-        mask = (self.__point_absorption["frequency"] == frequency) & (self.__point_absorption["gamma"] == gamma)
+        mask = (self.__point_absorption["frequency"] == frequency) & (
+            self.__point_absorption["gamma"] == gamma
+        )
         result = self.__point_absorption.loc[mask, ["status", "source_neural_network"]]
         if not result.empty:
             index = result.index[0]
@@ -321,34 +366,52 @@ class DataAndProcessing:
             self.__point_absorption.loc[index, "status"] = new_status
 
     @absorption_will_be_changed
-    def set_status_point_absorption_by_coordinates(self, frequency: float, gamma: float, new_status: bool):
+    def set_status_point_absorption_by_coordinates(
+        self, frequency: float, gamma: float, new_status: bool
+    ):
         """Обновляет статус для точки поглощения по координатам."""
-        mask = (self.__point_absorption["frequency"] == frequency) & (self.__point_absorption["gamma"] == gamma)
+        mask = (self.__point_absorption["frequency"] == frequency) & (
+            self.__point_absorption["gamma"] == gamma
+        )
         self.__point_absorption.loc[mask, "status"] = new_status
 
     @absorption_will_be_changed
     def add_new_point_absorption(self, frequency: float, gamma: float):
         """Метод добавляет новую точку поглощения с заданными координатами."""
-        new_point = DataFrame({
-            "frequency": [frequency],
-            "gamma": [gamma],
-            "status": [True],
-            "source_neural_network": [False]
-        })
-        self.__point_absorption = concat([self.__point_absorption, new_point], ignore_index=True)
-        self.__point_absorption.sort_values(by="frequency", inplace=True, ignore_index=True)
+        new_point = DataFrame(
+            {
+                "frequency": [frequency],
+                "gamma": [gamma],
+                "status": [True],
+                "source_neural_network": [False],
+            }
+        )
+        self.__point_absorption = concat(
+            [self.__point_absorption, new_point], ignore_index=True
+        )
+        self.__point_absorption.sort_values(
+            by="frequency", inplace=True, ignore_index=True
+        )
 
     @absorption_will_be_changed
     def del_point_absorption(self, frequency: float, gamma: float):
         """Удаляет точку поглощения, если она была добавлена в ручную"""
-        mask = (self.__point_absorption["frequency"] == frequency) & (self.__point_absorption["gamma"] == gamma)
-        to_delete = self.__point_absorption[mask & (self.__point_absorption["source_neural_network"] == False)]
+        mask = (self.__point_absorption["frequency"] == frequency) & (
+            self.__point_absorption["gamma"] == gamma
+        )
+        to_delete = self.__point_absorption[
+            mask & (not self.__point_absorption["source_neural_network"])
+        ]
         if not to_delete.empty:
-            self.__point_absorption = self.__point_absorption.drop(to_delete.index).reset_index(drop=True)
+            self.__point_absorption = self.__point_absorption.drop(
+                to_delete.index
+            ).reset_index(drop=True)
 
     @absorption_will_be_changed
     def del_point_absorption_by_index(self, index: int):
         """Удаляет точку поглощения по индексу, если она была добавлена вручную"""
         if 0 <= index < len(self.__point_absorption):
             if not self.__point_absorption.loc[index, "source_neural_network"]:
-                self.__point_absorption = self.__point_absorption.drop(index).reset_index(drop=True)
+                self.__point_absorption = self.__point_absorption.drop(
+                    index
+                ).reset_index(drop=True)

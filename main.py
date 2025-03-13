@@ -2,7 +2,7 @@ import sys
 import ctypes
 import traceback
 from functools import partial
-from pyqtgraph.Qt.QtWidgets import QMessageBox, QApplication, QDialog
+from pyqtgraph.Qt.QtWidgets import QMessageBox, QApplication
 from pyqtgraph.Qt.QtCore import QCoreApplication, Qt
 from gui_logic import GuiProgram
 from app_exception import AppException
@@ -21,20 +21,27 @@ def handle_exception(app, exc_type, exc_value, exc_traceback):
     # sys.exit(1)
 
 
-if __name__ == '__main__':
-    # Решает проблему не правильного масштабирования интерфейса и осей графика PyQtGraph на разных мониторах
-    # https://github.com/pyqtgraph/pyqtgraph/issues/756#issuecomment-1023182391
-    QApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
-    QCoreApplication.setAttribute(Qt.ApplicationAttribute.AA_EnableHighDpiScaling, True)
-    # Установка значка приложения на панели задач
-    # https://stackoverflow.com/a/1552105
-    my_app_id = 'company.my-product.subproject.version'
-    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(my_app_id)
-    # Инициализации и запуск приложения
-    app = QApplication(sys.argv)
-    dialog = QDialog(None)
-    program = GuiProgram(dialog)
-    dialog.show()
-    # Устанавливаем глобальный обработчик исключений, c передачей app для подгрузки иконки приложения
-    sys.excepthook = partial(handle_exception, app)
-    sys.exit(app.exec_())
+if __name__ == "__main__":
+
+    def main():
+        # Решает проблему не правильного масштабирования интерфейса и осей графика PyQtGraph на разных мониторах
+        # https://github.com/pyqtgraph/pyqtgraph/issues/756#issuecomment-1023182391
+        QApplication.setHighDpiScaleFactorRoundingPolicy(
+            Qt.HighDpiScaleFactorRoundingPolicy.PassThrough
+        )
+        QCoreApplication.setAttribute(
+            Qt.ApplicationAttribute.AA_EnableHighDpiScaling, True
+        )
+        # Установка значка приложения на панели задач
+        # https://stackoverflow.com/a/1552105
+        my_app_id = "company.my-product.subproject.version"
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(my_app_id)
+        # Инициализации и запуск приложения
+        app = QApplication(sys.argv)
+        dialog = GuiProgram(None)
+        dialog.show()
+        # Устанавливаем глобальный обработчик исключений, c передачей app для подгрузки иконки приложения
+        sys.excepthook = partial(handle_exception, app)
+        sys.exit(app.exec())
+
+    main()
