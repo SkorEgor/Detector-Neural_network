@@ -1,6 +1,7 @@
 import sys
 import ctypes
 import traceback
+from contextlib import suppress
 from functools import partial
 from pyqtgraph.Qt.QtWidgets import QMessageBox, QApplication
 from pyqtgraph.Qt.QtCore import QCoreApplication, Qt
@@ -29,9 +30,10 @@ if __name__ == "__main__":
         QApplication.setHighDpiScaleFactorRoundingPolicy(
             Qt.HighDpiScaleFactorRoundingPolicy.PassThrough
         )
-        QCoreApplication.setAttribute(
-            Qt.ApplicationAttribute.AA_EnableHighDpiScaling, True
-        )
+        with suppress(AttributeError):
+            QCoreApplication.setAttribute(
+                Qt.ApplicationAttribute.AA_EnableHighDpiScaling, True
+            )
         # Установка значка приложения на панели задач
         # https://stackoverflow.com/a/1552105
         my_app_id = "company.my-product.subproject.version"

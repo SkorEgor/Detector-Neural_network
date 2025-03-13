@@ -215,7 +215,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.layout_style_sheet.setObjectName("layout_style_sheet")
         self.widget_menu = QtWidgets.QWidget(self.widget_style_sheet)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred
+            QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Preferred
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -223,10 +223,11 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.widget_menu.setSizePolicy(sizePolicy)
         self.widget_menu.setMinimumSize(QtCore.QSize(225, 0))
         self.widget_menu.setMaximumSize(QtCore.QSize(215, 16777215))
-        self.widget_menu.setStyleSheet("")
         self.widget_menu.setObjectName("widget_menu")
         self.layout_menu = QtWidgets.QVBoxLayout(self.widget_menu)
-        self.layout_menu.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
+        self.layout_menu.setSizeConstraint(
+            QtWidgets.QLayout.SizeConstraint.SetDefaultConstraint
+        )
         self.layout_menu.setContentsMargins(0, 0, 0, 0)
         self.layout_menu.setSpacing(0)
         self.layout_menu.setObjectName("layout_menu")
@@ -304,7 +305,9 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.widget_menu_body = QtWidgets.QWidget(self.widget_menu)
         self.widget_menu_body.setObjectName("widget_menu_body")
         self.layout_menu_body = QtWidgets.QVBoxLayout(self.widget_menu_body)
-        self.layout_menu_body.setSizeConstraint(QtWidgets.QLayout.SetMaximumSize)
+        self.layout_menu_body.setSizeConstraint(
+            QtWidgets.QLayout.SizeConstraint.SetMaximumSize
+        )
         self.layout_menu_body.setContentsMargins(0, 0, 3, 0)
         self.layout_menu_body.setSpacing(0)
         self.layout_menu_body.setObjectName("layout_menu_body")
@@ -321,18 +324,17 @@ class Ui_Dialog(QtWidgets.QDialog):
             QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff
         )
         self.scrollArea_menu_body.setSizeAdjustPolicy(
-            QtWidgets.QAbstractScrollArea.AdjustToContents
+            QtWidgets.QAbstractScrollArea.SizeAdjustPolicy.AdjustToContents
         )
         self.scrollArea_menu_body.setWidgetResizable(True)
         self.scrollArea_menu_body.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.scrollArea_menu_body.setObjectName("scrollArea_menu_body")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 222, 492))
-        self.scrollAreaWidgetContents.setStyleSheet("")
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.Layout_scroll_menu = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.Layout_scroll_menu.setSizeConstraint(
-            QtWidgets.QLayout.SetDefaultConstraint
+            QtWidgets.QLayout.SizeConstraint.SetDefaultConstraint
         )
         self.Layout_scroll_menu.setContentsMargins(0, 0, 0, 0)
         self.Layout_scroll_menu.setSpacing(5)
@@ -340,7 +342,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.widget_neural_network = QtWidgets.QWidget(self.scrollAreaWidgetContents)
         self.widget_neural_network.setEnabled(True)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed
+            QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -355,7 +357,7 @@ class Ui_Dialog(QtWidgets.QDialog):
             self.widget_neural_network
         )
         self.layout_menu_neural_network.setSizeConstraint(
-            QtWidgets.QLayout.SetDefaultConstraint
+            QtWidgets.QLayout.SizeConstraint.SetDefaultConstraint
         )
         self.layout_menu_neural_network.setContentsMargins(0, 0, 0, 5)
         self.layout_menu_neural_network.setSpacing(0)
@@ -375,7 +377,7 @@ class Ui_Dialog(QtWidgets.QDialog):
             self.widget_neural_network_header
         )
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed
+            QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -439,7 +441,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.label_text_neural_network = QtWidgets.QLabel(self.widget)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Preferred
+            QtWidgets.QSizePolicy.Policy.Ignored, QtWidgets.QSizePolicy.Policy.Preferred
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -461,7 +463,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.horizontalLayout_2.addWidget(self.label_text_neural_network)
         self.pushButton_reading_file_neural_network = QtWidgets.QPushButton(self.widget)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed
+            QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -498,7 +500,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.checkBox_download_neural_network = QtWidgets.QCheckBox(self.widget)
         self.checkBox_download_neural_network.setEnabled(False)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed
+            QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -524,7 +526,7 @@ class Ui_Dialog(QtWidgets.QDialog):
             self.widget_neural_network_body
         )
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed
+            QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Fixed
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -541,7 +543,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.Layout_scroll_menu.addWidget(self.widget_neural_network)
         self.widget_data = QtWidgets.QWidget(self.scrollAreaWidgetContents)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed
+            QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -551,7 +553,9 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.widget_data.setStyleSheet("")
         self.widget_data.setObjectName("widget_data")
         self.layout_menu_data = QtWidgets.QVBoxLayout(self.widget_data)
-        self.layout_menu_data.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
+        self.layout_menu_data.setSizeConstraint(
+            QtWidgets.QLayout.SizeConstraint.SetDefaultConstraint
+        )
         self.layout_menu_data.setContentsMargins(0, 0, 0, 5)
         self.layout_menu_data.setSpacing(0)
         self.layout_menu_data.setObjectName("layout_menu_data")
@@ -564,7 +568,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.layout_data_header.setObjectName("layout_data_header")
         self.pushButton_data_header = QtWidgets.QPushButton(self.widget_data_header)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed
+            QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -643,7 +647,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.layout_no_gas.setObjectName("layout_no_gas")
         self.label_text_file_name_no_gas = QtWidgets.QLabel(self.groupBox_no_gas)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Preferred
+            QtWidgets.QSizePolicy.Policy.Ignored, QtWidgets.QSizePolicy.Policy.Preferred
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -667,7 +671,7 @@ class Ui_Dialog(QtWidgets.QDialog):
             self.groupBox_no_gas
         )
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed
+            QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -702,7 +706,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.checkBox_download_no_gas = QtWidgets.QCheckBox(self.groupBox_no_gas)
         self.checkBox_download_no_gas.setEnabled(False)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed
+            QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -753,7 +757,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.layout_with_gas.setObjectName("layout_with_gas")
         self.label_text_file_name_with_gas = QtWidgets.QLabel(self.groupBox_with_gas)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Preferred
+            QtWidgets.QSizePolicy.Policy.Ignored, QtWidgets.QSizePolicy.Policy.Preferred
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -779,7 +783,7 @@ class Ui_Dialog(QtWidgets.QDialog):
             self.groupBox_with_gas
         )
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed
+            QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -811,7 +815,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.checkBox_download_with_gas = QtWidgets.QCheckBox(self.groupBox_with_gas)
         self.checkBox_download_with_gas.setEnabled(False)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed
+            QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -939,7 +943,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.layout_frequency_range.addWidget(self.radioButton_selected_range)
         self.widget_start_range = QtWidgets.QWidget(self.groupBox_frequency_range)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Preferred
+            QtWidgets.QSizePolicy.Policy.Ignored, QtWidgets.QSizePolicy.Policy.Preferred
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -952,14 +956,15 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.widget_start_range.setObjectName("widget_start_range")
         self.layout_start_range = QtWidgets.QHBoxLayout(self.widget_start_range)
         self.layout_start_range.setSizeConstraint(
-            QtWidgets.QLayout.SetDefaultConstraint
+            QtWidgets.QLayout.SizeConstraint.SetDefaultConstraint
         )
         self.layout_start_range.setContentsMargins(0, 0, 0, 0)
         self.layout_start_range.setSpacing(0)
         self.layout_start_range.setObjectName("layout_start_range")
         self.label_text_start_range = QtWidgets.QLabel(self.widget_start_range)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred
+            QtWidgets.QSizePolicy.Policy.Preferred,
+            QtWidgets.QSizePolicy.Policy.Preferred,
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -978,7 +983,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.lineEdit_start_range = QtWidgets.QLineEdit(self.widget_start_range)
         self.lineEdit_start_range.setEnabled(False)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed
+            QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Fixed
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1002,7 +1007,8 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.layout_start_range.addWidget(self.lineEdit_start_range)
         self.label_text_units_start_range = QtWidgets.QLabel(self.widget_start_range)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred
+            QtWidgets.QSizePolicy.Policy.Preferred,
+            QtWidgets.QSizePolicy.Policy.Preferred,
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1024,7 +1030,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.layout_frequency_range.addWidget(self.widget_start_range)
         self.widget_end_range = QtWidgets.QWidget(self.groupBox_frequency_range)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Preferred
+            QtWidgets.QSizePolicy.Policy.Ignored, QtWidgets.QSizePolicy.Policy.Preferred
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1036,13 +1042,16 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.widget_end_range.setStyleSheet("")
         self.widget_end_range.setObjectName("widget_end_range")
         self.layout_end_range = QtWidgets.QHBoxLayout(self.widget_end_range)
-        self.layout_end_range.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
+        self.layout_end_range.setSizeConstraint(
+            QtWidgets.QLayout.SizeConstraint.SetDefaultConstraint
+        )
         self.layout_end_range.setContentsMargins(0, 0, 0, 0)
         self.layout_end_range.setSpacing(0)
         self.layout_end_range.setObjectName("layout_end_range")
         self.label_text_end_range = QtWidgets.QLabel(self.widget_end_range)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred
+            QtWidgets.QSizePolicy.Policy.Preferred,
+            QtWidgets.QSizePolicy.Policy.Preferred,
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1062,7 +1071,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.lineEdit_end_range = QtWidgets.QLineEdit(self.widget_end_range)
         self.lineEdit_end_range.setEnabled(False)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed
+            QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Fixed
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1086,7 +1095,8 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.layout_end_range.addWidget(self.lineEdit_end_range)
         self.label_text_units_end_range = QtWidgets.QLabel(self.widget_end_range)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred
+            QtWidgets.QSizePolicy.Policy.Preferred,
+            QtWidgets.QSizePolicy.Policy.Preferred,
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1111,7 +1121,10 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.layout_menu_data.addWidget(self.widget_data_body)
         self.Layout_scroll_menu.addWidget(self.widget_data)
         spacerItem = QtWidgets.QSpacerItem(
-            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
+            20,
+            40,
+            QtWidgets.QSizePolicy.Policy.Minimum,
+            QtWidgets.QSizePolicy.Policy.Expanding,
         )
         self.Layout_scroll_menu.addItem(spacerItem)
         self.scrollArea_menu_body.setWidget(self.scrollAreaWidgetContents)
@@ -1136,7 +1149,7 @@ class Ui_Dialog(QtWidgets.QDialog):
             self.widget_menu_bottom
         )
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed
+            QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1179,7 +1192,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.layout_menu_bottom.addWidget(self.pushButton_close_open_table)
         self.pushButton_menu_calculate = QtWidgets.QPushButton(self.widget_menu_bottom)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed
+            QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1296,7 +1309,7 @@ class Ui_Dialog(QtWidgets.QDialog):
             self.widget_table_view_mode
         )
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Preferred
+            QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Preferred
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1321,7 +1334,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         )
         self.comboBox_select_table_view.setCurrentText("")
         self.comboBox_select_table_view.setInsertPolicy(
-            QtWidgets.QComboBox.InsertAtBottom
+            QtWidgets.QComboBox.InsertPolicy.InsertAtBottom
         )
         self.comboBox_select_table_view.setIconSize(QtCore.QSize(20, 20))
         self.comboBox_select_table_view.setObjectName("comboBox_select_table_view")
@@ -1379,7 +1392,8 @@ class Ui_Dialog(QtWidgets.QDialog):
             self.widget_table
         )
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Expanding,
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1388,25 +1402,27 @@ class Ui_Dialog(QtWidgets.QDialog):
         )
         self.tableWidget_frequency_absorption.setSizePolicy(sizePolicy)
         self.tableWidget_frequency_absorption.setStyleSheet("")
-        self.tableWidget_frequency_absorption.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.tableWidget_frequency_absorption.setFrameShape(
+            QtWidgets.QFrame.Shape.NoFrame
+        )
         self.tableWidget_frequency_absorption.setHorizontalScrollBarPolicy(
             QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff
         )
         self.tableWidget_frequency_absorption.setSizeAdjustPolicy(
-            QtWidgets.QAbstractScrollArea.AdjustToContents
+            QtWidgets.QAbstractScrollArea.SizeAdjustPolicy.AdjustToContents
         )
         self.tableWidget_frequency_absorption.setEditTriggers(
-            QtWidgets.QAbstractItemView.AnyKeyPressed
-            | QtWidgets.QAbstractItemView.EditKeyPressed
+            QtWidgets.QAbstractItemView.EditTrigger.AnyKeyPressed
+            | QtWidgets.QAbstractItemView.EditTrigger.EditKeyPressed
         )
         self.tableWidget_frequency_absorption.setTabKeyNavigation(False)
         self.tableWidget_frequency_absorption.setProperty("showDropIndicator", False)
         self.tableWidget_frequency_absorption.setDragDropOverwriteMode(False)
         self.tableWidget_frequency_absorption.setSelectionMode(
-            QtWidgets.QAbstractItemView.SingleSelection
+            QtWidgets.QAbstractItemView.SelectionMode.SingleSelection
         )
         self.tableWidget_frequency_absorption.setSelectionBehavior(
-            QtWidgets.QAbstractItemView.SelectRows
+            QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows
         )
         self.tableWidget_frequency_absorption.setIconSize(QtCore.QSize(0, 0))
         self.tableWidget_frequency_absorption.setShowGrid(True)
@@ -1427,7 +1443,8 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.layout_table.addWidget(self.tableWidget_frequency_absorption)
         self.widget_bottom = QtWidgets.QWidget(self.widget_table)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred
+            QtWidgets.QSizePolicy.Policy.Preferred,
+            QtWidgets.QSizePolicy.Policy.Preferred,
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1439,7 +1456,9 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.widget_bottom.setStyleSheet("")
         self.widget_bottom.setObjectName("widget_bottom")
         self.layout_bottom = QtWidgets.QVBoxLayout(self.widget_bottom)
-        self.layout_bottom.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
+        self.layout_bottom.setSizeConstraint(
+            QtWidgets.QLayout.SizeConstraint.SetDefaultConstraint
+        )
         self.layout_bottom.setContentsMargins(0, 0, 0, 0)
         self.layout_bottom.setSpacing(0)
         self.layout_bottom.setObjectName("layout_bottom")
@@ -1447,7 +1466,7 @@ class Ui_Dialog(QtWidgets.QDialog):
             self.widget_bottom
         )
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed
+            QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Fixed
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1500,7 +1519,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.layout_frequency_range_3.addWidget(self.label_text_window_width)
         self.widget_input_window_view = QtWidgets.QWidget(self.groupBox_window_view)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Preferred
+            QtWidgets.QSizePolicy.Policy.Ignored, QtWidgets.QSizePolicy.Policy.Preferred
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1513,7 +1532,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.widget_input_window_view.setObjectName("widget_input_window_view")
         self.layout_start_range_8 = QtWidgets.QHBoxLayout(self.widget_input_window_view)
         self.layout_start_range_8.setSizeConstraint(
-            QtWidgets.QLayout.SetDefaultConstraint
+            QtWidgets.QLayout.SizeConstraint.SetDefaultConstraint
         )
         self.layout_start_range_8.setContentsMargins(0, 0, 0, 0)
         self.layout_start_range_8.setSpacing(0)
@@ -1521,7 +1540,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.lineEdit_window_width = QtWidgets.QLineEdit(self.widget_input_window_view)
         self.lineEdit_window_width.setEnabled(True)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Fixed
+            QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Fixed
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1542,7 +1561,7 @@ class Ui_Dialog(QtWidgets.QDialog):
             self.widget_input_window_view
         )
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred
+            QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Preferred
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1563,7 +1582,7 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.layout_bottom.addWidget(self.groupBox_window_view)
         self.pushButton_save_table_to_file = QtWidgets.QPushButton(self.widget_bottom)
         sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed
+            QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)

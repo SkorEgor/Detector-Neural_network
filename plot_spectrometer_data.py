@@ -231,7 +231,7 @@ class SpectrometerPlotAndLegendWidget(QWidget):
 
         # Создаем и добавляем легенду под графиком
         self.legend_widget = LegendWidget()
-        layout.addWidget(self.legend_widget, alignment=Qt.AlignCenter)
+        layout.addWidget(self.legend_widget, alignment=Qt.AlignmentFlag.AlignCenter)
 
         # Подключаем сигнал dataUpdated к методу update_legend
         self.plot_widget.dataUpdated.connect(self.legend_widget.update_legend)
