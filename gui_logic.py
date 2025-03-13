@@ -70,7 +70,7 @@ class GuiProgram(CustomDialog):
     def loading_neural_network(self):
         """Загрузка нейронной сети"""
         # 1. Получение имени файла из диалогового окна (в режиме DEBUG используется путь по умолчанию)
-        if setting.DEBUG:
+        if setting.DEBUG_ALL or setting.USE_DEFAULT_FILE_PATH_NEURAL_NETWORK:
             self.file_name_neural_network = setting.DEFAULT_FILE_PATH_NEURAL_NETWORK
         else:
             self.file_name_neural_network, _ = QFileDialog.getOpenFileName(
@@ -98,7 +98,7 @@ class GuiProgram(CustomDialog):
         # 1. Чтения файла (если файл тот же - пропускаем)
         if not skip_read:
             # Получение имени файла из диалогового окна (в режиме DEBUG используется путь по умолчанию)
-            if setting.DEBUG:
+            if setting.DEBUG_ALL or setting.USE_DEFAULT_FILE_PATH_WITHOUT_SUBSTANCE:
                 self.file_name_without_substance = (
                     setting.DEFAULT_FILE_PATH_WITHOUT_SUBSTANCE
                 )
@@ -142,7 +142,7 @@ class GuiProgram(CustomDialog):
         # 1. Чтения файла (если файл тот же - пропускаем)
         if not skip_read:
             # Получение имени файла из диалогового окна (в режиме DEBUG используется путь по умолчанию)
-            if setting.DEBUG:
+            if setting.DEBUG_ALL or setting.USE_DEFAULT_FILE_PATH_WITH_SUBSTANCE:
                 self.file_name_with_substance = setting.DEFAULT_FILE_PATH_WITH_SUBSTANCE
             else:
                 self.file_name_with_substance, _ = QFileDialog.getOpenFileName(
