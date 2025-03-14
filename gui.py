@@ -1572,19 +1572,15 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.layout_dialog_main.addWidget(self.widget_style_sheet)
 
         self.retranslateUi()
-        self.pushButton_data_header.clicked["bool"].connect(
-            self.widget_data_body.setVisible
-        )  # type: ignore
-        self.radioButton_selected_range.toggled["bool"].connect(
+        self.pushButton_data_header.clicked.connect(self.widget_data_body.setVisible)  # type: ignore
+        self.radioButton_selected_range.toggled.connect(
             self.lineEdit_start_range.setEnabled
         )  # type: ignore
-        self.radioButton_selected_range.toggled["bool"].connect(
+        self.radioButton_selected_range.toggled.connect(
             self.lineEdit_end_range.setEnabled
         )  # type: ignore
-        self.pushButton_close_open_table.clicked["bool"].connect(
-            self.widget_right.setVisible
-        )  # type: ignore
-        self.pushButton_neural_network_heade.toggled["bool"].connect(
+        self.pushButton_close_open_table.clicked.connect(self.widget_right.setVisible)  # type: ignore
+        self.pushButton_neural_network_heade.toggled.connect(
             self.widget_neural_network_body.setVisible
         )  # type: ignore
         QtCore.QMetaObject.connectSlotsByName(self)

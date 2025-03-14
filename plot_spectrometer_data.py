@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from pandas import DataFrame
 from pyqtgraph import PlotWidget, ScatterPlotItem, mkPen, setConfigOptions
-from pyqtgraph.Qt.QtCore import Qt, pyqtSignal
+from pyqtgraph.Qt.QtCore import Qt, Signal
 from pyqtgraph.Qt.QtGui import QColor, QPixmap
 from pyqtgraph.Qt.QtWidgets import (
     QApplication,
@@ -45,7 +45,7 @@ class SpectrometerPlotWidget(PlotWidget):
         None: "#FFA500",  # Оранжевый
     }
     # Объявляем сигнал обновления легенды (для кастомной легенды)
-    dataUpdated = pyqtSignal(list)
+    dataUpdated = Signal(list)
 
     def __init__(
         self,

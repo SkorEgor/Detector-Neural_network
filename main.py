@@ -1,10 +1,9 @@
 import sys
 import ctypes
 import traceback
-from contextlib import suppress
 from functools import partial
 
-from pyqtgraph.Qt.QtCore import QCoreApplication, Qt
+from pyqtgraph.Qt.QtCore import QCoreApplication, Qt, qVersion
 from pyqtgraph.Qt.QtWidgets import QApplication, QMessageBox
 
 from app_exception import AppException
@@ -32,7 +31,7 @@ if __name__ == "__main__":
         QApplication.setHighDpiScaleFactorRoundingPolicy(
             Qt.HighDpiScaleFactorRoundingPolicy.PassThrough
         )
-        with suppress(AttributeError):
+        if int(qVersion().split(".")[0]) < 6:
             QCoreApplication.setAttribute(
                 Qt.ApplicationAttribute.AA_EnableHighDpiScaling, True
             )

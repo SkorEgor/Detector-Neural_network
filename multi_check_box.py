@@ -1,5 +1,5 @@
 from pyqtgraph.Qt import QtSvg
-from pyqtgraph.Qt.QtCore import Qt, pyqtSignal
+from pyqtgraph.Qt.QtCore import Qt, Signal
 from pyqtgraph.Qt.QtGui import QPainter, QPixmap
 from pyqtgraph.Qt.QtWidgets import (
     QApplication,
@@ -23,7 +23,7 @@ def load_svg_icon(svg_path, size=24):
 
 
 class BaseMultiCheckBox(QWidget):
-    clicked = pyqtSignal(object)
+    clicked = Signal(object)
 
     def __init__(
         self,
