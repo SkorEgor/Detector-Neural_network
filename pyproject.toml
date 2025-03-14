@@ -1,0 +1,25 @@
+[project]
+name = "detector-neural-network"
+version = "1.0.0"
+description = "Find spectral lines in recorded data with the help of a neural network"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "joblib",
+    "numpy",
+    "pandas",
+    "pyqtgraph",
+    "scipy",
+    "scikit-learn",
+]
+
+[project.optional-dependencies]
+PyQt6 = [
+    "PyQt6",
+]
+PySide6 = [
+    "PySide6-Essentials",
+]
+PyQt5 = [
+    "PyQt5",
+]
