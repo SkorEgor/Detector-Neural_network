@@ -85,6 +85,7 @@ class SpectrometerPlotWidget(PlotWidget):
             isinstance(spectrometer_data, DataFrame)
             and not spectrometer_data.empty
             and "without_gas" in spectrometer_data.columns
+            and not spectrometer_data["frequency"].dropna().empty
             and not spectrometer_data["without_gas"].dropna().empty
         ):
             self.plot(
@@ -103,6 +104,7 @@ class SpectrometerPlotWidget(PlotWidget):
             isinstance(spectrometer_data, DataFrame)
             and not spectrometer_data.empty
             and "with_gas" in spectrometer_data.columns
+            and not spectrometer_data["frequency"].dropna().empty
             and not spectrometer_data["with_gas"].dropna().empty
         ):
             # Рисуем линию
