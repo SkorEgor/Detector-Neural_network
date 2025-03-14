@@ -448,18 +448,20 @@ class GuiProgram(CustomDialog):
                 """***********************************************************\n"""
             )
             # Фильтр строк, где source_neural_network=True
-            filtered = point_absorption[point_absorption["source_neural_network"]]
+            filtered = point_absorption[
+                point_absorption["source_neural_network"] == True
+            ]
             # 1. Количество строк, где source_neural_network=True
             dots_found = filtered.shape[0]
             # 2. Количество строк, где source_neural_network=True и status=True
-            points_confirmed = filtered[filtered["status"]].shape[0]
+            points_confirmed = filtered[filtered["status"] == True].shape[0]
             # 3. Количество строк, где source_neural_network=True и status=False
-            points_rejected = filtered[not filtered["status"]].shape[0]
+            points_rejected = filtered[filtered["status"] == False].shape[0]
             # 4. Всего точек
             dots_all = point_absorption.shape[0]
             # 5. Точек добавлено
             dots_add = point_absorption[
-                not point_absorption["source_neural_network"]
+                point_absorption["source_neural_network"] == False
             ].shape[0]
             print(dots_found, points_confirmed, points_rejected, dots_all, dots_add)
             file.write(
@@ -481,20 +483,20 @@ class GuiProgram(CustomDialog):
 
         # Фильтр строк, где source_neural_network=True
         filtered_neuron_found = point_absorption[
-            point_absorption["source_neural_network"]
+            point_absorption["source_neural_network"] == True
         ]
         # Количество строк, где source_neural_network=True
         points_neuron_found = filtered_neuron_found.shape[0]
         # Количество строк, где source_neural_network=True и status=True
-        points_confirmed = filtered_neuron_found[filtered_neuron_found["status"]].shape[
-            0
-        ]
+        points_confirmed = filtered_neuron_found[
+            filtered_neuron_found["status"] == True
+        ].shape[0]
         # Процент выбранных
         percent_chosen = (
             0 if points_neuron_found == 0 else points_confirmed / points_neuron_found
         )
         # Фильтр строк, где status=True
-        filtered_absorption_lines = point_absorption[point_absorption["status"]]
+        filtered_absorption_lines = point_absorption[point_absorption["status"] == True]
         # Всего найденных частот поглощения
         number_absorption_lines = filtered_absorption_lines.shape[0]
         # Строки статистики

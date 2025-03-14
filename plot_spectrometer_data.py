@@ -132,15 +132,15 @@ class SpectrometerPlotWidget(PlotWidget):
             # Цвета для раскраски точек
             conditions = [
                 # status=False
-                (not absorption_points["status"]),
+                (absorption_points["status"] == False),
                 # status=None
                 (absorption_points["status"].isna()),
                 # status=True и source_neural_network=True
-                (absorption_points["status"])
-                & (absorption_points["source_neural_network"]),
+                (absorption_points["status"] == True)
+                & (absorption_points["source_neural_network"] == True),
                 # status=True и source_neural_network=False
-                (absorption_points["status"])
-                & (not absorption_points["source_neural_network"]),
+                (absorption_points["status"] == True)
+                & (absorption_points["source_neural_network"] == False),
             ]
             choices = [
                 "#FF0000",  # Красный
