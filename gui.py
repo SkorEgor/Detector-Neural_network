@@ -31,7 +31,6 @@ class Ui_Dialog(QtWidgets.QDialog):
             QtGui.QIcon.State.Off,
         )
         self.setWindowIcon(icon)
-        self.setStyleSheet("")
         self.setSizeGripEnabled(False)
         self.setModal(False)
         self.layout_dialog_main = QtWidgets.QHBoxLayout(self)
@@ -234,7 +233,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.widget_menu_title = QtWidgets.QWidget(self.widget_menu)
         self.widget_menu_title.setMinimumSize(QtCore.QSize(0, 50))
         self.widget_menu_title.setMaximumSize(QtCore.QSize(16777215, 50))
-        self.widget_menu_title.setStyleSheet("")
         self.widget_menu_title.setObjectName("widget_menu_title")
         self.layout_menu_title = QtWidgets.QHBoxLayout(self.widget_menu_title)
         self.layout_menu_title.setContentsMargins(0, 0, 0, 0)
@@ -251,7 +249,6 @@ class Ui_Dialog(QtWidgets.QDialog):
             border: none;                                                /* без границ */
             """
         )
-        self.label_imag_app.setText("")
         self.label_imag_app.setPixmap(
             QtGui.QPixmap(
                 ":/application picture/resource/application picture/app_icon-round.png"
@@ -295,7 +292,6 @@ class Ui_Dialog(QtWidgets.QDialog):
             }
             """
         )
-        self.checkBox_color_theme.setText("")
         self.checkBox_color_theme.setIconSize(QtCore.QSize(30, 30))
         self.checkBox_color_theme.setChecked(True)
         self.checkBox_color_theme.setTristate(False)
@@ -313,7 +309,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.layout_menu_body.setObjectName("layout_menu_body")
         self.scrollArea_menu_body = QtWidgets.QScrollArea(self.widget_menu_body)
         self.scrollArea_menu_body.setTabletTracking(False)
-        self.scrollArea_menu_body.setStyleSheet("")
         self.scrollArea_menu_body.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
         self.scrollArea_menu_body.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.scrollArea_menu_body.setLineWidth(1)
@@ -351,7 +346,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         )
         self.widget_neural_network.setSizePolicy(sizePolicy)
         self.widget_neural_network.setMinimumSize(QtCore.QSize(0, 0))
-        self.widget_neural_network.setStyleSheet("")
         self.widget_neural_network.setObjectName("widget_neural_network")
         self.layout_menu_neural_network = QtWidgets.QVBoxLayout(
             self.widget_neural_network
@@ -365,7 +359,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.widget_neural_network_header = QtWidgets.QWidget(
             self.widget_neural_network
         )
-        self.widget_neural_network_header.setStyleSheet("")
         self.widget_neural_network_header.setObjectName("widget_neural_network_header")
         self.layout_neural_network_header = QtWidgets.QHBoxLayout(
             self.widget_neural_network_header
@@ -393,7 +386,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.pushButton_neural_network_heade.setCursor(
             QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor)
         )
-        self.pushButton_neural_network_heade.setAccessibleDescription("")
         self.pushButton_neural_network_heade.setLayoutDirection(
             QtCore.Qt.LayoutDirection.LeftToRight
         )
@@ -425,7 +417,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.layout_menu_neural_network.addWidget(self.widget_neural_network_header)
         self.widget_neural_network_body = QtWidgets.QWidget(self.widget_neural_network)
         self.widget_neural_network_body.setEnabled(True)
-        self.widget_neural_network_body.setStyleSheet("")
         self.widget_neural_network_body.setObjectName("widget_neural_network_body")
         self.layout_neural_network_body = QtWidgets.QVBoxLayout(
             self.widget_neural_network_body
@@ -456,7 +447,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         font.setBold(False)
         font.setWeight(50)
         self.label_text_neural_network.setFont(font)
-        self.label_text_neural_network.setStyleSheet("")
         self.label_text_neural_network.setTextFormat(QtCore.Qt.TextFormat.AutoText)
         self.label_text_neural_network.setScaledContents(False)
         self.label_text_neural_network.setObjectName("label_text_neural_network")
@@ -478,9 +468,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.pushButton_reading_file_neural_network.setCursor(
             QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor)
         )
-        self.pushButton_reading_file_neural_network.setWhatsThis("")
-        self.pushButton_reading_file_neural_network.setAccessibleName("")
-        self.pushButton_reading_file_neural_network.setAccessibleDescription("")
         self.pushButton_reading_file_neural_network.setStyleSheet(
             """
             QPushButton {
@@ -491,7 +478,6 @@ class Ui_Dialog(QtWidgets.QDialog):
             }
             """
         )
-        self.pushButton_reading_file_neural_network.setText("")
         self.pushButton_reading_file_neural_network.setIconSize(QtCore.QSize(25, 25))
         self.pushButton_reading_file_neural_network.setObjectName(
             "pushButton_reading_file_neural_network"
@@ -510,11 +496,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.checkBox_download_neural_network.setSizePolicy(sizePolicy)
         self.checkBox_download_neural_network.setMinimumSize(QtCore.QSize(0, 30))
         self.checkBox_download_neural_network.setMaximumSize(QtCore.QSize(16777215, 30))
-        self.checkBox_download_neural_network.setWhatsThis("")
-        self.checkBox_download_neural_network.setAccessibleName("")
-        self.checkBox_download_neural_network.setAccessibleDescription("")
-        self.checkBox_download_neural_network.setStyleSheet("")
-        self.checkBox_download_neural_network.setText("")
         self.checkBox_download_neural_network.setChecked(False)
         self.checkBox_download_neural_network.setTristate(False)
         self.checkBox_download_neural_network.setObjectName(
@@ -534,7 +515,6 @@ class Ui_Dialog(QtWidgets.QDialog):
             self.label_parameters_neural_network.sizePolicy().hasHeightForWidth()
         )
         self.label_parameters_neural_network.setSizePolicy(sizePolicy)
-        self.label_parameters_neural_network.setText("")
         self.label_parameters_neural_network.setObjectName(
             "label_parameters_neural_network"
         )
@@ -550,7 +530,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         sizePolicy.setHeightForWidth(self.widget_data.sizePolicy().hasHeightForWidth())
         self.widget_data.setSizePolicy(sizePolicy)
         self.widget_data.setMinimumSize(QtCore.QSize(0, 0))
-        self.widget_data.setStyleSheet("")
         self.widget_data.setObjectName("widget_data")
         self.layout_menu_data = QtWidgets.QVBoxLayout(self.widget_data)
         self.layout_menu_data.setSizeConstraint(
@@ -560,7 +539,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.layout_menu_data.setSpacing(0)
         self.layout_menu_data.setObjectName("layout_menu_data")
         self.widget_data_header = QtWidgets.QWidget(self.widget_data)
-        self.widget_data_header.setStyleSheet("")
         self.widget_data_header.setObjectName("widget_data_header")
         self.layout_data_header = QtWidgets.QHBoxLayout(self.widget_data_header)
         self.layout_data_header.setContentsMargins(0, 0, 0, 0)
@@ -584,7 +562,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.pushButton_data_header.setCursor(
             QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor)
         )
-        self.pushButton_data_header.setAccessibleDescription("")
         self.pushButton_data_header.setLayoutDirection(
             QtCore.Qt.LayoutDirection.LeftToRight
         )
@@ -611,7 +588,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.layout_data_header.addWidget(self.pushButton_data_header)
         self.layout_menu_data.addWidget(self.widget_data_header)
         self.widget_data_body = QtWidgets.QWidget(self.widget_data)
-        self.widget_data_body.setStyleSheet("")
         self.widget_data_body.setObjectName("widget_data_body")
         self.layout_data_body = QtWidgets.QVBoxLayout(self.widget_data_body)
         self.layout_data_body.setContentsMargins(5, 5, 5, 5)
@@ -632,7 +608,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.groupBox_no_gas.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.ArrowCursor))
         self.groupBox_no_gas.setMouseTracking(False)
         self.groupBox_no_gas.setTabletTracking(False)
-        self.groupBox_no_gas.setStyleSheet("")
         self.groupBox_no_gas.setAlignment(
             QtCore.Qt.AlignmentFlag.AlignLeading
             | QtCore.Qt.AlignmentFlag.AlignLeft
@@ -662,7 +637,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         font.setBold(False)
         font.setWeight(50)
         self.label_text_file_name_no_gas.setFont(font)
-        self.label_text_file_name_no_gas.setStyleSheet("")
         self.label_text_file_name_no_gas.setTextFormat(QtCore.Qt.TextFormat.AutoText)
         self.label_text_file_name_no_gas.setScaledContents(False)
         self.label_text_file_name_no_gas.setObjectName("label_text_file_name_no_gas")
@@ -684,9 +658,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.pushButton_reading_file_no_gas.setCursor(
             QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor)
         )
-        self.pushButton_reading_file_no_gas.setWhatsThis("")
-        self.pushButton_reading_file_no_gas.setAccessibleName("")
-        self.pushButton_reading_file_no_gas.setAccessibleDescription("")
         self.pushButton_reading_file_no_gas.setStyleSheet(
             """
             QPushButton {
@@ -697,7 +668,6 @@ class Ui_Dialog(QtWidgets.QDialog):
             }
             """
         )
-        self.pushButton_reading_file_no_gas.setText("")
         self.pushButton_reading_file_no_gas.setIconSize(QtCore.QSize(25, 25))
         self.pushButton_reading_file_no_gas.setObjectName(
             "pushButton_reading_file_no_gas"
@@ -716,11 +686,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.checkBox_download_no_gas.setSizePolicy(sizePolicy)
         self.checkBox_download_no_gas.setMinimumSize(QtCore.QSize(0, 30))
         self.checkBox_download_no_gas.setMaximumSize(QtCore.QSize(16777215, 30))
-        self.checkBox_download_no_gas.setWhatsThis("")
-        self.checkBox_download_no_gas.setAccessibleName("")
-        self.checkBox_download_no_gas.setAccessibleDescription("")
-        self.checkBox_download_no_gas.setStyleSheet("")
-        self.checkBox_download_no_gas.setText("")
         self.checkBox_download_no_gas.setChecked(False)
         self.checkBox_download_no_gas.setTristate(False)
         self.checkBox_download_no_gas.setObjectName("checkBox_download_no_gas")
@@ -742,7 +707,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         )
         self.groupBox_with_gas.setMouseTracking(False)
         self.groupBox_with_gas.setTabletTracking(False)
-        self.groupBox_with_gas.setStyleSheet("")
         self.groupBox_with_gas.setAlignment(
             QtCore.Qt.AlignmentFlag.AlignLeading
             | QtCore.Qt.AlignmentFlag.AlignLeft
@@ -772,7 +736,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         font.setBold(False)
         font.setWeight(50)
         self.label_text_file_name_with_gas.setFont(font)
-        self.label_text_file_name_with_gas.setStyleSheet("")
         self.label_text_file_name_with_gas.setTextFormat(QtCore.Qt.TextFormat.AutoText)
         self.label_text_file_name_with_gas.setScaledContents(False)
         self.label_text_file_name_with_gas.setObjectName(
@@ -806,7 +769,6 @@ class Ui_Dialog(QtWidgets.QDialog):
             }
             """
         )
-        self.pushButton_reading_file_with_gas.setText("")
         self.pushButton_reading_file_with_gas.setIconSize(QtCore.QSize(25, 25))
         self.pushButton_reading_file_with_gas.setObjectName(
             "pushButton_reading_file_with_gas"
@@ -825,8 +787,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.checkBox_download_with_gas.setSizePolicy(sizePolicy)
         self.checkBox_download_with_gas.setMinimumSize(QtCore.QSize(0, 30))
         self.checkBox_download_with_gas.setMaximumSize(QtCore.QSize(16777215, 30))
-        self.checkBox_download_with_gas.setStyleSheet("")
-        self.checkBox_download_with_gas.setText("")
         self.checkBox_download_with_gas.setChecked(False)
         self.checkBox_download_with_gas.setTristate(False)
         self.checkBox_download_with_gas.setObjectName("checkBox_download_with_gas")
@@ -874,7 +834,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         )
         self.groupBox_frequency_range.setMouseTracking(False)
         self.groupBox_frequency_range.setTabletTracking(False)
-        self.groupBox_frequency_range.setStyleSheet("")
         self.groupBox_frequency_range.setAlignment(
             QtCore.Qt.AlignmentFlag.AlignLeading
             | QtCore.Qt.AlignmentFlag.AlignLeft
@@ -901,7 +860,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.radioButton_all_range.setCursor(
             QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor)
         )
-        self.radioButton_all_range.setStyleSheet("")
         self.radioButton_all_range.setChecked(True)
         self.radioButton_all_range.setObjectName("radioButton_all_range")
         self.layout_frequency_range.addWidget(self.radioButton_all_range)
@@ -952,7 +910,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         )
         self.widget_start_range.setSizePolicy(sizePolicy)
         self.widget_start_range.setMinimumSize(QtCore.QSize(0, 30))
-        self.widget_start_range.setStyleSheet("")
         self.widget_start_range.setObjectName("widget_start_range")
         self.layout_start_range = QtWidgets.QHBoxLayout(self.widget_start_range)
         self.layout_start_range.setSizeConstraint(
@@ -998,7 +955,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         font.setBold(False)
         font.setWeight(50)
         self.lineEdit_start_range.setFont(font)
-        self.lineEdit_start_range.setStyleSheet("")
         self.lineEdit_start_range.setText("22308")
         self.lineEdit_start_range.setMaxLength(10)
         self.lineEdit_start_range.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
@@ -1039,7 +995,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         )
         self.widget_end_range.setSizePolicy(sizePolicy)
         self.widget_end_range.setMinimumSize(QtCore.QSize(0, 30))
-        self.widget_end_range.setStyleSheet("")
         self.widget_end_range.setObjectName("widget_end_range")
         self.layout_end_range = QtWidgets.QHBoxLayout(self.widget_end_range)
         self.layout_end_range.setSizeConstraint(
@@ -1065,7 +1020,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         font.setBold(False)
         font.setWeight(50)
         self.label_text_end_range.setFont(font)
-        self.label_text_end_range.setStyleSheet("")
         self.label_text_end_range.setObjectName("label_text_end_range")
         self.layout_end_range.addWidget(self.label_text_end_range)
         self.lineEdit_end_range = QtWidgets.QLineEdit(self.widget_end_range)
@@ -1086,7 +1040,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         font.setBold(False)
         font.setWeight(50)
         self.lineEdit_end_range.setFont(font)
-        self.lineEdit_end_range.setStyleSheet("")
         self.lineEdit_end_range.setText("22342")
         self.lineEdit_end_range.setMaxLength(10)
         self.lineEdit_end_range.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
@@ -1110,7 +1063,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         font.setBold(False)
         font.setWeight(50)
         self.label_text_units_end_range.setFont(font)
-        self.label_text_units_end_range.setStyleSheet("")
         self.label_text_units_end_range.setAlignment(
             QtCore.Qt.AlignmentFlag.AlignCenter
         )
@@ -1165,7 +1117,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.pushButton_close_open_table.setCursor(
             QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor)
         )
-        self.pushButton_close_open_table.setAccessibleDescription("")
         self.pushButton_close_open_table.setLayoutDirection(
             QtCore.Qt.LayoutDirection.LeftToRight
         )
@@ -1208,7 +1159,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.pushButton_menu_calculate.setCursor(
             QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor)
         )
-        self.pushButton_menu_calculate.setAccessibleDescription("")
         self.pushButton_menu_calculate.setLayoutDirection(
             QtCore.Qt.LayoutDirection.LeftToRight
         )
@@ -1236,14 +1186,12 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.layout_menu.addWidget(self.widget_menu_bottom)
         self.layout_style_sheet.addWidget(self.widget_menu)
         self.widget_main = QtWidgets.QWidget(self.widget_style_sheet)
-        self.widget_main.setStyleSheet("")
         self.widget_main.setObjectName("widget_main")
         self.layout_main = QtWidgets.QVBoxLayout(self.widget_main)
         self.layout_main.setContentsMargins(0, 0, 0, 0)
         self.layout_main.setSpacing(0)
         self.layout_main.setObjectName("layout_main")
         self.widget_main_body = QtWidgets.QWidget(self.widget_main)
-        self.widget_main_body.setStyleSheet("")
         self.widget_main_body.setObjectName("widget_main_body")
         self.layout__main_body = QtWidgets.QHBoxLayout(self.widget_main_body)
         self.layout__main_body.setContentsMargins(0, 0, 0, 0)
@@ -1273,7 +1221,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.layout__main_body.addWidget(self.widget_plotting)
         self.widget_right = QtWidgets.QWidget(self.widget_main_body)
         self.widget_right.setMinimumSize(QtCore.QSize(260, 0))
-        self.widget_right.setStyleSheet("")
         self.widget_right.setObjectName("widget_right")
         self.layout_right = QtWidgets.QHBoxLayout(self.widget_right)
         self.layout_right.setContentsMargins(0, 0, 0, 0)
@@ -1401,7 +1348,6 @@ class Ui_Dialog(QtWidgets.QDialog):
             self.tableWidget_frequency_absorption.sizePolicy().hasHeightForWidth()
         )
         self.tableWidget_frequency_absorption.setSizePolicy(sizePolicy)
-        self.tableWidget_frequency_absorption.setStyleSheet("")
         self.tableWidget_frequency_absorption.setFrameShape(
             QtWidgets.QFrame.Shape.NoFrame
         )
@@ -1453,7 +1399,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         )
         self.widget_bottom.setSizePolicy(sizePolicy)
         self.widget_bottom.setMinimumSize(QtCore.QSize(0, 0))
-        self.widget_bottom.setStyleSheet("")
         self.widget_bottom.setObjectName("widget_bottom")
         self.layout_bottom = QtWidgets.QVBoxLayout(self.widget_bottom)
         self.layout_bottom.setSizeConstraint(
@@ -1477,8 +1422,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.label_statistics_on_selected_frequencies.setMinimumSize(
             QtCore.QSize(0, 30)
         )
-        self.label_statistics_on_selected_frequencies.setStyleSheet("")
-        self.label_statistics_on_selected_frequencies.setText("")
         self.label_statistics_on_selected_frequencies.setObjectName(
             "label_statistics_on_selected_frequencies"
         )
@@ -1500,7 +1443,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         )
         self.groupBox_window_view.setMouseTracking(False)
         self.groupBox_window_view.setTabletTracking(False)
-        self.groupBox_window_view.setStyleSheet("")
         self.groupBox_window_view.setAlignment(
             QtCore.Qt.AlignmentFlag.AlignLeading
             | QtCore.Qt.AlignmentFlag.AlignLeft
@@ -1528,7 +1470,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         )
         self.widget_input_window_view.setSizePolicy(sizePolicy)
         self.widget_input_window_view.setMinimumSize(QtCore.QSize(0, 30))
-        self.widget_input_window_view.setStyleSheet("")
         self.widget_input_window_view.setObjectName("widget_input_window_view")
         self.layout_start_range_8 = QtWidgets.QHBoxLayout(self.widget_input_window_view)
         self.layout_start_range_8.setSizeConstraint(
@@ -1550,7 +1491,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.lineEdit_window_width.setSizePolicy(sizePolicy)
         self.lineEdit_window_width.setMinimumSize(QtCore.QSize(0, 30))
         self.lineEdit_window_width.setMaximumSize(QtCore.QSize(120, 30))
-        self.lineEdit_window_width.setStyleSheet("")
         self.lineEdit_window_width.setText("10")
         self.lineEdit_window_width.setMaxLength(10)
         self.lineEdit_window_width.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
@@ -1570,7 +1510,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         )
         self.label_text_units_window_width.setSizePolicy(sizePolicy)
         self.label_text_units_window_width.setMinimumSize(QtCore.QSize(0, 30))
-        self.label_text_units_window_width.setStyleSheet("")
         self.label_text_units_window_width.setAlignment(
             QtCore.Qt.AlignmentFlag.AlignCenter
         )
@@ -1598,7 +1537,6 @@ class Ui_Dialog(QtWidgets.QDialog):
         self.pushButton_save_table_to_file.setCursor(
             QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor)
         )
-        self.pushButton_save_table_to_file.setAccessibleDescription("")
         self.pushButton_save_table_to_file.setLayoutDirection(
             QtCore.Qt.LayoutDirection.LeftToRight
         )
