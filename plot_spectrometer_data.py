@@ -3,16 +3,17 @@ import sys
 import numpy as np
 import pandas as pd
 from pandas import DataFrame
+from pyqtgraph import PlotWidget, ScatterPlotItem, mkPen, setConfigOptions
 from pyqtgraph.Qt.QtCore import Qt, pyqtSignal
-from pyqtgraph.Qt.QtGui import QPixmap, QColor
+from pyqtgraph.Qt.QtGui import QColor, QPixmap
 from pyqtgraph.Qt.QtWidgets import (
     QApplication,
-    QWidget,
     QHBoxLayout,
     QLabel,
     QVBoxLayout,
+    QWidget,
 )
-from pyqtgraph import PlotWidget, mkPen, setConfigOptions, ScatterPlotItem
+
 from data_and_processing import DataAndProcessing
 
 
@@ -259,4 +260,4 @@ if __name__ == "__main__":
     main_window.plot_widget.plot_spectrometer_data(data_processing)
     main_window.show()
 
-    sys.exit(app.exec_())
+    sys.exit(app.exec())

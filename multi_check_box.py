@@ -1,7 +1,6 @@
 from pyqtgraph.Qt import QtSvg
-from pyqtgraph.Qt.QtCore import Qt
-from pyqtgraph.Qt.QtGui import QPixmap, QPainter
-from pyqtgraph.Qt.QtCore import pyqtSignal
+from pyqtgraph.Qt.QtCore import Qt, pyqtSignal
+from pyqtgraph.Qt.QtGui import QPainter, QPixmap
 from pyqtgraph.Qt.QtWidgets import (
     QApplication,
     QHBoxLayout,

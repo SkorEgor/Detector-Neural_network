@@ -1,14 +1,14 @@
-import numpy as np
+from functools import wraps
 from typing import Callable
+
+import numpy as np
 from pandas import DataFrame, Series, concat
 from scipy import ndimage
-from scipy.ndimage import label, uniform_filter1d
 from scipy.interpolate import interp1d
+from scipy.ndimage import label, uniform_filter1d
+from scipy.signal import butter, savgol_filter, sosfilt
 from sklearn.neural_network import MLPClassifier
-from scipy.signal import savgol_filter
 from sklearn.preprocessing import StandardScaler
-from scipy.signal import butter, sosfilt
-from functools import wraps
 
 ABSORPTION_LINE_WIDTH = 30
 

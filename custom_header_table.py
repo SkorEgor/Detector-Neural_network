@@ -1,12 +1,13 @@
 import sys
+
+from pyqtgraph.Qt.QtCore import Qt
 from pyqtgraph.Qt.QtWidgets import (
     QApplication,
+    QCheckBox,
+    QHeaderView,
     QTableWidget,
     QTableWidgetItem,
-    QHeaderView,
-    QCheckBox,
 )
-from pyqtgraph.Qt.QtCore import Qt
 
 
 class CustomHeader(QHeaderView):

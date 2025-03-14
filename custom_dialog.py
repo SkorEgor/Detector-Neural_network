@@ -1,10 +1,12 @@
 import os
+
 from pyqtgraph.Qt.QtCore import Qt
-from gui import Ui_Dialog
-from color_theme import ColorTheme
+
 from app_exception import AppException
-from validators import get_float_and_positive
+from color_theme import ColorTheme
 from data_and_processing import DataAndProcessing
+from gui import Ui_Dialog
+from validators import get_float_and_positive
 
 
 class CustomDialog(Ui_Dialog):

@@ -1,11 +1,13 @@
 import os
-import setting
-from joblib import load
 from functools import partial
+
+from joblib import load
 from pyqtgraph.Qt.QtWidgets import QFileDialog, QTableWidgetItem
+
+import setting
 from app_exception import AppException
 from custom_dialog import CustomDialog
-from multi_check_box import GreenRedYellowCheckBox, BlueRedYellowCheckBox
+from multi_check_box import BlueRedYellowCheckBox, GreenRedYellowCheckBox
 from parser import parser, parser_all_data
 from plot_spectrometer_data import (
     SpectrometerPlotAndLegendWidget,

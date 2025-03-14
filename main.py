@@ -3,10 +3,12 @@ import ctypes
 import traceback
 from contextlib import suppress
 from functools import partial
-from pyqtgraph.Qt.QtWidgets import QMessageBox, QApplication
+
 from pyqtgraph.Qt.QtCore import QCoreApplication, Qt
-from gui_logic import GuiProgram
+from pyqtgraph.Qt.QtWidgets import QApplication, QMessageBox
+
 from app_exception import AppException
+from gui_logic import GuiProgram
 
 
 def handle_exception(app, exc_type, exc_value, exc_traceback):
