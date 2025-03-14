@@ -1573,17 +1573,17 @@ class Ui_Dialog(QtWidgets.QDialog):
 
         self.retranslateUi()
         self.pushButton_data_header.clicked.connect(self.widget_data_body.setVisible)  # type: ignore
-        self.radioButton_selected_range.toggled.connect(
+        self.radioButton_selected_range.toggled.connect(  # type: ignore
             self.lineEdit_start_range.setEnabled
-        )  # type: ignore
-        self.radioButton_selected_range.toggled.connect(
+        )
+        self.radioButton_selected_range.toggled.connect(  # type: ignore
             self.lineEdit_end_range.setEnabled
-        )  # type: ignore
+        )
         self.pushButton_close_open_table.clicked.connect(self.widget_right.setVisible)  # type: ignore
-        self.pushButton_neural_network_heade.toggled.connect(
+        self.pushButton_neural_network_heade.toggled.connect(  # type: ignore
             self.widget_neural_network_body.setVisible
-        )  # type: ignore
-        QtCore.QMetaObject.connectSlotsByName(self)
+        )
+        QtCore.QMetaObject.connectSlotsByName(self)  # type: ignore
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
