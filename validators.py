@@ -38,7 +38,7 @@ def get_int(
             raise AppException(
                 "Ошибка ввода", f"""Введите целое число в поле "{field_name!r}"."""
             )
-        return
+        return None
     return val
 
 
@@ -74,7 +74,7 @@ def get_int_and_positive(
                 "Ошибка ввода",
                 f"""Введите положительное число в поле "{field_name!r}".""",
             )
-        return
+        return None
     return val
 
 
@@ -113,7 +113,7 @@ def get_float(
             raise AppException(
                 "Ошибка ввода", f"""Введите число в поле "{field_name!r}"."""
             )
-        return
+        return None
     return val
 
 
@@ -149,5 +149,5 @@ def get_float_and_positive(
                 "Ошибка ввода",
                 f"""Введите положительное число в поле "{field_name!r}".""",
             )
-        return
+        return None
     return val
