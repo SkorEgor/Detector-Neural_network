@@ -1,5 +1,5 @@
 from functools import wraps
-from typing import Callable
+from typing import Callable, ClassVar
 
 import numpy as np
 from pandas import DataFrame, Series, concat
@@ -13,13 +13,13 @@ from sklearn.preprocessing import StandardScaler
 ABSORPTION_LINE_WIDTH = 30
 
 
-def scale_data_with_standard_scaler(data):
+def scale_data_with_standard_scaler(data: Series):
     """
     Масштабирует массив данных с помощью StandardScaler.
     """
     # Проверка входного массива
-    if len(data.shape) == 1:  # Если данные одномерные, преобразуем в двумерные
-        data = data.reshape(-1, 1)
+    if data.ndim == 1:  # Если данные одномерные, преобразуем в двумерные
+        data = data.to_numpy().reshape(-1, 1)
 
     # Создание и применение StandardScaler
     scaler = StandardScaler()
@@ -118,10 +118,10 @@ class DataAndProcessing:
         "__absorption_interceptor",
     )
     # Константы для инициализации пустых DataFrame
-    DEFAULT_SPECTROMETER_DATA = DataFrame(
+    DEFAULT_SPECTROMETER_DATA: ClassVar[DataFrame] = DataFrame(
         columns=["frequency", "without_gas", "with_gas"]
     )
-    DEFAULT_POINT_ABSORPTION = DataFrame(
+    DEFAULT_POINT_ABSORPTION: ClassVar[DataFrame] = DataFrame(
         columns=["frequency", "gamma", "status", "source_neural_network"]
     )
 
@@ -132,9 +132,11 @@ class DataAndProcessing:
             lambda method_name, *args, **kwargs: None
         )
         # Данные со спектрометра
-        self.__spectra = self.DEFAULT_SPECTROMETER_DATA.copy()
+        self.__spectra: DataFrame = DataAndProcessing.DEFAULT_SPECTROMETER_DATA.copy()
         # Точки, соответствующие линиям поглощения
-        self.__point_absorption = self.DEFAULT_POINT_ABSORPTION.copy()
+        self.__point_absorption: DataFrame = (
+            DataAndProcessing.DEFAULT_POINT_ABSORPTION.copy()
+        )
         # Нейронная сеть
         self.__neural_network: MLPClassifier | None = None
         self.__smoothed_noise = None
@@ -156,12 +158,12 @@ class DataAndProcessing:
     @spectra_will_be_changed
     def clear_data_from_spectrometer(self):
         """Очищает данные спектрометра."""
-        self.__spectra = self.DEFAULT_SPECTROMETER_DATA.copy()
+        self.__spectra = DataAndProcessing.DEFAULT_SPECTROMETER_DATA.copy()
 
     @spectra_will_be_changed
     def clear_point_absorption(self):
         """Очищает таблицу точек поглощения."""
-        self.__point_absorption = self.DEFAULT_POINT_ABSORPTION.copy()
+        self.__point_absorption = DataAndProcessing.DEFAULT_POINT_ABSORPTION.copy()
 
     @spectra_will_be_changed
     def clear_data(self):
@@ -188,7 +190,6 @@ class DataAndProcessing:
         noise = sosfilt(sos, gamma)
         self.__smoothed_noise = np.std(uniform_filter1d(noise, size=3)) * 5
         print(self.__smoothed_noise)
-        # self.__spectra["with_gas"] = self.__smoothed_noise
 
         gamma = savgol_filter(gamma, window_length=10, polyorder=2)
         # Интерполяция значений без газа
@@ -201,9 +202,26 @@ class DataAndProcessing:
             self.__spectra["with_gas"] = interpolated_gamma
         else:
             # Частота задана, проверяем что они совпадают
-            if len(self.__spectra["frequency"].values) != len(interpolated_frequencies):
-                raise ValueError("Частоты старых значений и новых не совпадают")
-            self.__spectra["with_gas"] = interpolated_gamma
+            if self.__spectra["frequency"].shape[0] != interpolated_frequencies.shape[
+                0
+            ] or not np.allclose(
+                self.__spectra["frequency"].to_numpy(), interpolated_frequencies
+            ):
+                if interpolated_frequencies.min() > self.__spectra["frequency"].min():
+                    good = self.__spectra["frequency"] >= interpolated_frequencies.min()
+                    self.__spectra = self.__spectra[good].reset_index()
+                if interpolated_frequencies.max() < self.__spectra["frequency"].max():
+                    good = self.__spectra["frequency"] <= interpolated_frequencies.max()
+                    self.__spectra = self.__spectra[good].reset_index()
+                self.__spectra["with_gas"] = interp1d(
+                    interpolated_frequencies,
+                    interpolated_gamma,
+                    bounds_error=True,
+                    copy=False,
+                    assume_sorted=True,
+                )(self.__spectra["frequency"])
+            else:
+                self.__spectra["with_gas"] = interpolated_gamma
 
     @spectra_will_be_changed
     def set_spectrum_without_substance(
@@ -225,9 +243,26 @@ class DataAndProcessing:
             self.__spectra["without_gas"] = interpolated_gamma
         else:
             # Частота задана, проверяем что они совпадают
-            if len(self.__spectra["frequency"].values) != len(interpolated_frequencies):
-                raise ValueError("Частоты старых значений и новых не совпадают")
-            self.__spectra["without_gas"] = interpolated_gamma
+            if self.__spectra["frequency"].shape[0] != interpolated_frequencies.shape[
+                0
+            ] or not np.allclose(
+                self.__spectra["frequency"].to_numpy(), interpolated_frequencies
+            ):
+                if interpolated_frequencies.min() > self.__spectra["frequency"].min():
+                    good = self.__spectra["frequency"] >= interpolated_frequencies.min()
+                    self.__spectra = self.__spectra[good].reset_index()
+                if interpolated_frequencies.max() < self.__spectra["frequency"].max():
+                    good = self.__spectra["frequency"] <= interpolated_frequencies.max()
+                    self.__spectra = self.__spectra[good].reset_index()
+                self.__spectra["without_gas"] = interp1d(
+                    interpolated_frequencies,
+                    interpolated_gamma,
+                    bounds_error=True,
+                    copy=False,
+                    assume_sorted=True,
+                )(self.__spectra["frequency"])
+            else:
+                self.__spectra["without_gas"] = interpolated_gamma
 
     @spectra_will_be_changed
     def set_neural_network(self, neural_network: MLPClassifier) -> None:
@@ -272,6 +307,9 @@ class DataAndProcessing:
         if self.__neural_network is None:
             raise ValueError("Для обработки отсутствует нейронная сеть")
 
+        if self.__spectra["with_gas"].isna().any():
+            raise ValueError(self.__spectra["with_gas"])
+
         # Очистка прошлых результатов
         self.clear_point_absorption()
 
@@ -279,7 +317,7 @@ class DataAndProcessing:
         num_inputs = self.__neural_network.n_features_in_
 
         # Подготовка окон для нейронной сети
-        gamma = scale_data_with_standard_scaler(self.__spectra["with_gas"].values)
+        gamma = scale_data_with_standard_scaler(self.__spectra["with_gas"])
         windows = split_into_windows(gamma, num_inputs)
 
         # Проверка наличия окон
@@ -314,7 +352,7 @@ class DataAndProcessing:
             group_indices = np.where(labeled_array == group_label)[0]
             # Выбираем индекс элемента с максимальным значением 'with_gas'
             max_index = group_indices[
-                np.argmax(self.__spectra.loc[group_indices, "with_gas"].values)
+                self.__spectra.loc[group_indices, "with_gas"].argmax()
             ]
             indices.append(max_index)
 
@@ -336,8 +374,8 @@ class DataAndProcessing:
         # Формирование результата
         self.__point_absorption = DataFrame(
             {
-                "frequency": self.__spectra.loc[indices, "frequency"].values,
-                "gamma": self.__spectra.loc[indices, "with_gas"].values,
+                "frequency": self.__spectra.loc[indices, "frequency"],
+                "gamma": self.__spectra.loc[indices, "with_gas"],
                 "status": None,
                 "source_neural_network": True,
             }
