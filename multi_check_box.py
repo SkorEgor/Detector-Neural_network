@@ -43,12 +43,13 @@ class BaseMultiCheckBox(QWidget):
 
         self.label = QLabel()
         self.label.setFixedSize(self.icon_size, self.icon_size)
-        self.label.setAlignment(Qt.Alignment.AlignCenter)
+        self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label.mousePressEvent = self.on_click
 
         layout = QVBoxLayout()
         layout.addWidget(
-            self.label, alignment=Qt.Alignment.AlignHCenter | Qt.Alignment.AlignVCenter
+            self.label,
+            alignment=Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignVCenter,
         )
         layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(0)
