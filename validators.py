@@ -6,7 +6,9 @@ CALL_EXCEPTION_DEFAULT = True
 # ---------------------------------------------------------------------------
 #   Целые числа
 # ---------------------------------------------------------------------------
-def get_int(val: int | float | str, field_name: str, call_raise: bool = CALL_EXCEPTION_DEFAULT) -> int | None:
+def get_int(
+    val: int | float | str, field_name: str, call_raise: bool = CALL_EXCEPTION_DEFAULT
+) -> int | None:
     """
     Преобразует значение в целое число.
 
@@ -33,12 +35,16 @@ def get_int(val: int | float | str, field_name: str, call_raise: bool = CALL_EXC
         val = int(val)
     except ValueError:
         if call_raise:
-            raise AppException("Ошибка ввода", f"""Введите целое число в поле "{field_name!r}".""")
-        return
+            raise AppException(
+                "Ошибка ввода", f"""Введите целое число в поле "{field_name!r}"."""
+            )
+        return None
     return val
 
 
-def get_int_and_positive(val: int | float | str, field_name: str, call_raise: bool = CALL_EXCEPTION_DEFAULT) -> int | None:
+def get_int_and_positive(
+    val: int | float | str, field_name: str, call_raise: bool = CALL_EXCEPTION_DEFAULT
+) -> int | None:
     """
     Преобразует значение в целое число и проверяет, что оно больше нуля.
 
@@ -64,15 +70,20 @@ def get_int_and_positive(val: int | float | str, field_name: str, call_raise: bo
     val = get_int(val, field_name, call_raise)
     if val is not None and val < 0:
         if call_raise:
-            raise AppException("Ошибка ввода", f"""Введите положительное число в поле "{field_name!r}".""")
-        return
+            raise AppException(
+                "Ошибка ввода",
+                f"""Введите положительное число в поле "{field_name!r}".""",
+            )
+        return None
     return val
 
 
 # ---------------------------------------------------------------------------
 #   С плавающей точкой
 # ---------------------------------------------------------------------------
-def get_float(val: int | float | str, field_name: str, call_raise: bool = CALL_EXCEPTION_DEFAULT) -> float | None:
+def get_float(
+    val: int | float | str, field_name: str, call_raise: bool = CALL_EXCEPTION_DEFAULT
+) -> float | None:
     """
     Преобразует значение в число с плавающей точкой.
 
@@ -99,12 +110,16 @@ def get_float(val: int | float | str, field_name: str, call_raise: bool = CALL_E
         val = float(val)
     except ValueError:
         if call_raise:
-            raise AppException("Ошибка ввода", f"""Введите число в поле "{field_name!r}".""")
-        return
+            raise AppException(
+                "Ошибка ввода", f"""Введите число в поле "{field_name!r}"."""
+            )
+        return None
     return val
 
 
-def get_float_and_positive(val: int | float | str, field_name: str, call_raise: bool = CALL_EXCEPTION_DEFAULT) -> float | None:
+def get_float_and_positive(
+    val: int | float | str, field_name: str, call_raise: bool = CALL_EXCEPTION_DEFAULT
+) -> float | None:
     """
     Преобразует значение в число с плавающей точкой и проверяет, что оно больше нуля.
 
@@ -130,6 +145,9 @@ def get_float_and_positive(val: int | float | str, field_name: str, call_raise: 
     val = get_float(val, field_name, call_raise)
     if val is not None and val < 0:
         if call_raise:
-            raise AppException("Ошибка ввода", f"""Введите положительное число в поле "{field_name!r}".""")
-        return
+            raise AppException(
+                "Ошибка ввода",
+                f"""Введите положительное число в поле "{field_name!r}".""",
+            )
+        return None
     return val

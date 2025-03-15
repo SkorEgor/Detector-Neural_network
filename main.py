@@ -2,11 +2,12 @@ import sys
 import ctypes
 import traceback
 from functools import partial
-from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtWidgets import QMessageBox, QApplication
-from PyQt5.QtCore import Qt
-from gui_logic import GuiProgram
+
+from pyqtgraph.Qt.QtCore import QCoreApplication, Qt, qVersion
+from pyqtgraph.Qt.QtWidgets import QApplication, QMessageBox
+
 from app_exception import AppException
+from gui_logic import GuiProgram
 
 
 def handle_exception(app, exc_type, exc_value, exc_traceback):
@@ -22,20 +23,28 @@ def handle_exception(app, exc_type, exc_value, exc_traceback):
     # sys.exit(1)
 
 
-if __name__ == '__main__':
-    # Решает проблему не правильного масштабирования интерфейса и осей графика PyQtGraph на разных мониторах
-    # https://github.com/pyqtgraph/pyqtgraph/issues/756#issuecomment-1023182391
-    QApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
-    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
-    # Установка значка приложения на панели задач
-    # https://stackoverflow.com/a/1552105
-    my_app_id = 'company.my-product.subproject.version'
-    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(my_app_id)
-    # Инициализации и запуск приложения
-    app = QtWidgets.QApplication(sys.argv)
-    dialog = QtWidgets.QDialog()
-    program = GuiProgram(dialog)
-    dialog.show()
-    # Устанавливаем глобальный обработчик исключений, c передачей app для подгрузки иконки приложения
-    sys.excepthook = partial(handle_exception, app)
-    sys.exit(app.exec_())
+if __name__ == "__main__":
+
+    def main():
+        # Решает проблему не правильного масштабирования интерфейса и осей графика PyQtGraph на разных мониторах
+        # https://github.com/pyqtgraph/pyqtgraph/issues/756#issuecomment-1023182391
+        QApplication.setHighDpiScaleFactorRoundingPolicy(
+            Qt.HighDpiScaleFactorRoundingPolicy.PassThrough
+        )
+        if int(qVersion().split(".")[0]) < 6:
+            QCoreApplication.setAttribute(
+                Qt.ApplicationAttribute.AA_EnableHighDpiScaling, True
+            )
+        # Установка значка приложения на панели задач
+        # https://stackoverflow.com/a/1552105
+        my_app_id = "company.my-product.subproject.version"
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(my_app_id)
+        # Инициализации и запуск приложения
+        app = QApplication(sys.argv)
+        dialog = GuiProgram(None)
+        dialog.show()
+        # Устанавливаем глобальный обработчик исключений, c передачей app для подгрузки иконки приложения
+        sys.excepthook = partial(handle_exception, app)
+        sys.exit(app.exec())
+
+    main()

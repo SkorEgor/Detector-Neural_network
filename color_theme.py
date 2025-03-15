@@ -110,7 +110,7 @@ QPushButton */
 QPushButton {
 	font-size: 12pt;
 	background-color:rgb(212, 212, 212);/* задает цвет фона */
-	display: inline-block;							/* пределяет, будет ли элемент обрабатываться как блочный или встроенный элемент */
+	/* display: inline-block;							определяет, будет ли элемент обрабатываться как блочный или встроенный элемент */
 	border: none;
 
 	/* задает иконку */
@@ -122,7 +122,7 @@ QPushButton {
 QPushButton:hover {
 	background-color:rgb(212, 212, 212);			/* задаем цвет фона */
 	border: none;												/* без границ */
-	border-left:4px solid rgb(189, 189, 189);	/* С правой красной раницей */
+	border-left:4px solid rgb(189, 189, 189);	/* С правой красной границей */
 }
 
 
@@ -291,7 +291,7 @@ QPushButton */
 QPushButton {
 	font-size: 12pt;
 	background-color:rgb(37, 41, 48);/* задает цвет фона */
-	display: inline-block;							/* пределяет, будет ли элемент обрабатываться как блочный или встроенный элемент */
+	/* display: inline-block;							определяет, будет ли элемент обрабатываться как блочный или встроенный элемент */
 	border: 1px solid rgb(52, 59, 72);		/* задает границу элемента */
 
 	/* задает иконку */
@@ -303,7 +303,7 @@ QPushButton {
 QPushButton:hover {
 	background-color:rgb(40, 44, 52);			/* задаем цвет фона */
 	border: none;												/* без границ */
-	border-left:4px solid rgb(208, 208, 208);	/* С правой красной раницей */
+	border-left:4px solid rgb(208, 208, 208);	/* С правой красной границей */
 }
 
 

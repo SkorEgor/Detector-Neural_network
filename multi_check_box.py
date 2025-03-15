@@ -1,15 +1,20 @@
-from PyQt5 import QtWidgets, QtGui, QtSvg, QtCore
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPixmap, QPainter
-from PyQt5.QtSvg import QSvgRenderer
-from PyQt5.QtCore import pyqtSignal
+from pyqtgraph.Qt import QtSvg
+from pyqtgraph.Qt.QtCore import Qt, Signal
+from pyqtgraph.Qt.QtGui import QPainter, QPixmap
+from pyqtgraph.Qt.QtWidgets import (
+    QApplication,
+    QHBoxLayout,
+    QLabel,
+    QVBoxLayout,
+    QWidget,
+)
 
 
 def load_svg_icon(svg_path, size=24):
     pixmap = QPixmap(size, size)
-    pixmap.fill(Qt.transparent)
+    pixmap.fill(Qt.GlobalColor.transparent)
 
-    renderer = QSvgRenderer(svg_path)
+    renderer = QtSvg.QSvgRenderer(svg_path)
     painter = QPainter(pixmap)
     renderer.render(painter)
     painter.end()
@@ -17,24 +22,34 @@ def load_svg_icon(svg_path, size=24):
     return pixmap
 
 
-class BaseMultiCheckBox(QtWidgets.QWidget):
-    clicked = pyqtSignal(object)
+class BaseMultiCheckBox(QWidget):
+    clicked = Signal(object)
 
-    def __init__(self, initial_state: bool | None = None, icon_size: int = 24, allow_none: bool = True):
+    def __init__(
+        self,
+        initial_state: bool | None = None,
+        icon_size: int = 24,
+        allow_none: bool = True,
+    ):
         super().__init__()
 
         self.icon_size = icon_size
         self.allow_none = allow_none
-        self.state = initial_state if (initial_state is not None or allow_none) else False
+        self.state = (
+            initial_state if (initial_state is not None or allow_none) else False
+        )
         self.icon_status = {}  # Пустой словарь, будет заполнен в дочерних классах
 
-        self.label = QtWidgets.QLabel()
+        self.label = QLabel()
         self.label.setFixedSize(self.icon_size, self.icon_size)
-        self.label.setAlignment(Qt.AlignCenter)
+        self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label.mousePressEvent = self.on_click
 
-        layout = QtWidgets.QVBoxLayout()
-        layout.addWidget(self.label, alignment=Qt.AlignHCenter | Qt.AlignVCenter)
+        layout = QVBoxLayout()
+        layout.addWidget(
+            self.label,
+            alignment=Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignVCenter,
+        )
         layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(0)
         self.setLayout(layout)
@@ -47,6 +62,7 @@ class BaseMultiCheckBox(QtWidgets.QWidget):
             self.state = not self.state
         self.label.setPixmap(self.icon_status[self.state])
         self.clicked.emit(self.state)
+        event.accept()
 
     def set_initial_pixmap(self):
         """Метод для установки начального состояния пиксмапы после инициализации icon_status"""
@@ -55,53 +71,76 @@ class BaseMultiCheckBox(QtWidgets.QWidget):
 
 
 class GreenRedYellowCheckBox(BaseMultiCheckBox):
-    def __init__(self, initial_state: bool | None = None, icon_size: int = 24, allow_none: bool = True):
-        super().__init__(initial_state, icon_size, allow_none)  # Сначала вызываем базовый конструктор
+    def __init__(
+        self,
+        initial_state: bool | None = None,
+        icon_size: int = 24,
+        allow_none: bool = True,
+    ):
+        super().__init__(
+            initial_state, icon_size, allow_none
+        )  # Сначала вызываем базовый конструктор
         # определяем icon_status
         self.icon_status = {
-            False: load_svg_icon('resource/multi_check_box_svg/no_24dp.svg', icon_size),
-            None: load_svg_icon('resource/multi_check_box_svg/undefined_24dp.svg', icon_size),
-            True: load_svg_icon('resource/multi_check_box_svg/yes_green_24dp.svg', icon_size)
+            False: load_svg_icon("resource/multi_check_box_svg/no_24dp.svg", icon_size),
+            None: load_svg_icon(
+                "resource/multi_check_box_svg/undefined_24dp.svg", icon_size
+            ),
+            True: load_svg_icon(
+                "resource/multi_check_box_svg/yes_green_24dp.svg", icon_size
+            ),
         }
         self.set_initial_pixmap()
 
 
 class BlueRedYellowCheckBox(BaseMultiCheckBox):
-    def __init__(self, initial_state: bool | None = None, icon_size: int = 24, allow_none: bool = True):
-        super().__init__(initial_state, icon_size, allow_none)  # Сначала вызываем базовый конструктор
+    def __init__(
+        self,
+        initial_state: bool | None = None,
+        icon_size: int = 24,
+        allow_none: bool = True,
+    ):
+        super().__init__(
+            initial_state, icon_size, allow_none
+        )  # Сначала вызываем базовый конструктор
         # определяем icon_status
         self.icon_status = {
-            False: load_svg_icon('resource/multi_check_box_svg/no_24dp.svg', icon_size),
-            None: load_svg_icon('resource/multi_check_box_svg/undefined_24dp.svg', icon_size),
-            True: load_svg_icon('resource/multi_check_box_svg/yes_blue_24dp.svg', icon_size)
+            False: load_svg_icon("resource/multi_check_box_svg/no_24dp.svg", icon_size),
+            None: load_svg_icon(
+                "resource/multi_check_box_svg/undefined_24dp.svg", icon_size
+            ),
+            True: load_svg_icon(
+                "resource/multi_check_box_svg/yes_blue_24dp.svg", icon_size
+            ),
         }
         self.set_initial_pixmap()
 
 
 # Локальная отладка элементов
 if __name__ == "__main__":
-    app = QtWidgets.QApplication([])
 
-    green_checkbox = GreenRedYellowCheckBox()
-    blue_checkbox = BlueRedYellowCheckBox()
+    def main():
+        app = QApplication([])
 
+        green_checkbox = GreenRedYellowCheckBox()
+        blue_checkbox = BlueRedYellowCheckBox()
 
-    def handle_green_click(state):
-        print(f"Green checkbox state: {state}")
+        def handle_green_click(state):
+            print(f"Green checkbox state: {state}")
 
+        def handle_blue_click(state):
+            print(f"Blue checkbox state: {state}")
 
-    def handle_blue_click(state):
-        print(f"Blue checkbox state: {state}")
+        green_checkbox.clicked.connect(handle_green_click)
+        blue_checkbox.clicked.connect(handle_blue_click)
 
+        window = QWidget()
+        layout = QHBoxLayout()
+        layout.addWidget(green_checkbox)
+        layout.addWidget(blue_checkbox)
+        window.setLayout(layout)
+        window.show()
 
-    green_checkbox.clicked.connect(handle_green_click)
-    blue_checkbox.clicked.connect(handle_blue_click)
+        app.exec()
 
-    window = QtWidgets.QWidget()
-    layout = QtWidgets.QHBoxLayout()
-    layout.addWidget(green_checkbox)
-    layout.addWidget(blue_checkbox)
-    window.setLayout(layout)
-    window.show()
-
-    app.exec_()
+    main()
