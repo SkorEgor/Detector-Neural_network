@@ -6,7 +6,7 @@ from app_exception import AppException
 from color_theme import ColorTheme
 from data_and_processing import DataAndProcessing
 from gui import Ui_Dialog
-from validators import get_float_and_positive
+from ui_validators import get_float_and_positive
 
 
 class CustomDialog(Ui_Dialog):
