@@ -379,7 +379,7 @@ class DataAndProcessing:
                 "status": None,
                 "source_neural_network": True,
             }
-        )
+        ).reset_index(drop=True)
 
     # ---------------------------------------------------------------------------
     #   Методы для работы с графиком

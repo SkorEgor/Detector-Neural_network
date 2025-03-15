@@ -255,7 +255,12 @@ if __name__ == "__main__":
         }
     )
     data_processing._DataAndProcessing__point_absorption = pd.DataFrame(
-        {"frequency": [2, 4], "gamma": [14, 17], "status": ["absorption", "absorption"]}
+        {
+            "frequency": [2, 4],
+            "gamma": [14, 17],
+            "status": ["absorption", "absorption"],
+            "source_neural_network": [True, False]
+        }
     )
 
     main_window = SpectrometerPlotAndLegendWidget()

@@ -216,10 +216,6 @@ class GuiProgram(CustomDialog):
             )
         # обработка
         self.data.processing()
-        # Отрисовка
-        self.update_graphics()
-        # Отображение в таблице
-        self.table()
 
     # ---------------------------------------------------------------------------
     #   Методы для работы с графиком
@@ -261,8 +257,6 @@ class GuiProgram(CustomDialog):
             # Точки нет – добавляем
             if index is None:
                 self.data.add_new_point_absorption(x, y)
-                self.update_graphics()
-                self.table()
 
     # ---------------------------------------------------------------------------
     #   Методы для работы с таблицей
