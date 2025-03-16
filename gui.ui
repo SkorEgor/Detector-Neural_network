@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1281</width>
-    <height>622</height>
+    <height>626</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -181,6 +181,69 @@ QPushButton:pressed      {
 	color: rgb(181, 181, 181);
 	border: none;												/* без границ */
 }
+
+/*Нейронная сеть*/
+#pushButton_neural_network_heade{
+	image: url(:/general_black_ui/resource/general_black_ui/network_24dp_white.svg);
+    image-position: left center;
+	padding-top: 2px; /* Отступ сверху */
+    padding-bottom: 2px; /* Отступ снизу */
+    padding-left: 4px; /* Отступ слева для симметрии */
+}
+#pushButton_reading_file_neural_network{image: url(:/general_black_ui/resource/general_black_ui/download_24dp_white.svg);}
+#pushButton_reading_file_neural_network{border: none;}
+
+/*Данные*/
+#pushButton_data_header {
+	image: url(:/general_black_ui/resource/general_black_ui/data_24dp_white.svg);
+    image-position: left center;
+    padding-top: 2px; /* Отступ сверху */
+    padding-bottom: 2px; /* Отступ снизу */
+    padding-left: 4px; /* Отступ слева для симметрии */
+}
+#pushButton_reading_file_no_gas{image: url(:/general_black_ui/resource/general_black_ui/download_24dp_white.svg);}
+#pushButton_reading_file_no_gas{border: none;}
+#pushButton_reading_file_with_gas{image: url(:/general_black_ui/resource/general_black_ui/download_24dp_white.svg);}
+#pushButton_reading_file_with_gas{border: none;}
+
+#radioButton_selected_range {
+	image: url(:/general_black_ui/resource/general_black_ui/cycle1_24dp_white.svg);
+    image-position: right center;
+	padding-top: 3px; /* Отступ сверху */
+    padding-bottom: 3px; /* Отступ снизу */
+    padding-right: 4px; /* Отступ справа для симметрии */
+} 
+#radioButton_selected_range:pressed      {
+	image: url(:/general_black_ui/resource/general_black_ui/cycle2_24dp_white.svg);
+    image-position: right center;
+	padding-top: 3px; /* Отступ сверху */
+    padding-bottom: 3px; /* Отступ снизу */
+    padding-right: 4px; /* Отступ справа для симметрии */
+}
+
+#pushButton_close_open_table {
+	image: url(:/general_black_ui/resource/general_black_ui/table_24dp_white.svg);
+    image-position: left center;
+	padding-top: 2px; /* Отступ сверху */
+    padding-bottom: 2px; /* Отступ снизу */
+    padding-left: 4px; /* Отступ слева для симметрии */
+}
+
+#pushButton_menu_calculate{
+	image: url(:/general_black_ui/resource/general_black_ui/launch_24dp_white.svg);
+    image-position: left center;
+	padding-top: 2px; /* Отступ сверху */
+    padding-bottom: 2px; /* Отступ снизу */
+    padding-left: 4px; /* Отступ слева для симметрии */
+}
+
+#pushButton_save_table_to_file{
+	image: url(:/general_black_ui/resource/general_black_ui/save_24dp_white.svg);
+    image-position: left center;
+	padding-top: 2px; /* Отступ сверху */
+    padding-bottom: 2px; /* Отступ снизу */
+    padding-left: 4px; /* Отступ слева для симметрии */
+}
 /* ///////////////////////////////////////////////////////////////////////////////////////////////// */
 /* /////////////////////////////////////////////////////////////////////////////////////////////////
 QLineEdit */
@@ -222,8 +285,7 @@ QHeaderView::section{
 border: 1px solid rgb(136, 136, 136);
 }
 /*Кнопка в верхнем левом углу*/
-QTableCornerButton::section {background-color:rgb(33, 37, 43); }
-</string>
+QTableCornerButton::section {background-color:rgb(33, 37, 43); }</string>
      </property>
      <layout class="QHBoxLayout" name="layout_style_sheet">
       <property name="spacing">
@@ -339,14 +401,14 @@ QTableCornerButton::section {background-color:rgb(33, 37, 43); }
               <property name="styleSheet">
                <string notr="true">padding-left: 7px;
 padding-right: 7px;
-	border: none;												/* без границ */
+border: none;
 </string>
               </property>
               <property name="text">
                <string/>
               </property>
               <property name="pixmap">
-               <pixmap>:/application picture/resource/application picture/app_icon-round.png</pixmap>
+               <pixmap resource="res.qrc">:/application_picture/resource/application_picture/app_icon-round.png</pixmap>
               </property>
               <property name="scaledContents">
                <bool>true</bool>
@@ -385,48 +447,33 @@ padding-right: 7px;
              <widget class="QCheckBox" name="checkBox_color_theme">
               <property name="minimumSize">
                <size>
-                <width>40</width>
+                <width>0</width>
                 <height>0</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>54</width>
-                <height>20</height>
+                <width>55</width>
+                <height>16777215</height>
                </size>
-              </property>
-              <property name="layoutDirection">
-               <enum>Qt::LeftToRight</enum>
               </property>
               <property name="styleSheet">
                <string notr="true">/* Состояние - не выбран*/
 QCheckBox::indicator:unchecked {
 	/* Выбор картинки*/
-	image: url(:/toggle/resource/toggle/toggle_off_black_36dp.svg);
-	image: url(:/toggle_color_theme/resource/toggle_color_theme/toggle_on_white.svg);
+	image: url(:/toggle_color_theme/resource/toggle_color_theme/off_black.svg);
+
 }
 
 /* Состояние -  выбран*/
 QCheckBox::indicator:checked {
 	/* Выбор картинки*/
-	image: url(:/toggle/resource/toggle/toggle_on_white_36dp.svg);
-	image: url(:/toggle_color_theme/resource/toggle_color_theme/toggle_off_black.svg);
-}</string>
+	image: url(:/toggle_color_theme/resource/toggle_color_theme/on_white.svg);
+}
+</string>
               </property>
               <property name="text">
-               <string/>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>30</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-              <property name="tristate">
-               <bool>false</bool>
+               <string notr="true"/>
               </property>
              </widget>
             </item>
@@ -496,8 +543,8 @@ QCheckBox::indicator:checked {
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>222</width>
-                 <height>492</height>
+                 <width>232</width>
+                 <height>496</height>
                 </rect>
                </property>
                <property name="styleSheet">
@@ -620,13 +667,7 @@ QCheckBox::indicator:checked {
                          <bool>false</bool>
                         </property>
                         <property name="styleSheet">
-                         <string notr="true">QPushButton {
-	image: url(:/general_black_ui/resource/general_black_ui/network_24dp_white.svg);
-    image-position: left center;
-	padding-top: 2px; /* Отступ сверху */
-    padding-bottom: 2px; /* Отступ снизу */
-    padding-left: 4px; /* Отступ слева для симметрии */
-}</string>
+                         <string notr="true"/>
                         </property>
                         <property name="text">
                          <string>Нейронная сеть</string>
@@ -776,13 +817,7 @@ QCheckBox::indicator:checked {
                             <string/>
                            </property>
                            <property name="styleSheet">
-                            <string notr="true">QPushButton {
-	image: url(:/general_black_ui/resource/general_black_ui/download_24dp_white.svg);
-}
-
-QPushButton:hover {
-	border: none;												/* без границ */
-}</string>
+                            <string notr="true"/>
                            </property>
                            <property name="text">
                             <string/>
@@ -958,13 +993,7 @@ QPushButton:hover {
                          <bool>false</bool>
                         </property>
                         <property name="styleSheet">
-                         <string notr="true">QPushButton {
-    image: url(:/general_black_ui/resource/general_black_ui/data_24dp_white.svg);
-    image-position: left center;
-	padding-top: 2px; /* Отступ сверху */
-    padding-bottom: 2px; /* Отступ снизу */
-    padding-left: 4px; /* Отступ слева для симметрии */
-}</string>
+                         <string notr="true"/>
                         </property>
                         <property name="text">
                          <string>Данные</string>
@@ -1168,13 +1197,7 @@ QPushButton:hover {
                             <string/>
                            </property>
                            <property name="styleSheet">
-                            <string notr="true">QPushButton {
-	image: url(:/general_black_ui/resource/general_black_ui/download_24dp_white.svg);
-}
-
-QPushButton:hover {
-	border: none;												/* без границ */
-}</string>
+                            <string notr="true"/>
                            </property>
                            <property name="text">
                             <string/>
@@ -1370,13 +1393,7 @@ QPushButton:hover {
                             <cursorShape>PointingHandCursor</cursorShape>
                            </property>
                            <property name="styleSheet">
-                            <string notr="true">QPushButton {
-	image: url(:/general_black_ui/resource/general_black_ui/download_24dp_white.svg);
-}
-
-QPushButton:hover {
-	border: none;												/* без границ */
-}</string>
+                            <string notr="true"/>
                            </property>
                            <property name="text">
                             <string/>
@@ -1585,24 +1602,7 @@ QPushButton:hover {
                             <cursorShape>PointingHandCursor</cursorShape>
                            </property>
                            <property name="styleSheet">
-                            <string notr="true">QRadioButton {
-	/* задает иконку */
-	image: url(:/general_black_ui/resource/general_black_ui/cycle1_24dp_white.svg);
-    image-position: right center;
-	padding-top: 3px; /* Отступ сверху */
-    padding-bottom: 3px; /* Отступ снизу */
-    padding-right: 4px; /* Отступ справа для симметрии */
-} 
-/* срабатывает, при нажатии*/
-QRadioButton:pressed      {
-	
-	image: url(:/general_black_ui/resource/general_black_ui/cycle2_24dp_white.svg);
-    image-position: right center;
-	padding-top: 3px; /* Отступ сверху */
-    padding-bottom: 3px; /* Отступ снизу */
-    padding-right: 4px; /* Отступ справа для симметрии */
-}
-</string>
+                            <string notr="true"/>
                            </property>
                            <property name="text">
                             <string>Некоторые</string>
@@ -1997,13 +1997,7 @@ QRadioButton:pressed      {
                <bool>false</bool>
               </property>
               <property name="styleSheet">
-               <string notr="true">QPushButton {
-	image: url(:/general_black_ui/resource/general_black_ui/table_24dp_white.svg);
-    image-position: left center;
-	padding-top: 2px; /* Отступ сверху */
-    padding-bottom: 2px; /* Отступ снизу */
-    padding-left: 4px; /* Отступ слева для симметрии */
-}</string>
+               <string notr="true"/>
               </property>
               <property name="text">
                <string>Таблица</string>
@@ -2072,13 +2066,7 @@ QRadioButton:pressed      {
                <bool>false</bool>
               </property>
               <property name="styleSheet">
-               <string notr="true">QPushButton {
-	image: url(:/general_black_ui/resource/general_black_ui/launch_24dp_white.svg);
-    image-position: left center;
-	padding-top: 2px; /* Отступ сверху */
-    padding-bottom: 2px; /* Отступ снизу */
-    padding-left: 4px; /* Отступ слева для симметрии */
-}</string>
+               <string notr="true"/>
               </property>
               <property name="text">
                <string>Вычислить</string>
@@ -2727,13 +2715,7 @@ selection-background-color: rgb(191, 191, 191);
                         <bool>false</bool>
                        </property>
                        <property name="styleSheet">
-                        <string notr="true">QPushButton {
-	image: url(:/general_black_ui/resource/general_black_ui/save_24dp_white.svg);
-    image-position: left center;
-	padding-top: 2px; /* Отступ сверху */
-    padding-bottom: 2px; /* Отступ снизу */
-    padding-left: 4px; /* Отступ слева для симметрии */
-}</string>
+                        <string notr="true"/>
                        </property>
                        <property name="text">
                         <string>Сохранить в файл</string>

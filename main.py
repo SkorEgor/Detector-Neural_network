@@ -41,7 +41,7 @@ if __name__ == "__main__":
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(my_app_id)
         # Инициализации и запуск приложения
         app = QApplication(sys.argv)
-        dialog = GuiProgram(None)
+        dialog = GuiProgram()
         dialog.show()
         # Устанавливаем глобальный обработчик исключений, c передачей app для подгрузки иконки приложения
         sys.excepthook = partial(handle_exception, app)

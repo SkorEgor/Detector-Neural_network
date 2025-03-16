@@ -1,21 +1,22 @@
 import os
-
+from pyqtgraph.Qt.QtWidgets import QDialog
 from pyqtgraph.Qt.QtCore import Qt
 
 from app_exception import AppException
-from color_theme import ColorTheme
+from color_theme.theme import color_theme
 from data_and_processing import DataAndProcessing
 from gui import Ui_Dialog
 from ui_validators import get_float_and_positive
 
 
-class CustomDialog(Ui_Dialog):
+class CustomDialog(QDialog, Ui_Dialog):
     """Класс для добавления доп. логики UI компонентов (валидация полей (get))"""
 
     def __init__(self, *args, **kwargs):
         # 1. Создание окна
         # - Инициализация UI из дизайна
         super().__init__(*args, **kwargs)
+        self.setupUi(self)
         os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
         # - Инициализация окна
         self.setWindowFlags(  # Передаем флаги создания окна
@@ -47,7 +48,7 @@ class CustomDialog(Ui_Dialog):
     def update_color_theme(self, state):
         """Смена цветового стиля интерфейса. Смена с темной темы на светлую и обратно."""
         self.widget_style_sheet.setStyleSheet(
-            ColorTheme.dark_style_sheet if state else ColorTheme.light_style_sheet
+            color_theme.light_style_sheet if state else color_theme.dark_style_sheet
         )
 
     def update_ui_on_spectra_change(self, *args, **kwargs):
