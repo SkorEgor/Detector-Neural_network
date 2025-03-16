@@ -28,13 +28,9 @@ if __name__ == "__main__":
     def main():
         # Решает проблему не правильного масштабирования интерфейса и осей графика PyQtGraph на разных мониторах
         # https://github.com/pyqtgraph/pyqtgraph/issues/756#issuecomment-1023182391
-        QApplication.setHighDpiScaleFactorRoundingPolicy(
-            Qt.HighDpiScaleFactorRoundingPolicy.PassThrough
-        )
+        QApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
         if int(qVersion().split(".")[0]) < 6:
-            QCoreApplication.setAttribute(
-                Qt.ApplicationAttribute.AA_EnableHighDpiScaling, True
-            )
+            QCoreApplication.setAttribute(Qt.ApplicationAttribute.AA_EnableHighDpiScaling, True)
         # Установка значка приложения на панели задач
         # https://stackoverflow.com/a/1552105
         my_app_id = "company.my-product.subproject.version"

@@ -47,9 +47,7 @@ class CustomDialog(QDialog, Ui_Dialog):
 
     def update_color_theme(self, state):
         """Смена цветового стиля интерфейса. Смена с темной темы на светлую и обратно."""
-        self.widget_style_sheet.setStyleSheet(
-            color_theme.light_style_sheet if state else color_theme.dark_style_sheet
-        )
+        self.widget_style_sheet.setStyleSheet(color_theme.light_style_sheet if state else color_theme.dark_style_sheet)
 
     def update_ui_on_spectra_change(self, *args, **kwargs):
         """Метод вызываемый при обновлении данных для изменения соответствующих индикаторов UI"""
@@ -65,18 +63,14 @@ class CustomDialog(QDialog, Ui_Dialog):
         spectra = self.data.get_spectra()
         # Проверяем наличие "Спектра без вещества" (выставляем соответсвующий статус и имя файла)
         if not (spectra["without_gas"].empty or spectra["without_gas"].isna().all()):
-            self.label_text_file_name_no_gas.setText(
-                os.path.basename(self.file_name_without_substance)
-            )
+            self.label_text_file_name_no_gas.setText(os.path.basename(self.file_name_without_substance))
             self.checkBox_download_no_gas.setCheckState(Qt.CheckState.Checked)
         else:
             self.label_text_file_name_no_gas.setText("Нет файла")
             self.checkBox_download_no_gas.setCheckState(Qt.CheckState.Unchecked)
         # Проверяем наличие "Спектра с веществом"
         if not (spectra["with_gas"].empty or spectra["with_gas"].isna().all()):
-            self.label_text_file_name_with_gas.setText(
-                os.path.basename(self.file_name_with_substance)
-            )
+            self.label_text_file_name_with_gas.setText(os.path.basename(self.file_name_with_substance))
             self.checkBox_download_with_gas.setCheckState(Qt.CheckState.Checked)
         else:
             self.label_text_file_name_with_gas.setText("Нет файла")

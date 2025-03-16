@@ -28,17 +28,11 @@ class GuiProgram(CustomDialog):
 
         # Обработчики нажатий кнопок интерфейса
         # - Загрузка нейронной сети
-        self.pushButton_reading_file_neural_network.clicked.connect(
-            self.loading_neural_network
-        )
+        self.pushButton_reading_file_neural_network.clicked.connect(self.loading_neural_network)
         # - Загрузка данных без вещества
-        self.pushButton_reading_file_no_gas.clicked.connect(
-            self.reading_and_plotting_data_without_substance
-        )
+        self.pushButton_reading_file_no_gas.clicked.connect(self.reading_and_plotting_data_without_substance)
         # - Загрузка данные с веществом
-        self.pushButton_reading_file_with_gas.clicked.connect(
-            self.reading_and_plotting_data_with_substance
-        )
+        self.pushButton_reading_file_with_gas.clicked.connect(self.reading_and_plotting_data_with_substance)
         # - Смена режима чтения и отображения файлов
         self.radioButton_all_range.clicked.connect(self.change_spectrum_range)
         self.radioButton_selected_range.clicked.connect(self.change_spectrum_range)
@@ -93,9 +87,7 @@ class GuiProgram(CustomDialog):
         self.data.set_neural_network(load(self.file_name_neural_network))
         # 3. Получение количества входов и скрытых слоев, отображение в UI
         num_inputs, hidden_layer_sizes = self.data.get_neural_network_info()
-        self.label_parameters_neural_network.setText(
-            f"Кол-во вх: {num_inputs}\nРазмеры слоев: {hidden_layer_sizes}"
-        )
+        self.label_parameters_neural_network.setText(f"Кол-во вх: {num_inputs}\nРазмеры слоев: {hidden_layer_sizes}")
         # - Сохранение директории для следующего открытия диалога
         settings.setValue("last_neural_network_dir", os.path.dirname(self.file_name_neural_network))
 
@@ -105,9 +97,7 @@ class GuiProgram(CustomDialog):
         if not skip_read:
             # Получение имени файла из диалогового окна (в режиме DEBUG используется путь по умолчанию)
             if setting.DEBUG_ALL or setting.USE_DEFAULT_FILE_PATH_WITHOUT_SUBSTANCE:
-                self.file_name_without_substance = (
-                    setting.DEFAULT_FILE_PATH_WITHOUT_SUBSTANCE
-                )
+                self.file_name_without_substance = setting.DEFAULT_FILE_PATH_WITHOUT_SUBSTANCE
             else:
                 # - Загружаем последнюю успешную директорию, если она есть, иначе используем текущую (".")
                 last_dir = settings.value("last_without_substance_dir", ".", type=str)
@@ -131,9 +121,7 @@ class GuiProgram(CustomDialog):
             # Запрашиваем начало и конец диапазона спектра, из UI с валидацией
             start_frequency, end_frequency = self.get_spectrum_frequency_range()
             # Парс данных в заданных частотах
-            frequency, gamma = parser(
-                self.lines_file_without_gas, start_frequency, end_frequency
-            )
+            frequency, gamma = parser(self.lines_file_without_gas, start_frequency, end_frequency)
         else:
             # Парс данных
             frequency, gamma = parser_all_data(self.lines_file_without_gas)
@@ -174,9 +162,7 @@ class GuiProgram(CustomDialog):
             # Запрашиваем начало и конец диапазона спектра, из UI с валидацией
             start_frequency, end_frequency = self.get_spectrum_frequency_range()
             # Парс данных в заданных частотах
-            frequency, gamma = parser(
-                self.lines_file_with_gas, start_frequency, end_frequency
-            )
+            frequency, gamma = parser(self.lines_file_with_gas, start_frequency, end_frequency)
         else:
             # Парс данных
             frequency, gamma = parser_all_data(self.lines_file_with_gas)
@@ -190,12 +176,8 @@ class GuiProgram(CustomDialog):
     def change_spectrum_range(self):
         """Вызов при обновлении диапазона спектра - Очищает, отображает данные в актуальном диапазоне"""
         spectra = self.data.get_spectra()
-        update_with_gas = not (
-            spectra["with_gas"].empty or spectra["with_gas"].isna().all()
-        )
-        update_without_gas = not (
-            spectra["without_gas"].empty or spectra["without_gas"].isna().all()
-        )
+        update_with_gas = not (spectra["with_gas"].empty or spectra["with_gas"].isna().all())
+        update_without_gas = not (spectra["without_gas"].empty or spectra["without_gas"].isna().all())
         self.data.clear_data()
         if update_with_gas:
             self.reading_and_plotting_data_with_substance(True)
@@ -213,13 +195,9 @@ class GuiProgram(CustomDialog):
         """Поиск линий поглощения"""
         spectra = self.data.get_spectra()
         if spectra["with_gas"].empty or spectra["with_gas"].isna().all():
-            raise AppException(
-                """Ошибка при "Вычислении" """, """Нет данных с веществом """
-            )
+            raise AppException("""Ошибка при "Вычислении" """, """Нет данных с веществом """)
         if not self.data.get_neural_network():
-            raise AppException(
-                """Ошибка при "Вычислении" """, """Нет нейронной сети """
-            )
+            raise AppException("""Ошибка при "Вычислении" """, """Нет нейронной сети """)
         # обработка
         self.data.processing()
 
@@ -235,9 +213,7 @@ class GuiProgram(CustomDialog):
         for point in points:
             x, y = point.pos()
             # Получаем текущий статус
-            index, status, source_neural_network = (
-                self.data.get_status_point_absorption(x, y)
-            )
+            index, status, source_neural_network = self.data.get_status_point_absorption(x, y)
             if index is None:
                 return
             # Если точку поставили в ручную - удаляем
@@ -271,12 +247,8 @@ class GuiProgram(CustomDialog):
         """Инициализация: Пустая таблица"""
         self.tableWidget_frequency_absorption.clear()
         self.tableWidget_frequency_absorption.setColumnCount(4)
-        self.tableWidget_frequency_absorption.setHorizontalHeaderLabels(
-            ["Частота МГц", "Гамма", ""]
-        )
-        self.tableWidget_frequency_absorption.setColumnHidden(
-            3, True
-        )  # Скрываем столбец с индексом
+        self.tableWidget_frequency_absorption.setHorizontalHeaderLabels(["Частота МГц", "Гамма", ""])
+        self.tableWidget_frequency_absorption.setColumnHidden(3, True)  # Скрываем столбец с индексом
         self.tableWidget_frequency_absorption.resizeColumnToContents(2)
 
     def table(self):
@@ -325,26 +297,14 @@ class GuiProgram(CustomDialog):
                 continue
 
             # Заполняем ячейки частоты, гаммы, индекса
-            self.tableWidget_frequency_absorption.setItem(
-                visible_row, 0, QTableWidgetItem(f"{frequency:.3f}")
-            )
-            self.tableWidget_frequency_absorption.setItem(
-                visible_row, 1, QTableWidgetItem(f"{gamma:.7E}")
-            )
-            self.tableWidget_frequency_absorption.setItem(
-                visible_row, 3, QTableWidgetItem(str(index))
-            )
+            self.tableWidget_frequency_absorption.setItem(visible_row, 0, QTableWidgetItem(f"{frequency:.3f}"))
+            self.tableWidget_frequency_absorption.setItem(visible_row, 1, QTableWidgetItem(f"{gamma:.7E}"))
+            self.tableWidget_frequency_absorption.setItem(visible_row, 3, QTableWidgetItem(str(index)))
             # Создаем и настраиваем чекбокс для столбца статуса
             checkbox_class = GreenRedYellowCheckBox if source else BlueRedYellowCheckBox
-            check_box = checkbox_class(
-                initial_state=status, icon_size=22, allow_none=source
-            )
-            check_box.clicked.connect(
-                partial(self.frequency_selection, check_box, index, source)
-            )
-            self.tableWidget_frequency_absorption.setCellWidget(
-                visible_row, 2, check_box
-            )
+            check_box = checkbox_class(initial_state=status, icon_size=22, allow_none=source)
+            check_box.clicked.connect(partial(self.frequency_selection, check_box, index, source))
+            self.tableWidget_frequency_absorption.setCellWidget(visible_row, 2, check_box)
             # Устанавливаем высоту текущей строки
             self.tableWidget_frequency_absorption.setRowHeight(visible_row, 26)
             visible_row += 1
@@ -353,14 +313,10 @@ class GuiProgram(CustomDialog):
         self.tableWidget_frequency_absorption.setRowCount(visible_row)
 
         # Настраиваем внешний вид таблицы
-        self.tableWidget_frequency_absorption.setColumnWidth(
-            2, 30
-        )  # Ширина столбца с чекбоксом
+        self.tableWidget_frequency_absorption.setColumnWidth(2, 30)  # Ширина столбца с чекбоксом
         self.tableWidget_frequency_absorption.resizeColumnsToContents()  # Масштабируем по содержимому
 
-    def frequency_selection(
-        self, sender: GreenRedYellowCheckBox | BlueRedYellowCheckBox, index, source
-    ):
+    def frequency_selection(self, sender: GreenRedYellowCheckBox | BlueRedYellowCheckBox, index, source):
         """Клик по чекбоксу в таблице"""
         # Нет точек поглощения - сброс
         point_absorption = self.data.get_point_absorption()
@@ -403,9 +359,7 @@ class GuiProgram(CustomDialog):
             y_max = spectra["with_gas"].max()
 
         # zoom
-        self.plot_widget_1.plot_widget.zoom_to_region(
-            x_min=x_min, x_max=x_max, y_min=y_min, y_max=y_max
-        )
+        self.plot_widget_1.plot_widget.zoom_to_region(x_min=x_min, x_max=x_max, y_min=y_min, y_max=y_max)
 
     # ---------------------------------------------------------------------------
     #   Методы для сохранения в файл
@@ -444,13 +398,9 @@ class GuiProgram(CustomDialog):
                     g = self.tableWidget_frequency_absorption.item(i, 1).text()
                     file.write(f"{f}\t{g}\n")
             # Конец файла
-            file.write(
-                """***********************************************************\n"""
-            )
+            file.write("""***********************************************************\n""")
             # Фильтр строк, где source_neural_network=True
-            filtered = point_absorption[
-                point_absorption["source_neural_network"] == True
-            ]
+            filtered = point_absorption[point_absorption["source_neural_network"] == True]
             # 1. Количество строк, где source_neural_network=True
             dots_found = filtered.shape[0]
             # 2. Количество строк, где source_neural_network=True и status=True
@@ -460,9 +410,7 @@ class GuiProgram(CustomDialog):
             # 4. Всего точек
             dots_all = point_absorption.shape[0]
             # 5. Точек добавлено
-            dots_add = point_absorption[
-                point_absorption["source_neural_network"] == False
-            ].shape[0]
+            dots_add = point_absorption[point_absorption["source_neural_network"] == False].shape[0]
             print(dots_found, points_confirmed, points_rejected, dots_all, dots_add)
             file.write(
                 f"Точек обнаружено: {dots_found}\n"
@@ -482,19 +430,13 @@ class GuiProgram(CustomDialog):
             return
 
         # Фильтр строк, где source_neural_network=True
-        filtered_neuron_found = point_absorption[
-            point_absorption["source_neural_network"] == True
-        ]
+        filtered_neuron_found = point_absorption[point_absorption["source_neural_network"] == True]
         # Количество строк, где source_neural_network=True
         points_neuron_found = filtered_neuron_found.shape[0]
         # Количество строк, где source_neural_network=True и status=True
-        points_confirmed = filtered_neuron_found[
-            filtered_neuron_found["status"] == True
-        ].shape[0]
+        points_confirmed = filtered_neuron_found[filtered_neuron_found["status"] == True].shape[0]
         # Процент выбранных
-        percent_chosen = (
-            0 if points_neuron_found == 0 else points_confirmed / points_neuron_found
-        )
+        percent_chosen = 0 if points_neuron_found == 0 else points_confirmed / points_neuron_found
         # Фильтр строк, где status=True
         filtered_absorption_lines = point_absorption[point_absorption["status"] == True]
         # Всего найденных частот поглощения

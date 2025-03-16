@@ -5,7 +5,7 @@ import pandas as pd
 from pandas import DataFrame
 from pyqtgraph import PlotWidget, ScatterPlotItem, mkPen, setConfigOptions
 from pyqtgraph.Qt.QtCore import Qt, Signal
-from pyqtgraph.Qt.QtGui import QColor, QPixmap
+from pyqtgraph.Qt.QtGui import QColor, QPixmap, QPainter
 from pyqtgraph.Qt.QtWidgets import (
     QApplication,
     QHBoxLayout,
@@ -37,13 +37,18 @@ class SpectrometerPlotWidget(PlotWidget):
     color_without_gas = "#515151"
     name_with_gas = "C веществом"
     color_with_gas = "#DC7C02"
-    list_absorbing = "Участок с линией поглощения"
-    color_absorbing = "#36F62D"
-    color_status = {
-        True: "#36F62D",  # Зеленый
+    absorption_line_text_found_programmatically = "Линия поглощения (найдена программно)"
+    absorption_line_colors_found_programmatically = {
+        # Порядок цветов важен для absorption_line_choices
         False: "#FF0000",  # Красный
         None: "#FFA500",  # Оранжевый
+        True: "#36F62D",  # Зеленый
     }
+    absorption_line_text_found_manually = "Линия поглощения (найдена вручную)"
+    absorption_line_colors_found_manually = "#2854C5"
+    absorption_line_choices = list(absorption_line_colors_found_programmatically.values()) + [
+        absorption_line_colors_found_manually
+    ]
     # Объявляем сигнал обновления легенды (для кастомной легенды)
     dataUpdated = Signal(list)
 
@@ -124,9 +129,7 @@ class SpectrometerPlotWidget(PlotWidget):
                 brush=self.color_with_gas,
             )
             self.addItem(with_gas_scatter)
-            with_gas_scatter.sigClicked.connect(
-                lambda plot, points: self.with_gas_click_callback(self, plot, points)
-            )
+            with_gas_scatter.sigClicked.connect(lambda plot, points: self.with_gas_click_callback(self, plot, points))
             legend_data.append((self.color_with_gas, self.name_with_gas))
 
         # Отрисовка точек поглощения
@@ -138,24 +141,16 @@ class SpectrometerPlotWidget(PlotWidget):
                 # status=None
                 (absorption_points["status"].isna()),
                 # status=True и source_neural_network=True
-                (absorption_points["status"] == True)
-                & (absorption_points["source_neural_network"] == True),
+                (absorption_points["status"] == True) & (absorption_points["source_neural_network"] == True),
                 # status=True и source_neural_network=False
-                (absorption_points["status"] == True)
-                & (absorption_points["source_neural_network"] == False),
-            ]
-            choices = [
-                "#FF0000",  # Красный
-                "#FFA500",  # Оранжевый
-                "#36F62D",  # Зеленый
-                "#2854C5",  # Синий
+                (absorption_points["status"] == True) & (absorption_points["source_neural_network"] == False),
             ]
             self.absorption_scatter = ScatterPlotItem(
                 x=absorption_points["frequency"],
                 y=absorption_points["gamma"],
                 pen=mkPen("k"),
                 symbol="o",
-                brush=np.select(conditions, choices, default="#FFA500"),
+                brush=np.select(conditions, self.absorption_line_choices, default="#FFA500"),
                 symbolBrush="b",
                 size=8,
             )
@@ -163,11 +158,15 @@ class SpectrometerPlotWidget(PlotWidget):
             # Подключаем callback если он задан
             if self.absorption_click_callback:
                 self.absorption_scatter.sigClicked.connect(
-                    lambda plot, points: self.absorption_click_callback(
-                        self, plot, points
-                    )
+                    lambda plot, points: self.absorption_click_callback(self, plot, points)
                 )
-            legend_data.append((self.color_absorbing, self.list_absorbing))
+            legend_data.append(
+                (
+                    list(self.absorption_line_colors_found_programmatically.values()),
+                    self.absorption_line_text_found_programmatically,
+                )
+            )
+            legend_data.append((self.absorption_line_colors_found_manually, self.absorption_line_text_found_manually))
 
         # Испускаем сигнал с обновленными данными для легенды
         self.dataUpdated.emit(legend_data)
@@ -175,7 +174,7 @@ class SpectrometerPlotWidget(PlotWidget):
     def update_absorption_point_color(self, status: list[bool]):
         """Метод для обновления цвета конкретной точки поглощения по индексу"""
         if self.absorption_scatter:
-            self.absorption_scatter.setBrush([self.color_status[s] for s in status])
+            self.absorption_scatter.setBrush([self.absorption_line_colors_found_programmatically[s] for s in status])
 
     def zoom_to_region(self, x_min, x_max, y_min, y_max, padding_factor=0.1):
         """
@@ -198,8 +197,7 @@ class LegendWidget(QWidget):
     def update_legend(self, legend_items):
         # Очистка предыдущих элементов легенды
         clearer_layout(self.layout)
-        print(f"{legend_items=}")
-        print(f"{self.layout.itemAt(0)=}")
+
         # Добавляем новые элементы в легенду
         for color, label in legend_items:
             item_layout = QHBoxLayout()
@@ -207,7 +205,23 @@ class LegendWidget(QWidget):
             # Цветной квадратик для обозначения цвета данных
             color_label = QLabel()
             pixmap = QPixmap(20, 20)
-            pixmap.fill(QColor(color))
+
+            # color - строка (один цвет)
+            if isinstance(color, str):
+                pixmap.fill(QColor(color))
+            # color - список цветов
+            elif isinstance(color, list):
+                painter = QPainter(pixmap)
+                total_width = 20
+                num_colors = len(color)
+                width_per_color = total_width / num_colors
+                for i, c in enumerate(color):
+                    # Рассчитываем координаты с учетом точной ширины
+                    x_start = i * width_per_color
+                    x_end = (i + 1) * width_per_color
+                    painter.fillRect(int(x_start), 0, int(x_end - x_start + 0.5), 20, QColor(c))
+                painter.end()
+
             color_label.setPixmap(pixmap)
             item_layout.addWidget(color_label)
 
@@ -259,7 +273,7 @@ if __name__ == "__main__":
             "frequency": [2, 4],
             "gamma": [14, 17],
             "status": ["absorption", "absorption"],
-            "source_neural_network": [True, False]
+            "source_neural_network": [True, False],
         }
     )
 

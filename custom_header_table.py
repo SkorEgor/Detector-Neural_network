@@ -23,9 +23,7 @@ class CustomHeader(QHeaderView):
         for row in range(table.rowCount()):
             item = table.item(row, 2)  # Третий столбец (индекс 2)
             if item:
-                item.setCheckState(
-                    Qt.CheckState.Checked if state else Qt.CheckState.Unchecked
-                )
+                item.setCheckState(Qt.CheckState.Checked if state else Qt.CheckState.Unchecked)
 
     def resizeEvent(self, event):
         # Перемещаем чекбокс при изменении размера заголовка
@@ -42,18 +40,14 @@ class MyWindow(QTableWidget):  # Предполагается, что ваша �
 
     def initialize_table(self):
         """Инициализация: Пустая таблица с чекбоксом в заголовке третьего столбца"""
-        self.tableWidget_frequency_absorption = (
-            self  # Предполагаем, что это ваша таблица
-        )
+        self.tableWidget_frequency_absorption = self  # Предполагаем, что это ваша таблица
         self.tableWidget_frequency_absorption.clear()
         self.tableWidget_frequency_absorption.setColumnCount(3)
 
         # Устанавливаем кастомный заголовок
         custom_header = CustomHeader(Qt.Orientation.Horizontal, self)
         self.tableWidget_frequency_absorption.setHorizontalHeader(custom_header)
-        self.tableWidget_frequency_absorption.setHorizontalHeaderLabels(
-            ["Частота МГц", "Гамма", ""]
-        )
+        self.tableWidget_frequency_absorption.setHorizontalHeaderLabels(["Частота МГц", "Гамма", ""])
 
         # Настраиваем размеры столбцов
         self.tableWidget_frequency_absorption.resizeColumnToContents(2)
@@ -61,12 +55,8 @@ class MyWindow(QTableWidget):  # Предполагается, что ваша �
         # Для примера добавим несколько строк
         for row in range(5):
             self.tableWidget_frequency_absorption.insertRow(row)
-            self.tableWidget_frequency_absorption.setItem(
-                row, 0, QTableWidgetItem(f"{row + 1} МГц")
-            )
-            self.tableWidget_frequency_absorption.setItem(
-                row, 1, QTableWidgetItem(f"Гамма {row}")
-            )
+            self.tableWidget_frequency_absorption.setItem(row, 0, QTableWidgetItem(f"{row + 1} МГц"))
+            self.tableWidget_frequency_absorption.setItem(row, 1, QTableWidgetItem(f"Гамма {row}"))
             # Добавляем чекбокс в ячейки третьего столбца
             item = QTableWidgetItem()
             item.setFlags(item.flags() | Qt.ItemFlags.ItemIsUserCheckable)

@@ -35,9 +35,7 @@ class BaseMultiCheckBox(QWidget):
 
         self.icon_size = icon_size
         self.allow_none = allow_none
-        self.state = (
-            initial_state if (initial_state is not None or allow_none) else False
-        )
+        self.state = initial_state if (initial_state is not None or allow_none) else False
         self.icon_status = {}  # Пустой словарь, будет заполнен в дочерних классах
 
         self.label = QLabel()
@@ -77,18 +75,12 @@ class GreenRedYellowCheckBox(BaseMultiCheckBox):
         icon_size: int = 24,
         allow_none: bool = True,
     ):
-        super().__init__(
-            initial_state, icon_size, allow_none
-        )  # Сначала вызываем базовый конструктор
+        super().__init__(initial_state, icon_size, allow_none)  # Сначала вызываем базовый конструктор
         # определяем icon_status
         self.icon_status = {
             False: load_svg_icon("resource/multi_check_box_svg/no_24dp.svg", icon_size),
-            None: load_svg_icon(
-                "resource/multi_check_box_svg/undefined_24dp.svg", icon_size
-            ),
-            True: load_svg_icon(
-                "resource/multi_check_box_svg/yes_green_24dp.svg", icon_size
-            ),
+            None: load_svg_icon("resource/multi_check_box_svg/undefined_24dp.svg", icon_size),
+            True: load_svg_icon("resource/multi_check_box_svg/yes_green_24dp.svg", icon_size),
         }
         self.set_initial_pixmap()
 
@@ -100,18 +92,12 @@ class BlueRedYellowCheckBox(BaseMultiCheckBox):
         icon_size: int = 24,
         allow_none: bool = True,
     ):
-        super().__init__(
-            initial_state, icon_size, allow_none
-        )  # Сначала вызываем базовый конструктор
+        super().__init__(initial_state, icon_size, allow_none)  # Сначала вызываем базовый конструктор
         # определяем icon_status
         self.icon_status = {
             False: load_svg_icon("resource/multi_check_box_svg/no_24dp.svg", icon_size),
-            None: load_svg_icon(
-                "resource/multi_check_box_svg/undefined_24dp.svg", icon_size
-            ),
-            True: load_svg_icon(
-                "resource/multi_check_box_svg/yes_blue_24dp.svg", icon_size
-            ),
+            None: load_svg_icon("resource/multi_check_box_svg/undefined_24dp.svg", icon_size),
+            True: load_svg_icon("resource/multi_check_box_svg/yes_blue_24dp.svg", icon_size),
         }
         self.set_initial_pixmap()
 
