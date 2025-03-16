@@ -7,3 +7,5 @@ USE_DEFAULT_FILE_PATH_NEURAL_NETWORK: bool = os.getenv("USE_DEFAULT_FILE_PATH_NE
 DEFAULT_FILE_PATH_WITHOUT_SUBSTANCE: str = "data/empty.csv"
 DEFAULT_FILE_PATH_WITH_SUBSTANCE: str = "data/DMSO.csv"
 DEFAULT_FILE_PATH_NEURAL_NETWORK: str = "data/5_new.joblib"
+ORGANIZATION: str = "Institute for Physics of Microstructures RAS"
+APPLICATION: str = "Detector - Neural_network"

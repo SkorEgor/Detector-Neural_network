@@ -2,6 +2,7 @@ import os
 from functools import partial
 
 from joblib import load
+from pyqtgraph.Qt.QtCore import QSettings
 from pyqtgraph.Qt.QtWidgets import QFileDialog, QTableWidgetItem
 
 import setting
@@ -13,6 +14,8 @@ from plot_spectrometer_data import (
     SpectrometerPlotAndLegendWidget,
     SpectrometerPlotWidget,
 )
+
+settings = QSettings(setting.ORGANIZATION, setting.APPLICATION)
 
 
 class GuiProgram(CustomDialog):
@@ -75,18 +78,17 @@ class GuiProgram(CustomDialog):
         if setting.DEBUG_ALL or setting.USE_DEFAULT_FILE_PATH_NEURAL_NETWORK:
             self.file_name_neural_network = setting.DEFAULT_FILE_PATH_NEURAL_NETWORK
         else:
+            # - Загружаем последнюю успешную директорию, если она есть, иначе используем текущую (".")
+            last_dir = settings.value("last_neural_network_dir", ".", type=str)
             self.file_name_neural_network, _ = QFileDialog.getOpenFileName(
                 self,
                 """Выбрать файл "Нейронной сети" """,
-                ".",
+                last_dir,
                 "Neural network(*.joblib);;All Files(*)",
             )
-        # Если имя файла не получено, сброс
+        # - Если диалог закрыт через крестик или отменён, просто выходим
         if not self.file_name_neural_network:
-            raise AppException(
-                "Ошибка при загрузке нейронной сети",
-                """Путь к файлу "нейронной сети" не найден""",
-            )
+            return
         # 2. Загрузка модели
         self.data.set_neural_network(load(self.file_name_neural_network))
         # 3. Получение количества входов и скрытых слоев, отображение в UI
@@ -94,6 +96,8 @@ class GuiProgram(CustomDialog):
         self.label_parameters_neural_network.setText(
             f"Кол-во вх: {num_inputs}\nРазмеры слоев: {hidden_layer_sizes}"
         )
+        # - Сохранение директории для следующего открытия диалога
+        settings.setValue("last_neural_network_dir", os.path.dirname(self.file_name_neural_network))
 
     def reading_and_plotting_data_without_substance(self, skip_read=False):
         """Чтение и построение сигнала без вещества"""
@@ -105,18 +109,17 @@ class GuiProgram(CustomDialog):
                     setting.DEFAULT_FILE_PATH_WITHOUT_SUBSTANCE
                 )
             else:
+                # - Загружаем последнюю успешную директорию, если она есть, иначе используем текущую (".")
+                last_dir = settings.value("last_without_substance_dir", ".", type=str)
                 self.file_name_without_substance, _ = QFileDialog.getOpenFileName(
                     self,
                     "Выбрать файл 'Данные без вещества'",
-                    ".",
+                    last_dir,
                     "Spectrometer Data(*.csv);;All Files(*)",
                 )
-            # Если имя файла не получено, сброс
+            # - Если диалог закрыт через крестик или отменён, просто выходим
             if not self.file_name_without_substance:
-                raise AppException(
-                    """Ошибка при загрузке файла "данных без вещества" """,
-                    """Путь к файлу "данных без вещества" - не найден """,
-                )
+                return
             # Чтение данных
             with open(self.file_name_without_substance) as file:
                 self.lines_file_without_gas = file.readlines()
@@ -138,6 +141,8 @@ class GuiProgram(CustomDialog):
         self.data.set_spectrum_without_substance(frequency, gamma)
         # 4. Отображаем данные на графике
         self.update_graphics()
+        # - Сохранение директории для следующего открытия диалога
+        settings.setValue("last_without_substance_dir", os.path.dirname(self.file_name_without_substance))
 
     def reading_and_plotting_data_with_substance(self, skip_read=False):
         """Чтение и построение сигнала с веществом"""
@@ -147,18 +152,17 @@ class GuiProgram(CustomDialog):
             if setting.DEBUG_ALL or setting.USE_DEFAULT_FILE_PATH_WITH_SUBSTANCE:
                 self.file_name_with_substance = setting.DEFAULT_FILE_PATH_WITH_SUBSTANCE
             else:
+                # - Загружаем последнюю успешную директорию, если она есть, иначе используем текущую (".")
+                last_dir = settings.value("last_with_substance_dir", ".", type=str)
                 self.file_name_with_substance, _ = QFileDialog.getOpenFileName(
                     self,
                     "Выбрать файл 'Данные c веществом'",
-                    ".",
+                    last_dir,
                     "Spectrometer Data(*.csv);;All Files(*)",
                 )
-            # Если имя файла не получено, сброс
+            # - Если диалог закрыт через крестик или отменён, просто выходим
             if not self.file_name_with_substance:
-                raise AppException(
-                    """Ошибка при загрузке файла "данных с веществом" """,
-                    """Путь к файлу "данных с веществом" - не найден """,
-                )
+                return
             # Чтение данных
             with open(self.file_name_with_substance) as file:
                 self.lines_file_with_gas = file.readlines()
@@ -180,6 +184,8 @@ class GuiProgram(CustomDialog):
         self.data.set_spectrum_with_substance(frequency, gamma)
         # 4. Отображаем данные на графике
         self.update_graphics()
+        # - Сохранение директории для следующего открытия диалога
+        settings.setValue("last_with_substance_dir", os.path.dirname(self.file_name_with_substance))
 
     def change_spectrum_range(self):
         """Вызов при обновлении диапазона спектра - Очищает, отображает данные в актуальном диапазоне"""
