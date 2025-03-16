@@ -51,7 +51,6 @@ class CustomDialog(QDialog, Ui_Dialog):
 
     def update_ui_on_spectra_change(self, *args, **kwargs):
         """Метод вызываемый при обновлении данных для изменения соответствующих индикаторов UI"""
-        print("update_ui_on_data_change")
         # Проверка наличия "нейронной сети" (выставляем соответсвующий статус и имя файла)
         if self.data.get_neural_network():
             self.label_text_neural_network.setText(self.file_name_neural_network)

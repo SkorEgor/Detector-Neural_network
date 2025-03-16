@@ -174,7 +174,6 @@ class DataAndProcessing:
         sos = butter(3, cutoff_frequency, btype="highpass", analog=False, output="sos")
         noise = sosfilt(sos, gamma)
         self.__smoothed_noise = np.std(uniform_filter1d(noise, size=3)) * 5
-        print(self.__smoothed_noise)
 
         gamma = savgol_filter(gamma, window_length=10, polyorder=2)
         # Интерполяция значений без газа

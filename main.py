@@ -6,6 +6,7 @@ from functools import partial
 from pyqtgraph.Qt.QtCore import QCoreApplication, Qt, qVersion
 from pyqtgraph.Qt.QtWidgets import QApplication, QMessageBox
 
+import res_rc  # noqa: F401
 from app_exception import AppException
 from gui_logic import GuiProgram
 
@@ -28,8 +29,8 @@ if __name__ == "__main__":
     def main():
         # Решает проблему не правильного масштабирования интерфейса и осей графика PyQtGraph на разных мониторах
         # https://github.com/pyqtgraph/pyqtgraph/issues/756#issuecomment-1023182391
-        QApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
         if int(qVersion().split(".")[0]) < 6:
+            QApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
             QCoreApplication.setAttribute(Qt.ApplicationAttribute.AA_EnableHighDpiScaling, True)
         # Установка значка приложения на панели задач
         # https://stackoverflow.com/a/1552105

@@ -2197,7 +2197,7 @@ color: rgb(0, 0, 0);
              <widget class="QWidget" name="widget_right" native="true">
               <property name="minimumSize">
                <size>
-                <width>260</width>
+                <width>265</width>
                 <height>0</height>
                </size>
               </property>
