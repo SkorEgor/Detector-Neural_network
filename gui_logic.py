@@ -316,7 +316,7 @@ class GuiProgram(CustomDialog):
         self.tableWidget_frequency_absorption.setColumnWidth(2, 30)  # Ширина столбца с чекбоксом
         self.tableWidget_frequency_absorption.resizeColumnsToContents()  # Масштабируем по содержимому
 
-    def frequency_selection(self, sender: GreenRedYellowCheckBox | BlueRedYellowCheckBox, index, source):
+    def frequency_selection(self, sender: GreenRedYellowCheckBox | BlueRedYellowCheckBox, index, source, checked):
         """Клик по чекбоксу в таблице"""
         # Нет точек поглощения - сброс
         point_absorption = self.data.get_point_absorption()

@@ -14,7 +14,7 @@
    <string>Детектирование c использованием нейронной сети</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="res.qrc">
+   <iconset resource="resources.qrc">
     <normaloff>:/application_picture/resource/application_picture/app_icon-round.png</normaloff>:/application_picture/resource/application_picture/app_icon-round.png</iconset>
   </property>
   <property name="styleSheet">
@@ -330,7 +330,7 @@ QTableCornerButton::section {background-color:rgb(33, 37, 43); }</string>
           <number>0</number>
          </property>
          <property name="sizeConstraint">
-          <enum>QLayout::SetDefaultConstraint</enum>
+          <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
          </property>
          <property name="leftMargin">
           <number>0</number>
@@ -407,7 +407,7 @@ border: none;
                <string/>
               </property>
               <property name="pixmap">
-               <pixmap resource="res.qrc">:/application_picture/resource/application_picture/app_icon-round.png</pixmap>
+               <pixmap resource="resources.qrc">:/application_picture/resource/application_picture/app_icon-round.png</pixmap>
               </property>
               <property name="scaledContents">
                <bool>true</bool>
@@ -426,7 +426,6 @@ border: none;
                <font>
                 <family>MS Shell Dlg 2</family>
                 <pointsize>14</pointsize>
-                <weight>50</weight>
                 <italic>false</italic>
                 <bold>false</bold>
                </font>
@@ -438,7 +437,7 @@ border: none;
                <string>Детектор</string>
               </property>
               <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <set>Qt::AlignmentFlag::AlignCenter</set>
               </property>
              </widget>
             </item>
@@ -491,7 +490,7 @@ QCheckBox::indicator:checked {
              <number>0</number>
             </property>
             <property name="sizeConstraint">
-             <enum>QLayout::SetMaximumSize</enum>
+             <enum>QLayout::SizeConstraint::SetMaximumSize</enum>
             </property>
             <property name="leftMargin">
              <number>0</number>
@@ -514,35 +513,35 @@ QCheckBox::indicator:checked {
                <string notr="true"/>
               </property>
               <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
+               <enum>QFrame::Shape::NoFrame</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Sunken</enum>
+               <enum>QFrame::Shadow::Sunken</enum>
               </property>
               <property name="lineWidth">
                <number>1</number>
               </property>
               <property name="verticalScrollBarPolicy">
-               <enum>Qt::ScrollBarAsNeeded</enum>
+               <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
               </property>
               <property name="horizontalScrollBarPolicy">
-               <enum>Qt::ScrollBarAlwaysOff</enum>
+               <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
               </property>
               <property name="sizeAdjustPolicy">
-               <enum>QAbstractScrollArea::AdjustToContents</enum>
+               <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents</enum>
               </property>
               <property name="widgetResizable">
                <bool>true</bool>
               </property>
               <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <set>Qt::AlignmentFlag::AlignCenter</set>
               </property>
               <widget class="QWidget" name="scrollAreaWidgetContents">
                <property name="geometry">
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>232</width>
+                 <width>222</width>
                  <height>496</height>
                 </rect>
                </property>
@@ -554,7 +553,7 @@ QCheckBox::indicator:checked {
                  <number>5</number>
                 </property>
                 <property name="sizeConstraint">
-                 <enum>QLayout::SetDefaultConstraint</enum>
+                 <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
                 </property>
                 <property name="leftMargin">
                  <number>0</number>
@@ -593,7 +592,7 @@ QCheckBox::indicator:checked {
                     <number>0</number>
                    </property>
                    <property name="sizeConstraint">
-                    <enum>QLayout::SetDefaultConstraint</enum>
+                    <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
                    </property>
                    <property name="leftMargin">
                     <number>0</number>
@@ -650,7 +649,10 @@ QCheckBox::indicator:checked {
                         </property>
                         <property name="font">
                          <font>
+                          <family>MS Shell Dlg 2</family>
                           <pointsize>12</pointsize>
+                          <italic>false</italic>
+                          <bold>false</bold>
                          </font>
                         </property>
                         <property name="cursor">
@@ -660,7 +662,7 @@ QCheckBox::indicator:checked {
                          <string/>
                         </property>
                         <property name="layoutDirection">
-                         <enum>Qt::LeftToRight</enum>
+                         <enum>Qt::LayoutDirection::LeftToRight</enum>
                         </property>
                         <property name="autoFillBackground">
                          <bool>false</bool>
@@ -764,8 +766,9 @@ QCheckBox::indicator:checked {
                            </property>
                            <property name="font">
                             <font>
+                             <family>MS Shell Dlg 2</family>
                              <pointsize>10</pointsize>
-                             <weight>50</weight>
+                             <italic>false</italic>
                              <bold>false</bold>
                             </font>
                            </property>
@@ -776,7 +779,7 @@ QCheckBox::indicator:checked {
                             <string>Нет файла</string>
                            </property>
                            <property name="textFormat">
-                            <enum>Qt::AutoText</enum>
+                            <enum>Qt::TextFormat::AutoText</enum>
                            </property>
                            <property name="scaledContents">
                             <bool>false</bool>
@@ -919,7 +922,7 @@ QCheckBox::indicator:checked {
                     <number>0</number>
                    </property>
                    <property name="sizeConstraint">
-                    <enum>QLayout::SetDefaultConstraint</enum>
+                    <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
                    </property>
                    <property name="leftMargin">
                     <number>0</number>
@@ -976,7 +979,10 @@ QCheckBox::indicator:checked {
                         </property>
                         <property name="font">
                          <font>
+                          <family>MS Shell Dlg 2</family>
                           <pointsize>12</pointsize>
+                          <italic>false</italic>
+                          <bold>false</bold>
                          </font>
                         </property>
                         <property name="cursor">
@@ -986,7 +992,7 @@ QCheckBox::indicator:checked {
                          <string/>
                         </property>
                         <property name="layoutDirection">
-                         <enum>Qt::LeftToRight</enum>
+                         <enum>Qt::LayoutDirection::LeftToRight</enum>
                         </property>
                         <property name="autoFillBackground">
                          <bool>false</bool>
@@ -1077,7 +1083,6 @@ QCheckBox::indicator:checked {
                          <font>
                           <family>MS Shell Dlg 2</family>
                           <pointsize>10</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -1098,7 +1103,7 @@ QCheckBox::indicator:checked {
                          <string>Без исследуемого вещества</string>
                         </property>
                         <property name="alignment">
-                         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                         </property>
                         <property name="flat">
                          <bool>true</bool>
@@ -1144,8 +1149,9 @@ QCheckBox::indicator:checked {
                            </property>
                            <property name="font">
                             <font>
+                             <family>MS Shell Dlg 2</family>
                              <pointsize>10</pointsize>
-                             <weight>50</weight>
+                             <italic>false</italic>
                              <bold>false</bold>
                             </font>
                            </property>
@@ -1156,7 +1162,7 @@ QCheckBox::indicator:checked {
                             <string>Нет файла</string>
                            </property>
                            <property name="textFormat">
-                            <enum>Qt::AutoText</enum>
+                            <enum>Qt::TextFormat::AutoText</enum>
                            </property>
                            <property name="scaledContents">
                             <bool>false</bool>
@@ -1282,7 +1288,6 @@ QCheckBox::indicator:checked {
                          <font>
                           <family>MS Shell Dlg 2</family>
                           <pointsize>10</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -1303,7 +1308,7 @@ QCheckBox::indicator:checked {
                          <string>С исследуемым веществом</string>
                         </property>
                         <property name="alignment">
-                         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                         </property>
                         <property name="flat">
                          <bool>true</bool>
@@ -1349,8 +1354,9 @@ QCheckBox::indicator:checked {
                            </property>
                            <property name="font">
                             <font>
+                             <family>MS Shell Dlg 2</family>
                              <pointsize>10</pointsize>
-                             <weight>50</weight>
+                             <italic>false</italic>
                              <bold>false</bold>
                             </font>
                            </property>
@@ -1361,7 +1367,7 @@ QCheckBox::indicator:checked {
                             <string>Нет файла</string>
                            </property>
                            <property name="textFormat">
-                            <enum>Qt::AutoText</enum>
+                            <enum>Qt::TextFormat::AutoText</enum>
                            </property>
                            <property name="scaledContents">
                             <bool>false</bool>
@@ -1445,7 +1451,7 @@ QCheckBox::indicator:checked {
                         </layout>
                        </widget>
                       </item>
-                      <item alignment="Qt::AlignHCenter">
+                      <item alignment="Qt::AlignmentFlag::AlignHCenter">
                        <widget class="QPushButton" name="pushButton_reset_spectrum_data">
                         <property name="minimumSize">
                          <size>
@@ -1463,7 +1469,6 @@ QCheckBox::indicator:checked {
                          <font>
                           <family>MS Shell Dlg 2</family>
                           <pointsize>12</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -1508,7 +1513,6 @@ QCheckBox::indicator:checked {
                          <font>
                           <family>MS Shell Dlg 2</family>
                           <pointsize>10</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -1529,7 +1533,7 @@ QCheckBox::indicator:checked {
                          <string>Диапазон частот</string>
                         </property>
                         <property name="alignment">
-                         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                         </property>
                         <property name="flat">
                          <bool>true</bool>
@@ -1563,8 +1567,9 @@ QCheckBox::indicator:checked {
                            </property>
                            <property name="font">
                             <font>
+                             <family>MS Shell Dlg 2</family>
                              <pointsize>10</pointsize>
-                             <weight>50</weight>
+                             <italic>false</italic>
                              <bold>false</bold>
                             </font>
                            </property>
@@ -1592,8 +1597,9 @@ QCheckBox::indicator:checked {
                            </property>
                            <property name="font">
                             <font>
+                             <family>MS Shell Dlg 2</family>
                              <pointsize>10</pointsize>
-                             <weight>50</weight>
+                             <italic>false</italic>
                              <bold>false</bold>
                             </font>
                            </property>
@@ -1633,7 +1639,7 @@ QCheckBox::indicator:checked {
                              <number>0</number>
                             </property>
                             <property name="sizeConstraint">
-                             <enum>QLayout::SetDefaultConstraint</enum>
+                             <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
                             </property>
                             <property name="leftMargin">
                              <number>0</number>
@@ -1663,8 +1669,9 @@ QCheckBox::indicator:checked {
                               </property>
                               <property name="font">
                                <font>
+                                <family>MS Shell Dlg 2</family>
                                 <pointsize>10</pointsize>
-                                <weight>50</weight>
+                                <italic>false</italic>
                                 <bold>false</bold>
                                </font>
                               </property>
@@ -1698,8 +1705,9 @@ QCheckBox::indicator:checked {
                               </property>
                               <property name="font">
                                <font>
+                                <family>MS Shell Dlg 2</family>
                                 <pointsize>10</pointsize>
-                                <weight>50</weight>
+                                <italic>false</italic>
                                 <bold>false</bold>
                                </font>
                               </property>
@@ -1713,7 +1721,7 @@ QCheckBox::indicator:checked {
                                <number>10</number>
                               </property>
                               <property name="alignment">
-                               <set>Qt::AlignCenter</set>
+                               <set>Qt::AlignmentFlag::AlignCenter</set>
                               </property>
                               <property name="dragEnabled">
                                <bool>false</bool>
@@ -1736,8 +1744,9 @@ QCheckBox::indicator:checked {
                               </property>
                               <property name="font">
                                <font>
+                                <family>MS Shell Dlg 2</family>
                                 <pointsize>10</pointsize>
-                                <weight>50</weight>
+                                <italic>false</italic>
                                 <bold>false</bold>
                                </font>
                               </property>
@@ -1745,7 +1754,7 @@ QCheckBox::indicator:checked {
                                <string> [МГц]</string>
                               </property>
                               <property name="alignment">
-                               <set>Qt::AlignCenter</set>
+                               <set>Qt::AlignmentFlag::AlignCenter</set>
                               </property>
                              </widget>
                             </item>
@@ -1774,7 +1783,7 @@ QCheckBox::indicator:checked {
                              <number>0</number>
                             </property>
                             <property name="sizeConstraint">
-                             <enum>QLayout::SetDefaultConstraint</enum>
+                             <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
                             </property>
                             <property name="leftMargin">
                              <number>0</number>
@@ -1804,8 +1813,9 @@ QCheckBox::indicator:checked {
                               </property>
                               <property name="font">
                                <font>
+                                <family>MS Shell Dlg 2</family>
                                 <pointsize>10</pointsize>
-                                <weight>50</weight>
+                                <italic>false</italic>
                                 <bold>false</bold>
                                </font>
                               </property>
@@ -1842,8 +1852,9 @@ QCheckBox::indicator:checked {
                               </property>
                               <property name="font">
                                <font>
+                                <family>MS Shell Dlg 2</family>
                                 <pointsize>10</pointsize>
-                                <weight>50</weight>
+                                <italic>false</italic>
                                 <bold>false</bold>
                                </font>
                               </property>
@@ -1857,7 +1868,7 @@ QCheckBox::indicator:checked {
                                <number>10</number>
                               </property>
                               <property name="alignment">
-                               <set>Qt::AlignCenter</set>
+                               <set>Qt::AlignmentFlag::AlignCenter</set>
                               </property>
                               <property name="dragEnabled">
                                <bool>false</bool>
@@ -1880,8 +1891,9 @@ QCheckBox::indicator:checked {
                               </property>
                               <property name="font">
                                <font>
+                                <family>MS Shell Dlg 2</family>
                                 <pointsize>10</pointsize>
-                                <weight>50</weight>
+                                <italic>false</italic>
                                 <bold>false</bold>
                                </font>
                               </property>
@@ -1892,7 +1904,7 @@ QCheckBox::indicator:checked {
                                <string> [МГц]</string>
                               </property>
                               <property name="alignment">
-                               <set>Qt::AlignCenter</set>
+                               <set>Qt::AlignmentFlag::AlignCenter</set>
                               </property>
                              </widget>
                             </item>
@@ -1911,7 +1923,7 @@ QCheckBox::indicator:checked {
                 <item>
                  <spacer name="verticalSpacer_menu">
                   <property name="orientation">
-                   <enum>Qt::Vertical</enum>
+                   <enum>Qt::Orientation::Vertical</enum>
                   </property>
                   <property name="sizeHint" stdset="0">
                    <size>
@@ -1980,7 +1992,10 @@ QCheckBox::indicator:checked {
               </property>
               <property name="font">
                <font>
+                <family>MS Shell Dlg 2</family>
                 <pointsize>12</pointsize>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
               </property>
               <property name="cursor">
@@ -1990,7 +2005,7 @@ QCheckBox::indicator:checked {
                <string/>
               </property>
               <property name="layoutDirection">
-               <enum>Qt::LeftToRight</enum>
+               <enum>Qt::LayoutDirection::LeftToRight</enum>
               </property>
               <property name="autoFillBackground">
                <bool>false</bool>
@@ -2049,7 +2064,10 @@ QCheckBox::indicator:checked {
               </property>
               <property name="font">
                <font>
+                <family>MS Shell Dlg 2</family>
                 <pointsize>12</pointsize>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
               </property>
               <property name="cursor">
@@ -2059,7 +2077,7 @@ QCheckBox::indicator:checked {
                <string/>
               </property>
               <property name="layoutDirection">
-               <enum>Qt::LeftToRight</enum>
+               <enum>Qt::LayoutDirection::LeftToRight</enum>
               </property>
               <property name="autoFillBackground">
                <bool>false</bool>
@@ -2300,7 +2318,7 @@ selection-background-color: rgb(191, 191, 191);
                         <string/>
                        </property>
                        <property name="insertPolicy">
-                        <enum>QComboBox::InsertAtBottom</enum>
+                        <enum>QComboBox::InsertPolicy::InsertAtBottom</enum>
                        </property>
                        <property name="iconSize">
                         <size>
@@ -2313,7 +2331,7 @@ selection-background-color: rgb(191, 191, 191);
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset resource="res.qrc">
+                         <iconset resource="resources.qrc">
                           <normaloff>:/multi_check_box/resource/multi_check_box_svg/all_24dp.svg</normaloff>:/multi_check_box/resource/multi_check_box_svg/all_24dp.svg</iconset>
                         </property>
                        </item>
@@ -2322,7 +2340,7 @@ selection-background-color: rgb(191, 191, 191);
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset resource="res.qrc">
+                         <iconset resource="resources.qrc">
                           <normaloff>:/multi_check_box/resource/multi_check_box_svg/undefined_24dp.svg</normaloff>:/multi_check_box/resource/multi_check_box_svg/undefined_24dp.svg</iconset>
                         </property>
                        </item>
@@ -2331,7 +2349,7 @@ selection-background-color: rgb(191, 191, 191);
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset resource="res.qrc">
+                         <iconset resource="resources.qrc">
                           <normaloff>:/multi_check_box/resource/multi_check_box_svg/no_24dp.svg</normaloff>:/multi_check_box/resource/multi_check_box_svg/no_24dp.svg</iconset>
                         </property>
                        </item>
@@ -2340,7 +2358,7 @@ selection-background-color: rgb(191, 191, 191);
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset resource="res.qrc">
+                         <iconset resource="resources.qrc">
                           <normaloff>:/multi_check_box/resource/multi_check_box_svg/yes_green_24dp.svg</normaloff>:/multi_check_box/resource/multi_check_box_svg/yes_green_24dp.svg</iconset>
                         </property>
                        </item>
@@ -2349,7 +2367,7 @@ selection-background-color: rgb(191, 191, 191);
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset resource="res.qrc">
+                         <iconset resource="resources.qrc">
                           <normaloff>:/multi_check_box/resource/multi_check_box_svg/yes_blue_24dp.svg</normaloff>:/multi_check_box/resource/multi_check_box_svg/yes_blue_24dp.svg</iconset>
                         </property>
                        </item>
@@ -2370,16 +2388,16 @@ selection-background-color: rgb(191, 191, 191);
                      <string notr="true"/>
                     </property>
                     <property name="frameShape">
-                     <enum>QFrame::NoFrame</enum>
+                     <enum>QFrame::Shape::NoFrame</enum>
                     </property>
                     <property name="horizontalScrollBarPolicy">
-                     <enum>Qt::ScrollBarAlwaysOff</enum>
+                     <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
                     </property>
                     <property name="sizeAdjustPolicy">
-                     <enum>QAbstractScrollArea::AdjustToContents</enum>
+                     <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents</enum>
                     </property>
                     <property name="editTriggers">
-                     <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::EditKeyPressed</set>
+                     <set>QAbstractItemView::EditTrigger::AnyKeyPressed|QAbstractItemView::EditTrigger::EditKeyPressed</set>
                     </property>
                     <property name="tabKeyNavigation">
                      <bool>false</bool>
@@ -2391,10 +2409,10 @@ selection-background-color: rgb(191, 191, 191);
                      <bool>false</bool>
                     </property>
                     <property name="selectionMode">
-                     <enum>QAbstractItemView::SingleSelection</enum>
+                     <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
                     </property>
                     <property name="selectionBehavior">
-                     <enum>QAbstractItemView::SelectRows</enum>
+                     <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
                     </property>
                     <property name="iconSize">
                      <size>
@@ -2447,7 +2465,7 @@ selection-background-color: rgb(191, 191, 191);
                       <number>0</number>
                      </property>
                      <property name="sizeConstraint">
-                      <enum>QLayout::SetDefaultConstraint</enum>
+                      <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
                      </property>
                      <property name="leftMargin">
                       <number>0</number>
@@ -2513,7 +2531,6 @@ selection-background-color: rgb(191, 191, 191);
                         <font>
                          <family>MS Shell Dlg 2</family>
                          <pointsize>10</pointsize>
-                         <weight>50</weight>
                          <italic>false</italic>
                          <bold>false</bold>
                         </font>
@@ -2534,7 +2551,7 @@ selection-background-color: rgb(191, 191, 191);
                         <string>Окно просмотра</string>
                        </property>
                        <property name="alignment">
-                        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                        <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                        </property>
                        <property name="flat">
                         <bool>true</bool>
@@ -2565,7 +2582,7 @@ selection-background-color: rgb(191, 191, 191);
  найденных частот</string>
                           </property>
                           <property name="alignment">
-                           <set>Qt::AlignCenter</set>
+                           <set>Qt::AlignmentFlag::AlignCenter</set>
                           </property>
                          </widget>
                         </item>
@@ -2591,7 +2608,7 @@ selection-background-color: rgb(191, 191, 191);
                             <number>0</number>
                            </property>
                            <property name="sizeConstraint">
-                            <enum>QLayout::SetDefaultConstraint</enum>
+                            <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
                            </property>
                            <property name="leftMargin">
                             <number>0</number>
@@ -2638,7 +2655,7 @@ selection-background-color: rgb(191, 191, 191);
                               <number>10</number>
                              </property>
                              <property name="alignment">
-                              <set>Qt::AlignCenter</set>
+                              <set>Qt::AlignmentFlag::AlignCenter</set>
                              </property>
                              <property name="dragEnabled">
                               <bool>false</bool>
@@ -2666,7 +2683,7 @@ selection-background-color: rgb(191, 191, 191);
                               <string> [МГц]</string>
                              </property>
                              <property name="alignment">
-                              <set>Qt::AlignCenter</set>
+                              <set>Qt::AlignmentFlag::AlignCenter</set>
                              </property>
                             </widget>
                            </item>
@@ -2698,7 +2715,10 @@ selection-background-color: rgb(191, 191, 191);
                        </property>
                        <property name="font">
                         <font>
+                         <family>MS Shell Dlg 2</family>
                          <pointsize>12</pointsize>
+                         <italic>false</italic>
+                         <bold>false</bold>
                         </font>
                        </property>
                        <property name="cursor">
@@ -2708,7 +2728,7 @@ selection-background-color: rgb(191, 191, 191);
                         <string/>
                        </property>
                        <property name="layoutDirection">
-                        <enum>Qt::LeftToRight</enum>
+                        <enum>Qt::LayoutDirection::LeftToRight</enum>
                        </property>
                        <property name="autoFillBackground">
                         <bool>false</bool>
@@ -2766,7 +2786,7 @@ selection-background-color: rgb(191, 191, 191);
   </layout>
  </widget>
  <resources>
-  <include location="res.qrc"/>
+  <include location="resources.qrc"/>
  </resources>
  <connections>
   <connection>

@@ -19,7 +19,7 @@ exclude = [
     "tools",
     "tests",
     "res.qrc",
-    "res_rc.py",
+    "res.py",
     "gui.py",
     "gui.ui",
 ]

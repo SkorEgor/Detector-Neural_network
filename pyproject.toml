@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "detector-neural-network"
 version = "1.0.0"
@@ -14,12 +18,11 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-PyQt6 = [
-    "PyQt6",
-]
-PySide6 = [
-    "PySide6-Essentials",
-]
-PyQt5 = [
-    "PyQt5",
-]
+PySide6 = ["PySide6-Essentials"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+exclude = ["resource", "data"]
+
+[tool.setuptools.package-data]
+"color_theme" = ["*.qss"]
