@@ -1,3 +1,5 @@
+import os
+
 from app_exception import AppException
 
 
@@ -8,11 +10,13 @@ class ColorTheme:
     dark_style_sheet: str
 
     def __init__(
-        self, light_file: str = "color_theme/light_style_sheet.qss", dark_file: str = "color_theme/dark_style_sheet.qss"
+            self, light_file: str = "light_style_sheet.qss", dark_file: str = "dark_style_sheet.qss"
     ):
         """Инициализация с указанием путей к файлам стилей"""
-        self.light_style_sheet = self._load_styles(light_file)
-        self.dark_style_sheet = self._load_styles(dark_file)
+        # Получение пути к директории данного модуля (theme.py)
+        base_path = os.path.dirname(__file__)
+        self.light_style_sheet = self._load_styles(os.path.join(base_path, light_file))
+        self.dark_style_sheet = self._load_styles(os.path.join(base_path, dark_file))
 
     @staticmethod
     def _load_styles(file_path: str) -> str:

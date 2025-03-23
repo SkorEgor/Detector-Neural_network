@@ -18,8 +18,8 @@ exclude = [
     "venv",
     "tools",
     "tests",
-    "res.qrc",
-    "res_rc.py",
+    "resources.qrc",
+    "resources_rc.py",
     "gui.py",
     "gui.ui",
 ]

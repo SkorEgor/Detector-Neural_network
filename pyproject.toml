@@ -6,20 +6,17 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "joblib",
-    "numpy",
+    "numpy>=1.26.0,<2.1.0",
     "pandas",
     "pyqtgraph",
     "scipy",
     "scikit-learn",
-]
-
-[project.optional-dependencies]
-PyQt6 = [
-    "PyQt6",
-]
-PySide6 = [
     "PySide6-Essentials",
 ]
-PyQt5 = [
-    "PyQt5",
-]
+
+[project.scripts]
+detect = "main:main"
+
+[tool.setuptools]
+package-dir = { "" = "." }
+package-data = {"*" = ["*.py", "*.qss", "*.qrc", "*.svg", "*.png"], "color_theme" = ["*.qss", "*.py"], "resource" = ["*.svg", "*.png"]}
