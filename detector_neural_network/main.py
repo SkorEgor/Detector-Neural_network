@@ -5,9 +5,9 @@ from functools import partial
 
 from PySide6.QtWidgets import QApplication, QMessageBox
 
-import resources_rc  # noqa: F401
-from app_exception import AppException
-from gui_logic import GuiProgram
+from detector_neural_network import resources_rc    # noqa: F401
+from detector_neural_network.app_exception import AppException
+from detector_neural_network.gui_logic import GuiProgram
 
 
 def handle_exception(app, exc_type, exc_value, exc_traceback):

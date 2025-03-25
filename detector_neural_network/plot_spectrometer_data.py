@@ -14,7 +14,7 @@ from pyqtgraph.Qt.QtWidgets import (
     QWidget,
 )
 
-from data_and_processing import DataAndProcessing
+from detector_neural_network.data_and_processing import DataAndProcessing
 
 
 def clearer_layout(layout):

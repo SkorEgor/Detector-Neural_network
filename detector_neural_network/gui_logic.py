@@ -5,12 +5,12 @@ from joblib import load
 from pyqtgraph.Qt.QtCore import QSettings
 from pyqtgraph.Qt.QtWidgets import QFileDialog, QTableWidgetItem
 
-import setting
-from app_exception import AppException
-from custom_dialog import CustomDialog
-from multi_check_box import BlueRedYellowCheckBox, GreenRedYellowCheckBox
-from parser import parser, parser_all_data
-from plot_spectrometer_data import (
+from detector_neural_network import setting
+from detector_neural_network.app_exception import AppException
+from detector_neural_network.custom_dialog import CustomDialog
+from detector_neural_network.multi_check_box import BlueRedYellowCheckBox, GreenRedYellowCheckBox
+from detector_neural_network.parser import parser, parser_all_data
+from detector_neural_network.plot_spectrometer_data import (
     SpectrometerPlotAndLegendWidget,
     SpectrometerPlotWidget,
 )

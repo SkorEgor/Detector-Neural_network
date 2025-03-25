@@ -1,4 +1,4 @@
-from app_exception import AppException
+from detector_neural_network.app_exception import AppException
 
 CALL_EXCEPTION_DEFAULT = True
 

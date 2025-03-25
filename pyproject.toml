@@ -15,8 +15,12 @@ dependencies = [
 ]
 
 [project.scripts]
-detect = "main:main"
+run-detector = "detector_neural_network.main:main"
 
-[tool.setuptools]
-package-dir = { "" = "." }
-package-data = {"*" = ["*.py", "*.qss", "*.qrc", "*.svg", "*.png"], "color_theme" = ["*.qss", "*.py"], "resource" = ["*.svg", "*.png"]}
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.package-data]
+"detector_neural_network" = ["*"]
+"detector_neural_network.color_theme" = ["*"]

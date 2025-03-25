@@ -21,7 +21,6 @@ from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplicat
     QLineEdit, QPushButton, QRadioButton, QScrollArea,
     QSizePolicy, QSpacerItem, QTableWidget, QTableWidgetItem,
     QVBoxLayout, QWidget)
-import resources_rc
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):

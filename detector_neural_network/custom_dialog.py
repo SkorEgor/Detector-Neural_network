@@ -2,11 +2,11 @@ import os
 from pyqtgraph.Qt.QtWidgets import QDialog
 from pyqtgraph.Qt.QtCore import Qt
 
-from app_exception import AppException
-from color_theme.theme import color_theme
-from data_and_processing import DataAndProcessing
-from gui import Ui_Dialog
-from ui_validators import get_float_and_positive
+from detector_neural_network.gui import Ui_Dialog
+from detector_neural_network.app_exception import AppException
+from detector_neural_network.color_theme.theme import color_theme
+from detector_neural_network.data_and_processing import DataAndProcessing
+from detector_neural_network.ui_validators import get_float_and_positive
 
 
 class CustomDialog(QDialog, Ui_Dialog):
