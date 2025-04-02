@@ -76,11 +76,11 @@ class GreenRedYellowCheckBox(BaseMultiCheckBox):
         allow_none: bool = True,
     ):
         super().__init__(initial_state, icon_size, allow_none)  # Сначала вызываем базовый конструктор
-        # определяем icon_status
+        # определяем иконки разных статусов, через ресурсы приложения
         self.icon_status = {
-            False: load_svg_icon("resource/multi_check_box_svg/no_24dp.svg", icon_size),
-            None: load_svg_icon("resource/multi_check_box_svg/undefined_24dp.svg", icon_size),
-            True: load_svg_icon("resource/multi_check_box_svg/yes_green_24dp.svg", icon_size),
+            False: load_svg_icon(":/multi_check_box/resource/multi_check_box_svg/no_24dp.svg", icon_size),
+            None: load_svg_icon(":/multi_check_box/resource/multi_check_box_svg/undefined_24dp.svg", icon_size),
+            True: load_svg_icon(":/multi_check_box/resource/multi_check_box_svg/yes_green_24dp.svg", icon_size),
         }
         self.set_initial_pixmap()
 
@@ -93,11 +93,11 @@ class BlueRedYellowCheckBox(BaseMultiCheckBox):
         allow_none: bool = True,
     ):
         super().__init__(initial_state, icon_size, allow_none)  # Сначала вызываем базовый конструктор
-        # определяем icon_status
+        # определяем иконки разных статусов, через ресурсы приложения
         self.icon_status = {
-            False: load_svg_icon("resource/multi_check_box_svg/no_24dp.svg", icon_size),
-            None: load_svg_icon("resource/multi_check_box_svg/undefined_24dp.svg", icon_size),
-            True: load_svg_icon("resource/multi_check_box_svg/yes_blue_24dp.svg", icon_size),
+            False: load_svg_icon(":/multi_check_box/resource/multi_check_box_svg/no_24dp.svg", icon_size),
+            None: load_svg_icon(":/multi_check_box/resource/multi_check_box_svg/undefined_24dp.svg", icon_size),
+            True: load_svg_icon(":/multi_check_box/resource/multi_check_box_svg/yes_blue_24dp.svg", icon_size),
         }
         self.set_initial_pixmap()
 
