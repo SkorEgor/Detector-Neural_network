@@ -1,5 +1,6 @@
 import sys
 import ctypes
+import platform
 import traceback
 from functools import partial
 
@@ -22,9 +23,10 @@ def handle_exception(app, exc_type, exc_value, exc_traceback):
 
 
 def main():
-    # Установка ID приложения для Windows
-    my_app_id = "company.my-product.subproject.version"
-    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(my_app_id)
+    # Установка ID приложения только для Windows
+    if platform.system() == "Windows":
+        my_app_id = "company.my-product.subproject.version"
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(my_app_id)
     # Инициализация приложения
     app = QApplication(sys.argv)
     # Установка обработчика исключений ДО запуска диалога
