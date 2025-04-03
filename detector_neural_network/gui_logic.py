@@ -11,8 +11,10 @@ from detector_neural_network.custom_dialog import CustomDialog
 from detector_neural_network.multi_check_box import BlueRedYellowCheckBox, GreenRedYellowCheckBox
 from detector_neural_network.parser import parser, parser_all_data
 from detector_neural_network.plot_spectrometer_data import (
-    SpectrometerPlotAndLegendWidget,
-    SpectrometerPlotWidget,
+    SpectrometerPlotAndLegendWidget, SpectrometerPlotWidget
+)
+from detector_neural_network.setting import (
+    DEFAULT_FILE_PATH_WITHOUT_SUBSTANCE, DEFAULT_FILE_PATH_WITH_SUBSTANCE, DEFAULT_FILE_PATH_NEURAL_NETWORK
 )
 
 settings = QSettings(setting.ORGANIZATION, setting.APPLICATION)
@@ -73,7 +75,7 @@ class GuiProgram(CustomDialog):
             self.file_name_neural_network = setting.DEFAULT_FILE_PATH_NEURAL_NETWORK
         else:
             # - Загружаем последнюю успешную директорию, если она есть, иначе используем текущую (".")
-            last_dir = settings.value("last_neural_network_dir", ".", type=str)
+            last_dir = settings.value("last_neural_network_dir", DEFAULT_FILE_PATH_NEURAL_NETWORK, type=str)
             self.file_name_neural_network, _ = QFileDialog.getOpenFileName(
                 self,
                 """Выбрать файл "Нейронной сети" """,
@@ -100,7 +102,7 @@ class GuiProgram(CustomDialog):
                 self.file_name_without_substance = setting.DEFAULT_FILE_PATH_WITHOUT_SUBSTANCE
             else:
                 # - Загружаем последнюю успешную директорию, если она есть, иначе используем текущую (".")
-                last_dir = settings.value("last_without_substance_dir", ".", type=str)
+                last_dir = settings.value("last_without_substance_dir", DEFAULT_FILE_PATH_WITHOUT_SUBSTANCE, type=str)
                 self.file_name_without_substance, _ = QFileDialog.getOpenFileName(
                     self,
                     "Выбрать файл 'Данные без вещества'",
@@ -141,7 +143,7 @@ class GuiProgram(CustomDialog):
                 self.file_name_with_substance = setting.DEFAULT_FILE_PATH_WITH_SUBSTANCE
             else:
                 # - Загружаем последнюю успешную директорию, если она есть, иначе используем текущую (".")
-                last_dir = settings.value("last_with_substance_dir", ".", type=str)
+                last_dir = settings.value("last_with_substance_dir", DEFAULT_FILE_PATH_WITH_SUBSTANCE, type=str)
                 self.file_name_with_substance, _ = QFileDialog.getOpenFileName(
                     self,
                     "Выбрать файл 'Данные c веществом'",
