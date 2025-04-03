@@ -1,0 +1,9 @@
+joblib
+numpy
+pandas
+pyqtgraph
+scipy
+scikit-learn
+PySide6-Essentials
+setuptools
+python-dotenv

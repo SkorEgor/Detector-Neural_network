@@ -13,7 +13,7 @@ dependencies = [
     "scikit-learn",
     "PySide6-Essentials",
     "setuptools",
-    "python-dotenv"
+    "python-dotenv",
 ]
 
 [project.scripts]
