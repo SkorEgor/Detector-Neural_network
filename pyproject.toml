@@ -6,12 +6,14 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "joblib",
-    "numpy>=1.26.0,<2.1.0",
+    "numpy",
     "pandas",
     "pyqtgraph",
     "scipy",
     "scikit-learn",
     "PySide6-Essentials",
+    "setuptools",
+    "python-dotenv"
 ]
 
 [project.scripts]

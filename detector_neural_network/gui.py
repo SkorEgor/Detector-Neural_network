@@ -182,6 +182,7 @@ class Ui_Dialog(object):
                         "rder: none;												/* \u0431\u0435\u0437 \u0433\u0440\u0430\u043d\u0438\u0446 */\n"
 "}\n"
 "\n"
+"\n"
 "/*\u041d\u0435\u0439\u0440\u043e\u043d\u043d\u0430\u044f \u0441\u0435\u0442\u044c*/\n"
 "#pushButton_neural_network_heade{\n"
 "	image: url(:/general_black_ui/resource/general_black_ui/network_24dp_white.svg);\n"
@@ -195,8 +196,8 @@ class Ui_Dialog(object):
 "\n"
 "/*\u0414\u0430\u043d\u043d\u044b\u0435*/\n"
 "#pushButton_data_header {\n"
-"	image: url(:/general_b"
-                        "lack_ui/resource/general_black_ui/data_24dp_white.svg);\n"
+"	image: url(:/gene"
+                        "ral_black_ui/resource/general_black_ui/data_24dp_white.svg);\n"
 "    image-position: left center;\n"
 "    padding-top: 2px; /* \u041e\u0442\u0441\u0442\u0443\u043f \u0441\u0432\u0435\u0440\u0445\u0443 */\n"
 "    padding-bottom: 2px; /* \u041e\u0442\u0441\u0442\u0443\u043f \u0441\u043d\u0438\u0437\u0443 */\n"
@@ -210,8 +211,8 @@ class Ui_Dialog(object):
 "#radioButton_selected_range {\n"
 "	image: url(:/general_black_ui/resource/general_black_ui/cycle1_24dp_white.svg);\n"
 "    image-position: right center;\n"
-"	padding-top: 3px; /* \u041e\u0442"
-                        "\u0441\u0442\u0443\u043f \u0441\u0432\u0435\u0440\u0445\u0443 */\n"
+"	padding-top: 3px; /* \u041e"
+                        "\u0442\u0441\u0442\u0443\u043f \u0441\u0432\u0435\u0440\u0445\u0443 */\n"
 "    padding-bottom: 3px; /* \u041e\u0442\u0441\u0442\u0443\u043f \u0441\u043d\u0438\u0437\u0443 */\n"
 "    padding-right: 4px; /* \u041e\u0442\u0441\u0442\u0443\u043f \u0441\u043f\u0440\u0430\u0432\u0430 \u0434\u043b\u044f \u0441\u0438\u043c\u043c\u0435\u0442\u0440\u0438\u0438 */\n"
 "} \n"
@@ -224,8 +225,8 @@ class Ui_Dialog(object):
 "}\n"
 "\n"
 "#pushButton_close_open_table {\n"
-"	image: url(:/general_black_ui/resource/general_black_ui/tab"
-                        "le_24dp_white.svg);\n"
+"	image: url(:/general_black_ui/resource/general_black_"
+                        "ui/table_24dp_white.svg);\n"
 "    image-position: left center;\n"
 "	padding-top: 2px; /* \u041e\u0442\u0441\u0442\u0443\u043f \u0441\u0432\u0435\u0440\u0445\u0443 */\n"
 "    padding-bottom: 2px; /* \u041e\u0442\u0441\u0442\u0443\u043f \u0441\u043d\u0438\u0437\u0443 */\n"
@@ -240,8 +241,8 @@ class Ui_Dialog(object):
 "    padding-left: 4px; /* \u041e\u0442\u0441\u0442\u0443\u043f \u0441\u043b\u0435\u0432\u0430 \u0434\u043b\u044f \u0441\u0438\u043c\u043c\u0435\u0442\u0440\u0438\u0438 */\n"
 "}\n"
 "\n"
-"#pushButton_save_table_to_"
-                        "file{\n"
+"#pushButton_save_tab"
+                        "le_to_file{\n"
 "	image: url(:/general_black_ui/resource/general_black_ui/save_24dp_white.svg);\n"
 "    image-position: left center;\n"
 "	padding-top: 2px; /* \u041e\u0442\u0441\u0442\u0443\u043f \u0441\u0432\u0435\u0440\u0445\u0443 */\n"
@@ -253,8 +254,8 @@ class Ui_Dialog(object):
 "QLineEdit */\n"
 "/* \u0421\u0442\u0438\u043b\u044c \u043f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e */\n"
 "QLineEdit:enabled{\n"
-"	background-color:rgb(44, 49, 58); /* \u0423\u0441\u0442\u0430\u043d\u0430\u0432\u043b\u0438\u0432\u0430\u0435\u043c \u0446\u0432\u0435\u0442 \u0437"
-                        "\u0430\u043b\u0438\u0432\u043a\u0438 */\n"
+"	background-color:rgb(44, 49, 58); /* \u0423\u0441\u0442\u0430\u043d\u0430\u0432\u043b\u0438\u0432\u0430\u0435\u043c \u0446\u0432\u0435\u0442"
+                        " \u0437\u0430\u043b\u0438\u0432\u043a\u0438 */\n"
 "	border: 1px solid rgb(255, 255, 255); \n"
 "}\n"
 "\n"
@@ -271,8 +272,8 @@ class Ui_Dialog(object):
 "	color:rgb(255, 255, 255);	/* \u0437\u0430\u0434\u0430\u0435\u0442 \u0446\u0432\u0435\u0442 \u0448\u0440\u0438\u0444\u0442\u0430 */\n"
 "}\n"
 "/* ///////////////////////////////////////////////////////////////////////////////////////////////// */\n"
-"/* ///////////"
-                        "//////////////////////////////////////////////////////////////////////////////////////\n"
+"/* ////"
+                        "/////////////////////////////////////////////////////////////////////////////////////////////\n"
 "QTableWidget */\n"
 "\n"
 "QTableWidget {	\n"
@@ -617,6 +618,7 @@ class Ui_Dialog(object):
 
         self.pushButton_reading_file_no_gas = QPushButton(self.groupBox_no_gas)
         self.pushButton_reading_file_no_gas.setObjectName(u"pushButton_reading_file_no_gas")
+        self.pushButton_reading_file_no_gas.setEnabled(True)
         sizePolicy3.setHeightForWidth(self.pushButton_reading_file_no_gas.sizePolicy().hasHeightForWidth())
         self.pushButton_reading_file_no_gas.setSizePolicy(sizePolicy3)
         self.pushButton_reading_file_no_gas.setMinimumSize(QSize(30, 30))
@@ -629,7 +631,7 @@ class Ui_Dialog(object):
 
         self.checkBox_download_no_gas = QCheckBox(self.groupBox_no_gas)
         self.checkBox_download_no_gas.setObjectName(u"checkBox_download_no_gas")
-        self.checkBox_download_no_gas.setEnabled(False)
+        self.checkBox_download_no_gas.setEnabled(True)
         sizePolicy3.setHeightForWidth(self.checkBox_download_no_gas.sizePolicy().hasHeightForWidth())
         self.checkBox_download_no_gas.setSizePolicy(sizePolicy3)
         self.checkBox_download_no_gas.setMinimumSize(QSize(0, 30))
@@ -1204,6 +1206,7 @@ class Ui_Dialog(object):
         self.radioButton_selected_range.toggled.connect(self.lineEdit_end_range.setEnabled)
         self.pushButton_close_open_table.clicked["bool"].connect(self.widget_right.setVisible)
         self.pushButton_neural_network_heade.toggled.connect(self.widget_neural_network_body.setVisible)
+        self.checkBox_download_with_gas.toggled.connect(self.pushButton_reading_file_no_gas.setVisible)
 
         self.pushButton_neural_network_heade.setDefault(False)
         self.pushButton_data_header.setDefault(False)

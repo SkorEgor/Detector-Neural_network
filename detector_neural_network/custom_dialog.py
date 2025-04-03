@@ -25,6 +25,8 @@ class CustomDialog(QDialog, Ui_Dialog):
             | Qt.WindowType.WindowMaximizeButtonHint  # Кнопка развернуть
             | Qt.WindowType.WindowMinimizeButtonHint  # Кнопка свернуть
         )
+        # - Кнопка загрузки файла без вещества скрыта в начале
+        self.pushButton_reading_file_no_gas.setVisible(False)
 
         # 3. Мета данные для данных
         # 3.1 Нейронная сеть

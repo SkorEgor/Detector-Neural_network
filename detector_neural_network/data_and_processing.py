@@ -1,7 +1,6 @@
+import numpy as np
 from functools import wraps
 from typing import Callable, ClassVar
-
-import numpy as np
 from pandas import DataFrame, Series, concat
 from scipy import ndimage
 from scipy.interpolate import interp1d
@@ -9,6 +8,8 @@ from scipy.ndimage import label, uniform_filter1d
 from scipy.signal import butter, savgol_filter, sosfilt
 from sklearn.neural_network import MLPClassifier
 from sklearn.preprocessing import StandardScaler
+
+from detector_neural_network import setting
 
 ABSORPTION_LINE_WIDTH = 30
 
@@ -175,7 +176,8 @@ class DataAndProcessing:
         noise = sosfilt(sos, gamma)
         self.__smoothed_noise = np.std(uniform_filter1d(noise, size=3)) * 5
 
-        gamma = savgol_filter(gamma, window_length=10, polyorder=2)
+        if setting.SAVGOL_FILTER_WINDOW_LENGTH != 0:
+            gamma = savgol_filter(gamma, window_length=setting.SAVGOL_FILTER_WINDOW_LENGTH, polyorder=2)
         # Интерполяция значений без газа
         interpolated_frequencies, interpolated_gamma = interpolate_values(frequency, gamma)
         # Частота пуста - данных не было - задаем
@@ -209,7 +211,8 @@ class DataAndProcessing:
         if len(frequency) != len(gamma):
             raise ValueError("Количество частот не совпадает с количеством гамм")
         # Преобразуем входные данные
-        gamma = savgol_filter(gamma, window_length=10, polyorder=2)
+        if setting.SAVGOL_FILTER_WINDOW_LENGTH != 0:
+            gamma = savgol_filter(gamma, window_length=setting.SAVGOL_FILTER_WINDOW_LENGTH, polyorder=2)
         frequency, gamma = interpolate_values(frequency, gamma)
         # Интерполяция значений без газа
         interpolated_frequencies, interpolated_gamma = interpolate_values(frequency, gamma)
@@ -385,8 +388,9 @@ class DataAndProcessing:
                 "source_neural_network": [False],
             }
         )
-        self.__point_absorption = concat([self.__point_absorption, new_point], ignore_index=True)
-        self.__point_absorption.sort_values(by="frequency", inplace=True, ignore_index=True)
+        self.__point_absorption = new_point if self.__point_absorption.empty else concat(
+            [self.__point_absorption, new_point], ignore_index=True
+        ).sort_values(by="frequency", ignore_index=True)
 
     @absorption_will_be_changed
     def del_point_absorption(self, frequency: float, gamma: float):

@@ -181,6 +181,7 @@ QPushButton:pressed      {
 	border: none;												/* без границ */
 }
 
+
 /*Нейронная сеть*/
 #pushButton_neural_network_heade{
 	image: url(:/general_black_ui/resource/general_black_ui/network_24dp_white.svg);
@@ -1171,6 +1172,9 @@ QCheckBox::indicator:checked {
                          </item>
                          <item>
                           <widget class="QPushButton" name="pushButton_reading_file_no_gas">
+                           <property name="enabled">
+                            <bool>true</bool>
+                           </property>
                            <property name="sizePolicy">
                             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                              <horstretch>0</horstretch>
@@ -1218,7 +1222,7 @@ QCheckBox::indicator:checked {
                          <item>
                           <widget class="QCheckBox" name="checkBox_download_no_gas">
                            <property name="enabled">
-                            <bool>false</bool>
+                            <bool>true</bool>
                            </property>
                            <property name="sizePolicy">
                             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -2796,8 +2800,8 @@ selection-background-color: rgb(191, 191, 191);
    <slot>setVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>169</x>
-     <y>217</y>
+     <x>168</x>
+     <y>205</y>
     </hint>
     <hint type="destinationlabel">
      <x>202</x>
@@ -2864,8 +2868,24 @@ selection-background-color: rgb(191, 191, 191);
      <y>64</y>
     </hint>
     <hint type="destinationlabel">
-     <x>106</x>
-     <y>88</y>
+     <x>105</x>
+     <y>155</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_download_with_gas</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>pushButton_reading_file_no_gas</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>201</x>
+     <y>310</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>167</x>
+     <y>256</y>
     </hint>
    </hints>
   </connection>
