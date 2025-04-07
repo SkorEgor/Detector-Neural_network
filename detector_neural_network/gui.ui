@@ -2518,7 +2518,7 @@ selection-background-color: rgb(191, 191, 191);
                   <item>
                    <widget class="QTableWidget" name="tableWidget_frequency_absorption">
                     <property name="sizePolicy">
-                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                     <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
                       <horstretch>0</horstretch>
                       <verstretch>0</verstretch>
                      </sizepolicy>
@@ -2578,7 +2578,7 @@ selection-background-color: rgb(191, 191, 191);
                      <bool>false</bool>
                     </attribute>
                     <attribute name="horizontalHeaderStretchLastSection">
-                     <bool>false</bool>
+                     <bool>true</bool>
                     </attribute>
                    </widget>
                   </item>

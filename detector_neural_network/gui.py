@@ -22,11 +22,12 @@ from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplicat
     QSizePolicy, QSpacerItem, QTableWidget, QTableWidgetItem,
     QVBoxLayout, QWidget)
 
+
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(1281, 610)
+        Dialog.resize(1285, 618)
         icon = QIcon()
         icon.addFile(u":/application_picture/resource/application_picture/app_icon-round.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         Dialog.setWindowIcon(icon)
@@ -64,7 +65,7 @@ class Ui_Dialog(object):
 "}\n"
 "\n"
 "/* \u041f\u043e\u043b\u0437\u0443\u043d\u043e\u043a \u0432\u0435\u0440\u0442\u0438\u043a\u0430\u043b\u044c\u043d\u043e\u0439 \u043f\u043e\u043b\u043e\u0441\u044b */\n"
-"QScrollBar::handle:vertical {	\n"
+"QScrollBar::handle:vertical {\n"
 "    background: rgb(255, 255, 255);	/* \u0417\u0430\u0434\u0430\u0435\u0442 \u0446\u0432\u0435\u0442 \u0444\u043e\u043d\u0430 \u043f\u043e\u043b\u0437\u0443\u043d\u043a\u0430 */\n"
 "    min-height: 25px;								/* \u0423\u0441\u0442\u0430\u043d\u0430\u0432\u043b\u0438\u0432\u0430\u0435\u0442 \u043c\u0438\u043d\u0438\u043c\u0430\u043b\u044c\u043d\u0443\u044e \u0432"
                         "\u044b\u0441\u043e\u0442\u0443 \u043f\u043e\u043b\u0437\u0443\u043d\u043a\u0430 */\n"
@@ -189,7 +190,7 @@ class Ui_Dialog(object):
 "/* \u0421\u043e\u0441\u0442\u043e\u044f\u043d\u0438\u0435 - \u0432\u044b\u0431\u0440\u0430\u043d\u043e */\n"
 "QCheckBox::indicator:checked {\n"
 "	/* \u0423\u0441\u0442\u0430\u043d\u0430\u0432\u043b\u0438\u0432\u0430\u0435\u0442 \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435 \u0434\u043b\u044f \u0432\u044b\u0431\u0440\u0430\u043d\u043d\u043e\u0433\u043e \u0441\u043e\u0441\u0442\u043e\u044f\u043d\u0438\u044f */\n"
-"    image: url(:/multi_check_box/resource/multi_check_box_svg/yes_green_24dp.svg); \n"
+"    image: url(:/multi_check_box/resource/multi_check_box_svg/yes_green_24dp.svg);\n"
 "}\n"
 "\n"
 "/*------------------------------------------------*/\n"
@@ -347,7 +348,7 @@ class Ui_Dialog(object):
 "/*------------------------------------------------*/\n"
 "/*   TableWidget													*/\n"
 "/*------------------------------------------------*/\n"
-"QTableWidget {	\n"
+"QTableWidget {\n"
 "    gridline-color: rgb(136, 136, 136);					/* \u0423\u0441\u0442\u0430\u043d\u0430\u0432\u043b\u0438\u0432\u0430\u0435\u0442 \u0446\u0432\u0435\u0442 \u043b\u0438\u043d\u0438\u0439 \u0441\u0435\u0442\u043a\u0438 */\n"
 "    border-top: 1px solid rgb(54, 60, 74);			/* \u0417\u0430\u0434\u0430\u0435\u0442 \u0432\u0435\u0440\u0445\u043d\u044e\u044e \u0433\u0440\u0430\u043d\u0438\u0446\u0443 */\n"
 "    border-bottom: 1px solid rgb(54, 60, 74);	/* \u0417\u0430\u0434\u0430\u0435\u0442 \u043d\u0438\u0436\u043d\u044e\u044e \u0433\u0440\u0430\u043d\u0438\u0446\u0443 */\n"
@@ -358,15 +359,15 @@ class Ui_Dialog(object):
                         "\u0430\u043d\u0430\u0432\u043b\u0438\u0432\u0430\u0435\u0442 \u0444\u043e\u043d \u0434\u043b\u044f \u0432\u044b\u0431\u0440\u0430\u043d\u043d\u044b\u0445 \u044d\u043b\u0435\u043c\u0435\u043d\u0442\u043e\u0432 */\n"
 "}\n"
 "\n"
-"QHeaderView { \n"
+"QHeaderView {\n"
 "    qproperty-defaultAlignment: AlignCenter;	/* \u0412\u044b\u0440\u0430\u0432\u043d\u0438\u0432\u0430\u0435\u0442 \u0441\u043e\u0434\u0435\u0440\u0436\u0438\u043c\u043e\u0435 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u043e\u0432 */\n"
 "}\n"
 "\n"
 "/* \u0421\u0442\u0438\u043b\u044c \u0434\u043b\u044f \u0441\u0435\u043a\u0446\u0438\u0439 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u043e\u0432 \u0442\u0430\u0431\u043b\u0438\u0446\u044b */\n"
 "QHeaderView::section {\n"
 "    background-color: rgb(37, 41, 48);				/* \u0417\u0430\u0434\u0430\u0435\u0442 \u0444\u043e\u043d \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u043e\u0432 */\n"
-"    border: 1px solid rgb(136, 136, 136);				/* \u0423\u0441\u0442\u0430\u043d\u0430\u0432\u043b\u0438\u0432\u0430\u0435\u0442 "
-                        "\u0433\u0440\u0430\u043d\u0438\u0446\u0443 */\n"
+"    border: 1px solid rgb(136, 136, 136);				/* \u0423\u0441\u0442\u0430\u043d\u0430\u0432\u043b\u0438\u0432\u0430\u0435\u0442 \u0433"
+                        "\u0440\u0430\u043d\u0438\u0446\u0443 */\n"
 "    border-style: none;											/* \u0423\u0431\u0438\u0440\u0430\u0435\u0442 \u0441\u0442\u0438\u043b\u044c \u0433\u0440\u0430\u043d\u0438\u0446\u044b */\n"
 "}\n"
 "\n"
@@ -479,7 +480,7 @@ class Ui_Dialog(object):
         self.scrollArea_menu_body.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 222, 480))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 222, 488))
         self.scrollAreaWidgetContents.setStyleSheet(u"")
         self.Layout_scroll_menu = QVBoxLayout(self.scrollAreaWidgetContents)
         self.Layout_scroll_menu.setSpacing(5)
@@ -1146,7 +1147,7 @@ class Ui_Dialog(object):
 
         self.tableWidget_frequency_absorption = QTableWidget(self.widget_table)
         self.tableWidget_frequency_absorption.setObjectName(u"tableWidget_frequency_absorption")
-        sizePolicy8 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        sizePolicy8 = QSizePolicy(QSizePolicy.Policy.Ignored, QSizePolicy.Policy.Expanding)
         sizePolicy8.setHorizontalStretch(0)
         sizePolicy8.setVerticalStretch(0)
         sizePolicy8.setHeightForWidth(self.tableWidget_frequency_absorption.sizePolicy().hasHeightForWidth())
@@ -1168,7 +1169,7 @@ class Ui_Dialog(object):
         self.tableWidget_frequency_absorption.setColumnCount(0)
         self.tableWidget_frequency_absorption.horizontalHeader().setCascadingSectionResizes(False)
         self.tableWidget_frequency_absorption.horizontalHeader().setProperty(u"showSortIndicator", False)
-        self.tableWidget_frequency_absorption.horizontalHeader().setStretchLastSection(False)
+        self.tableWidget_frequency_absorption.horizontalHeader().setStretchLastSection(True)
 
         self.layout_table.addWidget(self.tableWidget_frequency_absorption)
 

@@ -1,4 +1,5 @@
 import os
+
 from joblib import load
 from functools import partial
 from pyqtgraph.Qt.QtCore import QSettings
@@ -7,8 +8,8 @@ from pyqtgraph.Qt.QtWidgets import QFileDialog, QTableWidgetItem
 from detector_neural_network import setting
 from detector_neural_network.app_exception import AppException
 from detector_neural_network.custom_dialog import CustomDialog
-from detector_neural_network.multi_check_box import BlueRedYellowCheckBox, GreenRedYellowCheckBox
 from detector_neural_network.parser import parser, parser_all_data
+from detector_neural_network.multi_check_box import BlueRedYellowCheckBox, GreenRedYellowCheckBox
 from detector_neural_network.plot_spectrometer_data import SpectrometerPlotAndLegendWidget, SpectrometerPlotWidget
 from detector_neural_network.setting import (
     DEFAULT_FILE_PATH_WITHOUT_SUBSTANCE,
@@ -317,7 +318,6 @@ class GuiProgram(CustomDialog):
 
         # Настраиваем внешний вид таблицы
         self.tableWidget_frequency_absorption.setColumnWidth(2, 30)  # Ширина столбца с чекбоксом
-        self.tableWidget_frequency_absorption.resizeColumnsToContents()  # Масштабируем по содержимому
 
     def frequency_selection(self, sender: GreenRedYellowCheckBox | BlueRedYellowCheckBox, index, source, checked):
         """Клик по чекбоксу в таблице"""
