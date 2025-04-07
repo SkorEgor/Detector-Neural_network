@@ -245,6 +245,37 @@ class DataAndProcessing:
     def set_neural_network(self, neural_network: MLPClassifier) -> None:
         self.__neural_network: MLPClassifier = neural_network
 
+    @absorption_will_be_changed
+    def set_point_absorption(
+        self,
+        frequency: list | Series,
+        gamma: list | Series,
+        status: list[bool] | Series | None = None,
+        source_neural_network: list[bool] | Series | None = None,
+    ):
+        """Загружает данные точек поглощения."""
+        # Проверка длины входных данных
+        if len(frequency) != len(gamma):
+            raise ValueError("Количество частот не совпадает с количеством значений гамма")
+
+        # Преобразуем входные данные в DataFrame с явным типом object для status
+        new_data = DataFrame(
+            {
+                "frequency": frequency,
+                "gamma": gamma,
+                "status": status,
+                "source_neural_network": source_neural_network,
+            }
+        ).astype({"status": "object"})  # Если не указать, то столбец числовой и при передаче None получим NaN
+
+        # Если таблица пуста, присваиваем новые данные, иначе добавляем и сортируем
+        if self.__point_absorption.empty:
+            self.__point_absorption = new_data
+        else:
+            self.__point_absorption = concat([self.__point_absorption, new_data], ignore_index=True).sort_values(
+                by="frequency", ignore_index=True
+            )
+
     # ---------------------------------------------------------------------------
     #   Getters - получение данных
     # ---------------------------------------------------------------------------
@@ -366,7 +397,7 @@ class DataAndProcessing:
         return None, None, None
 
     @absorption_will_be_changed
-    def set_status_point_absorption_by_index(self, index: int, new_status: bool):
+    def set_status_point_absorption_by_index(self, index: int, new_status: bool | None):
         """Обновляет статус для точки поглощения по индексу."""
         if 0 <= index < len(self.__point_absorption):
             self.__point_absorption.loc[index, "status"] = new_status
@@ -388,9 +419,13 @@ class DataAndProcessing:
                 "source_neural_network": [False],
             }
         )
-        self.__point_absorption = new_point if self.__point_absorption.empty else concat(
-            [self.__point_absorption, new_point], ignore_index=True
-        ).sort_values(by="frequency", ignore_index=True)
+        self.__point_absorption = (
+            new_point
+            if self.__point_absorption.empty
+            else concat([self.__point_absorption, new_point], ignore_index=True).sort_values(
+                by="frequency", ignore_index=True
+            )
+        )
 
     @absorption_will_be_changed
     def del_point_absorption(self, frequency: float, gamma: float):

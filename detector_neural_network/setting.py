@@ -20,3 +20,4 @@ DEFAULT_FILE_PATH_NEURAL_NETWORK: str = os.path.join(MODULE_DIR, "data", "exampl
 SAVGOL_FILTER_WINDOW_LENGTH: int = int(os.getenv("SAVGOL_FILTER_WINDOW_LENGTH", 10))  # Если 0, то фильтр выключен
 ORGANIZATION: str = "Institute for Physics of Microstructures RAS"
 APPLICATION: str = "Detector - Neural_network"
+RESULTS_FORMATTER_VERSION: str = "1.0.0"

@@ -6,7 +6,7 @@ from functools import partial
 
 from PySide6.QtWidgets import QApplication, QMessageBox
 
-from detector_neural_network import resources_rc    # noqa: F401
+from detector_neural_network import resources_rc  # noqa: F401
 from detector_neural_network.app_exception import AppException
 from detector_neural_network.gui_logic import GuiProgram
 

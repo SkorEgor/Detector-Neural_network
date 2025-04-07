@@ -1,7 +1,6 @@
 import os
-from functools import partial
-
 from joblib import load
+from functools import partial
 from pyqtgraph.Qt.QtCore import QSettings
 from pyqtgraph.Qt.QtWidgets import QFileDialog, QTableWidgetItem
 
@@ -10,11 +9,11 @@ from detector_neural_network.app_exception import AppException
 from detector_neural_network.custom_dialog import CustomDialog
 from detector_neural_network.multi_check_box import BlueRedYellowCheckBox, GreenRedYellowCheckBox
 from detector_neural_network.parser import parser, parser_all_data
-from detector_neural_network.plot_spectrometer_data import (
-    SpectrometerPlotAndLegendWidget, SpectrometerPlotWidget
-)
+from detector_neural_network.plot_spectrometer_data import SpectrometerPlotAndLegendWidget, SpectrometerPlotWidget
 from detector_neural_network.setting import (
-    DEFAULT_FILE_PATH_WITHOUT_SUBSTANCE, DEFAULT_FILE_PATH_WITH_SUBSTANCE, DEFAULT_FILE_PATH_NEURAL_NETWORK
+    DEFAULT_FILE_PATH_WITHOUT_SUBSTANCE,
+    DEFAULT_FILE_PATH_WITH_SUBSTANCE,
+    DEFAULT_FILE_PATH_NEURAL_NETWORK,
 )
 
 settings = QSettings(setting.ORGANIZATION, setting.APPLICATION)
@@ -58,7 +57,9 @@ class GuiProgram(CustomDialog):
         # - Инициализация пустой таблицы с заголовками
         self.initialize_table()
         # - Сохранить данные из таблицы в файл
-        self.pushButton_save_table_to_file.clicked.connect(self.saving_data)
+        self.pushButton_save_table_to_file.clicked.connect(self.saving_result_data)
+        # - Загрузить данные в таблицу из файла
+        self.pushButton_load_result.clicked.connect(self.load_result_data)
         # - Выбрана строка таблицы zoom
         self.tableWidget_frequency_absorption.cellClicked.connect(self.get_clicked_cell)
         self.comboBox_select_table_view.currentIndexChanged.connect(self.table)
@@ -321,8 +322,7 @@ class GuiProgram(CustomDialog):
     def frequency_selection(self, sender: GreenRedYellowCheckBox | BlueRedYellowCheckBox, index, source, checked):
         """Клик по чекбоксу в таблице"""
         # Нет точек поглощения - сброс
-        point_absorption = self.data.get_point_absorption()
-        if point_absorption.empty:
+        if self.data.get_point_absorption().empty:
             return
         # Точка от нейронной сети -> меняем состояние в данных и обновляем график
         if source:
@@ -333,6 +333,9 @@ class GuiProgram(CustomDialog):
 
     def get_clicked_cell(self, row):
         """Клик по строке таблице - zoom к указанной области графика или к зоне с линиями поглощения"""
+        # Нет исходных данных - сброс
+        if self.data.get_spectra().empty:
+            return
         # Получаем необходимые данные
         # * Спектр
         spectra = self.data.get_spectra()
@@ -364,63 +367,86 @@ class GuiProgram(CustomDialog):
         self.plot_widget_1.plot_widget.zoom_to_region(x_min=x_min, x_max=x_max, y_min=y_min, y_max=y_max)
 
     # ---------------------------------------------------------------------------
-    #   Методы для сохранения в файл
+    #   Методы для сохранения и загрузки результата в файл
     # ---------------------------------------------------------------------------
-    def saving_data(self):
+    def saving_result_data(self):
         """Сохранение результатов/таблицы в файл"""
-        # 0. Проверка, что данные для сохранения есть
-        spectra = self.data.get_spectra()
         point_absorption = self.data.get_point_absorption()
-        if spectra.empty:
-            raise AppException("""Ошибка "Сохранения" """, """Нет данных""")
+        if self.data.get_spectra().empty:
+            raise AppException("Ошибка 'Сохранения'", "Нет данных")
 
-        # 1. Выбор места для сохранения
-        # 1.1. Рекомендуемое название файла (WARNING)
-        name_with_substance, _ = os.path.splitext(self.file_name_with_substance)
-        recommended_file_name = f"{spectra['frequency'].iloc[0]}-{spectra['frequency'].iloc[-1]}_{name_with_substance}"
-        # 1.2. Вызов окна с выбором места для сохранения
-        file_name, file_type = QFileDialog.getSaveFileName(
-            self,
-            "Сохранение",
-            recommended_file_name,
-            "Text(*.txt);;Spectrometer Data(*.csv);;All Files(*)",
+        # Загружаем последнюю успешную директорию, если она есть, иначе используем текущую (".")
+        last_dir = settings.value("result_dir", ".", type=str)
+        # - Формируем имя файла и добавляем путь
+        base_name = os.path.splitext(os.path.basename(self.file_name_with_substance))[0]
+        recommended_file_name = os.path.join(last_dir, f"Result_for_{base_name}")
+        # - Загрузка
+        file_name, _ = QFileDialog.getSaveFileName(
+            self, "Сохранение", recommended_file_name, "Text(*.txt);;Spectrometer Data(*.csv);;All Files(*)"
         )
-        # 1.3. Если имя не получено, прервать
+        # - Если диалог закрыт через крестик или отменён, просто выходим
         if not file_name:
             return
 
-        # 2. Запись
-        with open(file_name, "w", encoding="utf-8") as file:
-            # Заголовок/Название столбцов
-            file.write("FREQUENCY:\tGAMMA:\n")
-            # Перебираем по парно частоты и гаммы пиков; Записываем по строчно в файл
-            for i in range(self.tableWidget_frequency_absorption.rowCount()):
-                if self.tableWidget_frequency_absorption.cellWidget(i, 2).state:
-                    f = self.tableWidget_frequency_absorption.item(i, 0).text()
-                    g = self.tableWidget_frequency_absorption.item(i, 1).text()
-                    file.write(f"{f}\t{g}\n")
-            # Конец файла
-            file.write("""***********************************************************\n""")
-            # Фильтр строк, где source_neural_network=True
-            filtered = point_absorption[point_absorption["source_neural_network"] == True]
-            # 1. Количество строк, где source_neural_network=True
-            dots_found = filtered.shape[0]
-            # 2. Количество строк, где source_neural_network=True и status=True
-            points_confirmed = filtered[filtered["status"] == True].shape[0]
-            # 3. Количество строк, где source_neural_network=True и status=False
-            points_rejected = filtered[filtered["status"] == False].shape[0]
-            # 4. Всего точек
-            dots_all = point_absorption.shape[0]
-            # 5. Точек добавлено
-            dots_add = point_absorption[point_absorption["source_neural_network"] == False].shape[0]
-            print(dots_found, points_confirmed, points_rejected, dots_all, dots_add)
-            file.write(
-                f"Точек обнаружено: {dots_found}\n"
-                f"Обнаруженных точек подтверждено: {points_confirmed} \n"
-                f"Обнаруженных точек  не утверждено: {points_rejected} \n"
-                f"Всего точек: {dots_all} \n"
-                f"Точек добавлено: {dots_add}\n"
-            )
+        # Запись
+        try:
+            with open(file_name, "w", encoding="utf-8") as file:
+                # Заголовок
+                file.write("FREQUENCY:\tGAMMA:\tSOURCE_NEURAL_NETWORK:\n")
+                # Запись только подтвержденных данных (status=True)
+                filtered_data = point_absorption[point_absorption["status"] == True]
+                for row in filtered_data[["frequency", "gamma", "source_neural_network"]].itertuples(index=False):
+                    file.write(f"{row.frequency}\t{row.gamma}\t{row.source_neural_network}\n")
+                # Разделитель и статистика
+                file.write("***********************************************************\n")
+                nn_data = point_absorption[point_absorption["source_neural_network"] == True]
+                stats = {
+                    "RESULTS_FORMATTER_VERSION": setting.RESULTS_FORMATTER_VERSION,
+                    "Обнаружено": nn_data.shape[0],
+                    "Подтверждено": nn_data[nn_data["status"] == True].shape[0],
+                    "Отклонено": nn_data[nn_data["status"] == False].shape[0],
+                    "Непроверенно": nn_data[nn_data["status"].isna()].shape[0],
+                    "Добавлено вручную": point_absorption[point_absorption["source_neural_network"] == False].shape[0],
+                    "Всего": point_absorption.shape[0],
+                }
+                file.write("\n".join(f"{key}: {value}" for key, value in stats.items()) + "\n")
+            # Сохраняем директорию выбранного файла как последнюю успешную
+            settings.setValue("result_dir", os.path.dirname(file_name))
+        except IOError as e:
+            raise AppException("Ошибка записи файла", str(e))
+
+    def load_result_data(self):
+        """Чтение данных из файла результата и загрузка в точки поглощения"""
+        if self.data.get_spectra().empty:
+            raise AppException("Ошибка 'Загрузки'", "Нет исходных данных спектров.")
+        # Загружаем последнюю успешную директорию, если она есть, иначе текущую
+        file_name, _ = QFileDialog.getOpenFileName(
+            self,
+            "Открыть файл результата",
+            settings.value("result_dir", ".", type=str),
+            "Text(*.txt);;Spectrometer Data(*.csv);;All Files(*)",
+        )
+        # - Если файл не выбран, выходим
+        if not file_name:
+            return
+
+        try:
+            with open(file_name, "r", encoding="utf-8") as file:
+                data = [
+                    (float(freq), float(gam), src.lower() == "true")
+                    for line in file
+                    if "\t" in line and not line.startswith(("FREQ", "*"))
+                    for freq, gam, src in [line.strip().split("\t")]
+                ]
+                if not data:
+                    raise AppException("Ошибка чтения", "Нет данных точек поглощения")
+
+                freq, gamma, src_nn = zip(*data)
+                self.data.set_point_absorption(freq, gamma, [True] * len(freq), src_nn)
+                settings.setValue("result_dir", os.path.dirname(file_name))
+
+        except (IOError, ValueError) as error:
+            raise AppException("Ошибка файла", str(error))
 
     # ---------------------------------------------------------------------------
     #   Методы для работы со статистикой

@@ -9,6 +9,9 @@ exclude = [
     ".ruff_cache",
     ".venv",
     ".vscode",
+    ".ui",
+    ".qss",
+    ".qrc",
     "__pypackages__",
     "_build",
     "BUILD",
@@ -18,10 +21,8 @@ exclude = [
     "venv",
     "tools",
     "tests",
-    "resources.qrc",
     "resources_rc.py",
     "gui.py",
-    "gui.ui",
 ]
 
 line-length = 120

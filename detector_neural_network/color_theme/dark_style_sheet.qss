@@ -1,240 +1,304 @@
-
-   QWidget{
-	font: 6pt "MS Shell Dlg 2";
-	background-color: rgb(33, 37, 43);
-	color: rgb(208, 208, 208);
-	font-size: 10pt;
-}
-/* /////////////////////////////////////////////////////////////////////////////////////////////////
-ScrollBars */
- QScrollBar {
-border: none;												/* без границ */
-	border-right:5px solid rgb(211, 211, 211);;	/* С правой красной раницей */
- }
- QScrollBar:vertical {
-	border: none;
-    background: rgb(52, 59, 72);
-    width: 8px;
-    margin: 21px 0 21px 0;
-	border-radius: 0px;
- }
-
-/* Ползунок */
- QScrollBar::handle:vertical {	
-	background:rgb(255, 255, 255);
-    min-height: 25px;
-	border-radius: 4px
- }
-/*Нижняя стрелка*/
- QScrollBar::add-line:vertical {
-     border: none;
-    background: rgb(55, 63, 77);
-     height: 20px;
-
-     subcontrol-position: bottom;
-     subcontrol-origin: margin;
- }
-/*Верхняя стрелка*/
- QScrollBar::sub-line:vertical {
-	border: none;
-    background: rgb(55, 63, 77);
-     height: 20px;
-
-     subcontrol-position: top;
-     subcontrol-origin: margin;
- }
-/* Цвета нижних и верхних стрелок */
- QScrollBar::up-arrow:vertical{
-	border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-     background: rgb(255, 255, 255);
- }
-QScrollBar::down-arrow:vertical{
-	border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-     background: rgb(255, 255, 255);
+QWidget {
+    font: 10pt "MS Shell Dlg 2";				/* Устанавливает размера и семейство шрифта*/
+    color: rgb(208, 208, 208);						/* Устанавливает цвет текста */
+    background-color: rgb(33, 37, 43);	/* Задает цвет фона */
 }
 
- QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-     background: none;
- }
-/* ///////////////////////////////////////////////////////////////////////////////////////////////// */
-/* /////////////////////////////////////////////////////////////////////////////////////////////////
-RadioButton */
+/*------------------------------------------------*/
+/*   ScrollBars															*/
+/*------------------------------------------------*/
+QScrollBar {
+    border: none;													/* Убирает границы для всех полос прокрутки */
+    border-right: 5px solid rgb(211, 211, 211); 	/* Задает правой границе цвет и толщину */
+}
+
+QScrollBar:vertical {
+    border: none;									/* Убирает границы для вертикальной полосы прокрутки */
+    background: rgb(52, 59, 72);			/* Устанавливает цвет фона полосы */
+    width: 8px;											/* Задает ширину полосы прокрутки */
+    margin: 21px 0 21px 0;					/* Устанавливает отступы сверху и снизу */
+    border-radius: 0px;							/* Убирает скругление углов полосы */
+}
+
+/* Ползунок вертикальной полосы */
+QScrollBar::handle:vertical {
+    background: rgb(255, 255, 255);	/* Задает цвет фона ползунка */
+    min-height: 25px;								/* Устанавливает минимальную высоту ползунка */
+    border-radius: 4px;							/* Задает скругление углов ползунка */
+}
+
+/* Нижняя стрелка */
+QScrollBar::add-line:vertical {
+    border: none;									/* Убирает границы нижней стрелки */
+    background: rgb(55, 63, 77);			/* Устанавливает цвет фона нижней стрелки */
+    height: 20px;										/* Задает высоту области нижней стрелки */
+    subcontrol-position: bottom;			/* Располагает стрелку внизу полосы */
+    subcontrol-origin: margin;				/* Определяет начало отсчета позиции из области отступов */
+}
+
+/* Верхняя стрелка */
+QScrollBar::sub-line:vertical {
+    border: none;									/* Убирает границы верхней стрелки */
+    background: rgb(55, 63, 77);			/* Устанавливает цвет фона верхней стрелки */
+    height: 20px;										/* Задает высоту области верхней стрелки */
+    subcontrol-position: top;					/* Располагает стрелку вверху полосы */
+    subcontrol-origin: margin;				/* Определяет начало отсчета позиции из области отступов */
+}
+
+/* Цвета верхней стрелки */
+QScrollBar::up-arrow:vertical {
+    border-top-left-radius: 4px;			/* Скругляет верхний левый угол стрелки */
+    border-top-right-radius: 4px;			/* Скругляет верхний правый угол стрелки */
+    background: rgb(255, 255, 255);	/* Задает цвет фона верхней стрелки */
+}
+
+/* Цвета нижней стрелки */
+QScrollBar::down-arrow:vertical {
+    border-bottom-left-radius: 4px;		/* Скругляет нижний левый угол стрелки */
+    border-bottom-right-radius: 4px;	/* Скругляет нижний правый угол стрелки */
+    background: rgb(255, 255, 255); 	/* Задает белый цвет фона нижней стрелки */
+}
+
+/* Области над и под ползунком */
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none; 							/* Убирает фон для областей над и под ползунком */
+}
+
+/*------------------------------------------------*/
+/*   RadioButton													*/
+/*------------------------------------------------*/
+/* Индикатор радиокнопки в обычном состоянии */
 QRadioButton::indicator {
-    border: 3px solid rgb(52, 59, 72);
-	width: 15px;
-	height: 15px;
-	border-radius: 10px;
-    background: rgb(44, 49, 60);
+    border: 3px solid rgb(52, 59, 72);	/* Задает границу */
+    width: 15px;										/* Устанавливает ширину индикатора */
+    height: 15px;										/* Устанавливает высоту индикатора */
+    border-radius: 10px;							/* Скругляет индикатор */
+    background: rgb(44, 49, 60);			/* Задает фон индикатора */
 }
+
+/* Индикатор радиокнопки при наведении мыши */
 QRadioButton::indicator:hover {
-    border: 3px solid rgb(58, 66, 81);
+    border: 3px solid rgb(58, 66, 81);	/* Меняет границу при наведении */
 }
+
+/* Индикатор радиокнопки в выбранном состоянии */
 QRadioButton::indicator:checked {
-    background: 3px solid rgb(255, 255, 255);
-	border: 3px solid rgb(52, 59, 72);	
+    border: 3px solid rgb(52, 59, 72); 	/* Сохраняет границу */
+    background: rgb(255, 255, 255);	/* Задает фон индикатора при выборе */
 }
-/* срабатывает, когда пользователь наводит на элемент мышью */
+
+/* Радиокнопка при наведении мыши */
 QRadioButton:hover {
-	background-color:rgb(40, 44, 52);			/* задаем цвет фона */
-}
-/* срабатывает, при нажатии*/
-QRadioButton:pressed      {
-	background-color:rgb(170, 170, 170);		/* задаем цвет фона */
-	color:  rgb(0, 0, 0);
-	border: none;												/* без границ */
-}
-/* ///////////////////////////////////////////////////////////////////////////////////////////////// */
-/* /////////////////////////////////////////////////////////////////////////////////////////////////
-QCheckBox */
-/* Стандартное состояние*/
-QCheckBox{
-	padding-left: 8px;		/* Отступ слева */
-	padding-right: -8px;	/* Отступ справа */
+    background-color: rgb(40, 44, 52);		 /* Устанавливает фон кнопки при наведении */
 }
 
-/* Состояние - не выбран*/
-QCheckBox::indicator:unchecked {
-	/* Выбор картинки*/
-	image: url(:/multi_check_box/resource/multi_check_box_svg/no_24dp.svg);
+/* Радиокнопка при нажатии */
+QRadioButton:pressed {
+    background-color: rgb(170, 170, 170);	/* Задает фон кнопки при нажатии */
+    color: rgb(0, 0, 0);										/* Устанавливает цвет текста */
+    border: none;											/* Убирает границы кнопки */
 }
 
-/* Состояние -  выбран*/
-QCheckBox::indicator:checked {
-	/* Выбор картинки*/
-	image: url(:/multi_check_box/resource/multi_check_box_svg/yes_green_24dp.svg);
-}
-/* ///////////////////////////////////////////////////////////////////////////////////////////////// */
-/* /////////////////////////////////////////////////////////////////////////////////////////////////
-QPushButton */
-/*Стандартное состояние для кнопки*/
-QPushButton {
-	font-size: 12pt;
-	background-color:rgb(37, 41, 48);/* задает цвет фона */
-	border: 1px solid rgb(52, 59, 72);		/* задает границу элемента */
-
-	/* задает иконку */
-	background-position: left center;							/* выравнивание иконки */
-	background-repeat: no-repeat;								/* повторять иконку */
-} 
-
-/* срабатывает, когда пользователь наводит на элемент мышью */
-QPushButton:hover {
-	background-color:rgb(40, 44, 52);			/* задаем цвет фона */
-	border: none;												/* без границ */
-	border-left:4px solid rgb(208, 208, 208);	/* С правой красной границей */
-}
-
-
-/* срабатывает, при нажатии*/
-QPushButton:pressed      {
-	background-color:rgb(170, 170, 170);		/* задаем цвет фона */
-	color: rgb(181, 181, 181);
-	border: none;												/* без границ */
-}
-
-/*Нейронная сеть*/
-#pushButton_neural_network_heade{
-	image: url(:/general_black_ui/resource/general_black_ui/network_24dp_white.svg);
-    image-position: left center;
-	padding-top: 2px; /* Отступ сверху */
-    padding-bottom: 2px; /* Отступ снизу */
-    padding-left: 4px; /* Отступ слева для симметрии */
-}
-#pushButton_reading_file_neural_network{image: url(:/general_black_ui/resource/general_black_ui/download_24dp_white.svg);}
-#pushButton_reading_file_neural_network{border: none;}
-
-/*Данные*/
-#pushButton_data_header {
-	image: url(:/general_black_ui/resource/general_black_ui/data_24dp_white.svg);
-    image-position: left center;
-    padding-top: 2px; /* Отступ сверху */
-    padding-bottom: 2px; /* Отступ снизу */
-    padding-left: 4px; /* Отступ слева для симметрии */
-}
-#pushButton_reading_file_no_gas{image: url(:/general_black_ui/resource/general_black_ui/download_24dp_white.svg);}
-#pushButton_reading_file_no_gas{border: none;}
-#pushButton_reading_file_with_gas{image: url(:/general_black_ui/resource/general_black_ui/download_24dp_white.svg);}
-#pushButton_reading_file_with_gas{border: none;}
-
+/* Специфичный стиль для радиокнопок Изменения диапазонов*/
 #radioButton_selected_range {
-	image: url(:/general_black_ui/resource/general_black_ui/cycle1_24dp_white.svg);
-    image-position: right center;
-	padding-top: 3px; /* Отступ сверху */
-    padding-bottom: 3px; /* Отступ снизу */
-    padding-right: 4px; /* Отступ справа для симметрии */
-} 
-#radioButton_selected_range:pressed      {
-	image: url(:/general_black_ui/resource/general_black_ui/cycle2_24dp_white.svg);
-    image-position: right center;
-	padding-top: 3px; /* Отступ сверху */
-    padding-bottom: 3px; /* Отступ снизу */
-    padding-right: 4px; /* Отступ справа для симметрии */
+    image: url(:/general_black_ui/resource/general_black_ui/cycle1_24dp_white.svg); /* Устанавливает изображение справа */
+    image-position: right center;			/* Выравнивает изображение */
+    padding-top: 3px;								/* Добавляет отступ сверху */
+    padding-bottom: 3px;						/* Добавляет отступ снизу */
+    padding-right: 4px;							/* Добавляет отступ справа */
+}
+#radioButton_selected_range:pressed {
+    image: url(:/general_black_ui/resource/general_black_ui/cycle2_24dp_white.svg); /* Меняет изображение при нажатии */
+    image-position: right center;			/* Выравнивает изображение */
+    padding-top: 3px;								/* Добавляет отступ сверху */
+    padding-bottom: 3px;						/* Добавляет отступ снизу */
+    padding-right: 4px;							/* Добавляет отступ справа */
 }
 
+/*------------------------------------------------*/
+/*   CheckBox															*/
+/*------------------------------------------------*/
+/* Стандартное состояние */
+QCheckBox {
+    padding-left: 0px;				/* Устанавливает отступ слева */
+    padding-right: -8px;        /* Устанавливает отрицательный отступ справа */
+}
+
+/* Состояние - не выбрано */
+QCheckBox::indicator:unchecked {
+	/* Задает изображение для невыбранного состояния */
+    image: url(:/multi_check_box/resource/multi_check_box_svg/no_24dp.svg);
+}
+
+/* Состояние - выбрано */
+QCheckBox::indicator:checked {
+	/* Устанавливает изображение для выбранного состояния */
+    image: url(:/multi_check_box/resource/multi_check_box_svg/yes_green_24dp.svg);
+}
+
+/*------------------------------------------------*/
+/*   PushButton														*/
+/*------------------------------------------------*/
+
+/* Стандартное состояние для кнопки */
+QPushButton {
+    font-size: 12pt;												/* Устанавливает размер шрифта */
+    background-color: rgb(37, 41, 48);			/* Задает фон */
+    border: 1px solid rgb(52, 59, 72);				/* Устанавливает границу */
+    background-position: left center;				/* Выравнивает фоновое изображение */
+    background-repeat: no-repeat;					/* Отключает повторение фонового изображения */
+}
+
+/* Состояние при наведении мыши */
+QPushButton:hover {
+    background-color: rgb(40, 44, 52);			/* Меняет фон */
+    border: none;												/* Убирает границы */
+}
+
+/* Состояние при нажатии */
+QPushButton:pressed {
+    background-color: rgb(170, 170, 170);		/* Задает фон */
+    color: rgb(181, 181, 181);								/* Устанавливает цвет текста */
+    border: none;												/* Убирает границы */
+}
+
+/* Кнопка "Нейронная сеть" */
+#pushButton_neural_network_heade {
+    image: url(:/general_black_ui/resource/general_black_ui/network_24dp_white.svg);/* Устанавливает иконку */
+    image-position: left center;							/* Выравнивает иконку */
+    padding-top: 2px;											/* Добавляет отступ сверху */
+    padding-bottom: 2px;									/* Добавляет отступ снизу */
+    padding-left: 4px;											/* Добавляет отступ слева */
+}
+#pushButton_neural_network_heade:hover {
+    border-left: 4px solid rgb(208, 208, 208);	/* Добавляет границу слева при наведении */
+}
+
+/* Кнопка загрузки файла для нейронной сети */
+#pushButton_reading_file_neural_network {
+    image: url(:/general_black_ui/resource/general_black_ui/download_24dp_white.svg);/* Устанавливает иконку */
+}
+
+/* Кнопка "Данные" */
+#pushButton_data_header {
+    image: url(:/general_black_ui/resource/general_black_ui/data_24dp_white.svg);/* Устанавливает иконку */
+    image-position: left center;							/* Выравнивает иконку */
+    padding-top: 2px;											/* Добавляет отступ сверху */
+    padding-bottom: 2px;									/* Добавляет отступ снизу */
+    padding-left: 4px;											/* Добавляет отступ слева */
+}
+#pushButton_data_header:hover {
+    border-left: 4px solid rgb(208, 208, 208);	/* Добавляет границу слева при наведении */
+}
+
+/* Кнопки загрузки файлов */
+#pushButton_reading_file_no_gas {
+    image: url(:/general_black_ui/resource/general_black_ui/download_24dp_white.svg);/* Устанавливает иконку */
+}
+#pushButton_reading_file_with_gas {
+    image: url(:/general_black_ui/resource/general_black_ui/download_24dp_white.svg);/* Устанавливает иконку */
+}
+
+/* Кнопка сброса данных спектра */
+#pushButton_reset_spectrum_data {
+    font-size: 10pt;												/* Устанавливает размер шрифта */
+}
+
+/* Кнопка открытия/закрытия таблицы */
 #pushButton_close_open_table {
-	image: url(:/general_black_ui/resource/general_black_ui/table_24dp_white.svg);
-    image-position: left center;
-	padding-top: 2px; /* Отступ сверху */
-    padding-bottom: 2px; /* Отступ снизу */
-    padding-left: 4px; /* Отступ слева для симметрии */
+    image: url(:/general_black_ui/resource/general_black_ui/table_24dp_white.svg);/* Устанавливает иконку */
+    image-position: left center;							/* Выравнивает иконку */
+    padding-top: 2px;											/* Добавляет отступ сверху */
+    padding-bottom: 2px;									/* Добавляет отступ снизу */
+    padding-left: 4px;											/* Добавляет отступ слева */
+}
+#pushButton_close_open_table:hover {
+    border-left: 4px solid rgb(208, 208, 208);	/* Добавляет границу слева при наведении */
 }
 
-#pushButton_menu_calculate{
-	image: url(:/general_black_ui/resource/general_black_ui/launch_24dp_white.svg);
-    image-position: left center;
-	padding-top: 2px; /* Отступ сверху */
-    padding-bottom: 2px; /* Отступ снизу */
-    padding-left: 4px; /* Отступ слева для симметрии */
+/* Кнопка расчета */
+#pushButton_menu_calculate {
+    image: url(:/general_black_ui/resource/general_black_ui/launch_24dp_white.svg);/* Устанавливает иконку */
+    image-position: left center;							/* Выравнивает иконку */
+    padding-top: 2px;											/* Добавляет отступ сверху */
+    padding-bottom: 2px;									/* Добавляет отступ снизу */
+    padding-left: 4px;											/* Добавляет отступ слева */
+}
+#pushButton_menu_calculate:hover {
+    border-left: 4px solid rgb(208, 208, 208);	/* Добавляет границу слева при наведении */
 }
 
-#pushButton_save_table_to_file{
-	image: url(:/general_black_ui/resource/general_black_ui/save_24dp_white.svg);
-    image-position: left center;
-	padding-top: 2px; /* Отступ сверху */
-    padding-bottom: 2px; /* Отступ снизу */
-    padding-left: 4px; /* Отступ слева для симметрии */
+/* Кнопка загрузки результата */
+#pushButton_load_result {
+    image: url(:/general_black_ui/resource/general_black_ui/download_24dp_white.svg);/* Устанавливает иконку */
+    image-position: left center;							/* Выравнивает иконку */
+    padding-top: 2px;											/* Добавляет отступ сверху */
+    padding-bottom: 2px;									/* Добавляет отступ снизу */
+    padding-left: 4px;											/* Добавляет отступ слева */
 }
-/* ///////////////////////////////////////////////////////////////////////////////////////////////// */
-/* /////////////////////////////////////////////////////////////////////////////////////////////////
-QLineEdit */
-/* Стиль по умолчанию */
-QLineEdit:enabled{
-	background-color:rgb(44, 49, 58); /* Устанавливаем цвет заливки */
-	border: 1px solid rgb(255, 255, 255); 
+#pushButton_load_result:hover {
+    border-left: 4px solid rgb(208, 208, 208);	/* Добавляет границу слева при наведении */
 }
 
-/* Если поле отключено */
+/* Кнопка сохранения таблицы в файл */
+#pushButton_save_table_to_file {
+    image: url(:/general_black_ui/resource/general_black_ui/save_24dp_white.svg);/* Устанавливает иконку */
+    image-position: left center;							/* Выравнивает иконку */
+    padding-top: 2px;											/* Добавляет отступ сверху */
+    padding-bottom: 2px;									/* Добавляет отступ снизу */
+    padding-left: 4px;											/* Добавляет отступ слева */
+}
+#pushButton_save_table_to_file:hover {
+    border-left: 4px solid rgb(208, 208, 208);	/* Добавляет границу слева при наведении */
+}
+
+/*------------------------------------------------*/
+/*   LineEdit															*/
+/*------------------------------------------------*/
+QLineEdit:enabled {
+    background-color: rgb(44, 49, 58);				/* Устанавливает фон */
+    border: 1px solid rgb(255, 255, 255);				/* Задает границу */
+}
+
+/* Стиль для отключенного состояния */
 QLineEdit:disabled {
-	background-color:  rgba(67, 74, 88, 0); /* Устанавливаем цвет заливки */
-	border: 1px solid rgb(255, 255, 255); 
-	color: rgb(67, 74, 88);
+    background-color: rgba(67, 74, 88, 0);			/* Устанавливает прозрачный фон */
+    border: 1px solid rgb(255, 255, 255);				/* Задает границу */
+    color: rgb(67, 74, 88);										/* Устанавливает цвет текста */
 }
-/* ///////////////////////////////////////////////////////////////////////////////////////////////// */
-/* /////////////////////////////////////////////////////////////////////////////////////////////////
-QGroupBox */
-QGroupBox{
-	color:rgb(255, 255, 255);	/* задает цвет шрифта */
-}
-/* ///////////////////////////////////////////////////////////////////////////////////////////////// */
-/* /////////////////////////////////////////////////////////////////////////////////////////////////
-QTableWidget */
 
-QTableWidget {	
-	gridline-color: rgb(136, 136, 136);
-	border-top: 1px solid rgb(54, 60, 74);
-	border-bottom: 1px solid  rgb(54, 60, 74);
+/*------------------------------------------------*/
+/*   GroupBox														*/
+/*------------------------------------------------*/
+QGroupBox {
+    color: rgb(255, 255, 255);									/* Задает цвет шрифта для заголовка группы */
 }
-QTableWidget::item:selected{
-	background-color: rgb(72, 81, 94);
+
+/*------------------------------------------------*/
+/*   TableWidget													*/
+/*------------------------------------------------*/
+QTableWidget {
+    gridline-color: rgb(136, 136, 136);					/* Устанавливает цвет линий сетки */
+    border-top: 1px solid rgb(54, 60, 74);			/* Задает верхнюю границу */
+    border-bottom: 1px solid rgb(54, 60, 74);	/* Задает нижнюю границу */
 }
-QHeaderView { qproperty-defaultAlignment: AlignCenter; }
-/*Цвет верхнего и левого поля*/
-QHeaderView::section{
-	background-color:rgb(37, 41, 48);
-    border-style: none;
-border: 1px solid rgb(136, 136, 136);
+
+QTableWidget::item:selected {
+    background-color: rgb(72, 81, 94);				/* Устанавливает фон для выбранных элементов */
 }
-/*Кнопка в верхнем левом углу*/
-QTableCornerButton::section {background-color:rgb(33, 37, 43); }
+
+QHeaderView {
+    qproperty-defaultAlignment: AlignCenter;	/* Выравнивает содержимое заголовков */
+}
+
+/* Стиль для секций заголовков таблицы */
+QHeaderView::section {
+    background-color: rgb(37, 41, 48);				/* Задает фон заголовков */
+    border: 1px solid rgb(136, 136, 136);				/* Устанавливает границу */
+    border-style: none;											/* Убирает стиль границы */
+}
+
+/* Кнопка в верхнем левом углу таблицы */
+QTableCornerButton::section {
+    background-color: rgb(33, 37, 43);				/* Задает фон угловой кнопки */
+}

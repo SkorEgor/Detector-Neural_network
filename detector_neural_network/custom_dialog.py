@@ -1,6 +1,6 @@
 import os
-from pyqtgraph.Qt.QtWidgets import QDialog
 from pyqtgraph.Qt.QtCore import Qt
+from pyqtgraph.Qt.QtWidgets import QDialog
 
 from detector_neural_network.gui import Ui_Dialog
 from detector_neural_network.app_exception import AppException
@@ -55,7 +55,7 @@ class CustomDialog(QDialog, Ui_Dialog):
         """Метод вызываемый при обновлении данных для изменения соответствующих индикаторов UI"""
         # Проверка наличия "нейронной сети" (выставляем соответсвующий статус и имя файла)
         if self.data.get_neural_network():
-            self.label_text_neural_network.setText(self.file_name_neural_network)
+            self.label_text_neural_network.setText(os.path.basename(self.file_name_neural_network))
             self.checkBox_download_neural_network.setCheckState(Qt.CheckState.Checked)
         else:
             self.label_text_neural_network.setText("Нет файла")
